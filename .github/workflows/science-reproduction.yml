@@ -1,0 +1,124 @@
+name: science-reproduction
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/science-reproduction.yml"
+      - "scripts/integrability_frobenius.py"
+      - "scripts/potential_reconstruction.py"
+      - "scripts/curvature_scatter.py"
+      - "scripts/background_ensemble.py"
+      - "scripts/normal_spectrum.py"
+      - "src/ns_response_geometry/**"
+
+jobs:
+  broad-ensemble:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install
+        run: python -m pip install -e ".[test]"
+      - name: Run broad background ensemble
+        env:
+          JAX_ENABLE_X64: "true"
+          XLA_PYTHON_CLIENT_PREALLOCATE: "false"
+        run: |
+          set -o pipefail
+          python scripts/background_ensemble.py | tee background_ensemble.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: background-ensemble-log
+          path: background_ensemble.log
+
+  normal-spectrum:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install
+        run: python -m pip install -e ".[test]"
+      - name: Run normal spectrum
+        env:
+          JAX_ENABLE_X64: "true"
+          XLA_PYTHON_CLIENT_PREALLOCATE: "false"
+        run: |
+          set -o pipefail
+          python scripts/normal_spectrum.py | tee normal_spectrum.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: normal-spectrum-log
+          path: normal_spectrum.log
+
+  integrability:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install
+        run: python -m pip install -e ".[test]"
+      - name: Run Frobenius audit
+        env:
+          JAX_ENABLE_X64: "true"
+          XLA_PYTHON_CLIENT_PREALLOCATE: "false"
+        run: |
+          set -o pipefail
+          python scripts/integrability_frobenius.py | tee integrability.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: integrability-log
+          path: integrability.log
+
+  potential:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install
+        run: python -m pip install -e ".[test]"
+      - name: Run potential reconstruction
+        env:
+          JAX_ENABLE_X64: "true"
+          XLA_PYTHON_CLIENT_PREALLOCATE: "false"
+        run: |
+          set -o pipefail
+          python scripts/potential_reconstruction.py | tee potential.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: potential-log
+          path: potential.log
+
+  curvature:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install
+        run: python -m pip install -e ".[test]"
+      - name: Run curvature audit
+        env:
+          JAX_ENABLE_X64: "true"
+          XLA_PYTHON_CLIENT_PREALLOCATE: "false"
+        run: |
+          set -o pipefail
+          python scripts/curvature_scatter.py | tee curvature.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: curvature-log
+          path: curvature.log

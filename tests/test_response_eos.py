@@ -8,17 +8,18 @@ import jax.numpy as jnp
 from ns_response_geometry.eos import RelativisticPolytrope
 from ns_response_geometry.observables import solve_observables
 from ns_response_geometry.response import response_jacobian, sequence_tangent
-from ns_response_geometry.response_eos import build_sound_speed_eos
+from ns_response_geometry.response_eos import build_nodal_sound_speed_eos
 
 
-def test_zero_modes_reconstruct_reference_polytrope():
+def test_zero_nodal_field_reconstructs_reference_polytrope():
     reference = RelativisticPolytrope(K=100.0, gamma=2.0)
-    coeffs = jnp.zeros(5)
-    eos = build_sound_speed_eos(
+    nodes = jnp.linspace(0.02, 0.5, 9)
+    eos = build_nodal_sound_speed_eos(
         reference,
-        coeffs,
+        jnp.zeros(nodes.shape[0]),
         h_match=0.02,
         h_max=0.5,
+        h_nodes=nodes,
         n_high=2048,
     )
 
@@ -37,13 +38,15 @@ def test_zero_modes_reconstruct_reference_polytrope():
     )
 
 
-def test_zero_modes_reproduce_reference_stellar_observables():
+def test_zero_nodal_field_reproduces_reference_stellar_observables():
     reference = RelativisticPolytrope(K=100.0, gamma=2.0)
-    eos = build_sound_speed_eos(
+    nodes = jnp.linspace(0.02, 0.5, 9)
+    eos = build_nodal_sound_speed_eos(
         reference,
-        jnp.zeros(5),
+        jnp.zeros(nodes.shape[0]),
         h_match=0.02,
         h_max=0.5,
+        h_nodes=nodes,
         n_high=2048,
     )
 
@@ -60,26 +63,52 @@ def test_zero_modes_reproduce_reference_stellar_observables():
 
 def test_response_jacobian_and_sequence_tangent_are_finite():
     reference = RelativisticPolytrope(K=100.0, gamma=2.0)
-    coeffs = jnp.zeros(3)
-    kwargs = dict(h_match=0.02, h_max=0.4, n_high=512)
+    nodes = jnp.linspace(0.02, 0.4, 5)
+    values = jnp.zeros(nodes.shape[0])
+    kwargs = dict(h_match=0.02, h_max=0.4, h_nodes=nodes, n_high=512)
 
     J = response_jacobian(
         reference,
-        coeffs,
+        values,
         0.15,
         n_steps=1024,
         eos_kwargs=kwargs,
     )
     tangent = sequence_tangent(
         reference,
-        coeffs,
+        values,
         0.15,
         n_steps=1024,
         eos_kwargs=kwargs,
     )
 
-    assert J.shape == (3, 3)
+    assert J.shape == (3, 5)
     assert tangent.shape == (3,)
     assert np.all(np.isfinite(np.asarray(J)))
     assert np.all(np.isfinite(np.asarray(tangent)))
     assert np.linalg.norm(np.asarray(J)) > 0.0
+
+
+def test_nodal_response_converges_with_grid_refinement_at_zero_field():
+    reference = RelativisticPolytrope(K=100.0, gamma=2.0)
+    h_c = 0.16
+
+    norms = []
+    for n_nodes in (5, 9, 17):
+        nodes = jnp.linspace(0.02, 0.5, n_nodes)
+        J = response_jacobian(
+            reference,
+            jnp.zeros(n_nodes),
+            h_c,
+            n_steps=1024,
+            eos_kwargs=dict(
+                h_match=0.02,
+                h_max=0.5,
+                h_nodes=nodes,
+                n_high=512,
+            ),
+        )
+        norms.append(float(jnp.linalg.norm(J)))
+
+    assert all(np.isfinite(norms))
+    assert norms[-1] > 0.0

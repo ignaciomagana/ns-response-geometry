@@ -1,0 +1,79 @@
+\section{Relativistic stellar structure}
+\label{sec:stars}
+
+\subsection{Background configurations}
+
+For a static spherical star,
+\begin{equation}
+    ds^2
+    =
+    -e^{2\nu(r)}dt^2
+    +
+    \left(1-\frac{2m(r)}{r}\right)^{-1}dr^2
+    +
+    r^2d\Omega^2 .
+\end{equation}
+The Tolman--Oppenheimer--Volkoff equations are
+\begin{align}
+    \frac{dm}{dr}
+    &=4\pi r^2\epsilon,
+    \\
+    \frac{dp}{dr}
+    &=
+    -\frac{(\epsilon+p)(m+4\pi r^3p)}
+    {r(r-2m)} .
+    \label{eq:tov}
+\end{align}
+We use relativistic enthalpy
+\begin{equation}
+    h(p)=\int_0^p\frac{dp'}{\epsilon(p')+p'}
+    \label{eq:enthalpy}
+\end{equation}
+as the integration coordinate. This fixes the stellar surface at \(h=0\) and makes the domain convenient for differentiating stellar observables with respect to EOS degrees of freedom.
+
+The surface values define
+\begin{equation}
+    M=m(R),
+    \qquad
+    C=M/R .
+\end{equation}
+
+\subsection{Tidal deformability and moment of inertia}
+
+The quadrupolar tidal deformability is
+\begin{equation}
+    \lambda_2=\frac{2}{3}k_2R^5,
+    \qquad
+    \Lamtwo=\frac{\lambda_2}{M^5}
+    =\frac{2}{3}k_2C^{-5}.
+    \label{eq:lambda}
+\end{equation}
+We integrate the standard even-parity \(l=2\) static perturbation equation together with the background and evaluate \(k_2\) from the surface logarithmic derivative and compactness. \todo{Insert the exact enthalpy-coordinate perturbation equation once the implementation is frozen so the manuscript cannot drift from the production code.}
+
+For uniform rotation at first order in angular velocity, the Hartle frame-dragging equation determines the angular momentum \(J\), from which
+\begin{equation}
+    I=\frac{J}{\Omega},
+    \qquad
+    \Ibar=\frac{I}{M^3}.
+\end{equation}
+The exact enthalpy-coordinate system used for the production calculation will likewise be inserted after the benchmark stage.
+
+\subsection{EOS coordinates and perturbations}
+
+We require EOS perturbations that approach a functional description while satisfying thermodynamic stability and causality by construction. The baseline representation uses a latent field \(u(h)\) mapped to the sound speed,
+\begin{equation}
+    c_s^2(h)=\sigma[u(h)],
+    \qquad
+    \sigma(u)=\frac{1}{1+e^{-u}},
+    \label{eq:cs-map}
+\end{equation}
+with stricter bounds applied explicitly if required. The latent field is expanded as
+\begin{equation}
+    u(h)=u_0(h)+\sum_{i=1}^{N_b}a_i\phi_i(h).
+    \label{eq:basis}
+\end{equation}
+The basis \(\phi_i\) is a numerical representation only. Physical conclusions must converge as \(N_b\) and the basis family are varied.
+
+Given \(c_s^2=dp/d\epsilon\), the remaining thermodynamic functions are reconstructed consistently from an anchor point and joined to an adopted low-density crust treatment. \todo{Freeze the exact thermodynamic reconstruction, density domain, and crust prescription after Stage 1 validation.}
+
+For the EOS response metric we will use at least two choices for \(C_{\rm EOS}\): a smooth covariance in the latent field and a second covariance with shorter correlation length or broader localized freedom. A response hierarchy that exists only for one EOS metric will not be interpreted as universal.

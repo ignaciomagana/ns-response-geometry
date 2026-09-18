@@ -3,11 +3,51 @@
 
 The first central test compares the EOS response transverse to the stellar sequence in the I--Love and C--Love planes. Both are constructed from the same stellar configurations and EOS metric, and no empirical relation is used to define either normal direction.
 
-For each reference configuration we compute the covariance-weighted transverse response and record its nonzero normal eigenvalue in the two-dimensional plane. The key diagnostic is therefore not the raw scatter of a sampled EOS catalog, but the ratio of local EOS response scales for I--Love and C--Love at matched stellar state.
+For each reference configuration we compute the covariance-weighted normal response. In a two-observable plane the normal cotangent direction is unique once its normalization metric is declared. If \(G^{AB}\) is the EOS-induced covariance, \(t^A\) the sequence tangent, and \(g_{AB}\) the observable metric, the scalar response is
+\begin{equation}
+    \sigma_\perp^2
+    =
+    n_A G^{AB}n_B,
+    \qquad
+    n_A t^A=0,
+    \qquad
+    n_A g^{AB}n_B=1.
+    \label{eq:normal-rms}
+\end{equation}
+The same EOS covariance is used when comparing I--Love and C--Love.
 
-\todo{Stage 3: report the transverse response as a function of mass or central enthalpy, including variation under EOS metric, observable metric, basis size, and numerical tolerance.}
+\subsection{Development diagnostic}
 
-A decisive positive result would be a robust hierarchy in which the normal EOS response of I--Love is substantially smaller than that of C--Love across the ordinary neutron-star domain. A null result would imply that the observed global universality is not captured by the proposed local metric construction, or that the chosen EOS/observable metrics do not represent the relevant physical perturbations.
+Before constructing a broad EOS ensemble, we performed a deliberately restricted diagnostic to determine whether the proposed response geometry contains the expected signal at all. The reference model is a relativistic \(\Gamma=2\) polytrope with \(K=100\) in geometrized units. Five Gaussian latent sound-speed modes span \(h\in[0.02,0.55]\). Their coefficient covariance is Eq.~\eqref{eq:eos-covariance} with \(\sigma_a=0.1\) and \(\ell_h=0.08\). We use the Euclidean metric in \((\ln C,\ln\Ibar,\ln\Lamtwo)\) for this diagnostic only.
+
+Table~\ref{tab:pilot-response} reports the resulting local normal RMS responses. Across the tested sequence, the I--Love normal response is smaller than the C--Love response by a factor between \(7.5\) and \(10.8\) in RMS, or roughly \(57\)--\(116\) in variance. This calculation uses one reference EOS, one EOS covariance, one basis resolution, and one observable metric and therefore is not yet evidence for prior-independent universality. Its purpose is narrower: the differential construction recovers a strong hierarchy without inserting an empirical I--Love fit.
+
+\begin{table}[b]
+\caption{Restricted response-geometry diagnostic for the \(\Gamma=2\) reference sequence. The quoted RMS values are local first-order responses in logarithmic observable coordinates under the declared latent-field covariance.}
+\label{tab:pilot-response}
+\begin{ruledtabular}
+\begin{tabular}{ccccc}
+\(h_c\) & \(C\) & \(\sigma_{\perp}^{I{\rm Love}}\) &
+\(\sigma_{\perp}^{C{\rm Love}}\) &
+\(\sigma_{\perp}^{I{\rm Love}}/\sigma_{\perp}^{C{\rm Love}}\)\\
+\hline
+0.08 & 0.0673 & 0.00198 & 0.02133 & 0.0929\\
+0.12 & 0.0933 & 0.00254 & 0.02612 & 0.0974\\
+0.16 & 0.1154 & 0.00297 & 0.02857 & 0.1040\\
+0.20 & 0.1344 & 0.00335 & 0.03007 & 0.1115\\
+0.25 & 0.1545 & 0.00382 & 0.03124 & 0.1223\\
+0.30 & 0.1713 & 0.00425 & 0.03202 & 0.1328
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+At \(h_c=0.16\), the automatically differentiated observable Jacobian was compared component by component with a symmetric finite difference using a coefficient step \(2\times10^{-4}\). The maximum relative discrepancy was \(8.2\times10^{-8}\), with an RMS relative discrepancy \(2.2\times10^{-8}\). This derivative check is specific to the diagnostic configuration; the production analysis repeats it under basis, integration, and EOS changes.
+
+\subsection{Production hierarchy}
+
+The production result will replace the restricted diagnostic as the main claim. It must demonstrate stability under basis refinement, more than one EOS covariance, multiple reference EOSs or a nonparametric EOS ensemble, and observable-coordinate/metric changes.
+
+\todo{Stage 3: report the production transverse response as a function of mass or central enthalpy, including variation under EOS metric, observable metric, basis size, and numerical tolerance.}
 
 \section{Integrability and global reconstruction}
 \label{sec:global}

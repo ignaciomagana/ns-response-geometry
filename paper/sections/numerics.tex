@@ -1,0 +1,30 @@
+\section{Numerical implementation and validation}
+\label{sec:numerics}
+
+The production implementation is differentiable and uses automatic differentiation to evaluate the finite-basis Jacobian \(J^A{}_i\). Automatic differentiation is a computational method, not a validation. Every reported derivative is checked against symmetric finite differences,
+\begin{equation}
+    \frac{\partial y^A}{\partial a_i}
+    \simeq
+    \frac{
+      y^A(a_i+\Delta a_i)
+      -
+      y^A(a_i-\Delta a_i)}
+      {2\Delta a_i},
+    \label{eq:fd}
+\end{equation}
+over a range of step sizes.
+
+Before any response-geometry result is used, we require:
+\begin{enumerate}
+    \item convergence of \(M\) and \(R\) with integration tolerance;
+    \item agreement of \(\Lamtwo\) with an independent implementation or published benchmark;
+    \item agreement of \(I\) with an independent implementation or published benchmark;
+    \item agreement of automatic and finite-difference derivatives;
+    \item stability under EOS basis refinement;
+    \item repetition with more than one EOS covariance metric;
+    \item explicit tests of observable-coordinate dependence.
+\end{enumerate}
+
+The coordinate test is important because a numerical measure of thinness can change under nonlinear reparameterizations of observables. We therefore distinguish the physical statement that EOS perturbations approximately preserve a relation from the numerical value of a particular norm assigned to that perturbation.
+
+\todo{Stage 1: insert benchmark table and convergence figure.}

@@ -23,7 +23,9 @@ jobs:
         env:
           JAX_ENABLE_X64: "true"
           XLA_PYTHON_CLIENT_PREALLOCATE: "false"
-        run: python scripts/transition_scan.py | tee transition_scan.log
+        run: |
+          set -o pipefail
+          python scripts/transition_scan.py | tee transition_scan.log
       - uses: actions/upload-artifact@v4
         with:
           name: transition-scan-log

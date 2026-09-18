@@ -69,3 +69,14 @@ the manuscript.
 - Specialized transition workflows rerun the localized-softening analyses.
 - Local-VM calculations are acceptable for development, but paper-level
   quantitative claims should be reproduced in GitHub Actions when feasible.
+
+
+## Matched-reference transition-location null test
+
+| Manuscript claim | Versioned source | Generator |
+|---|---|---|
+| Unconstrained fixed-depth maxima across \(\Gamma=1.7,1.85,2.0\), baseline \(C=0.12,0.16\), occur at \(h_{\rm tr}/h_c=0.40\)--0.55 but have deformed \(C=0.045\)--0.090 | results/matched_compactness_transition_20260918.json | scripts/matched_compactness_transition.py |
+| With post-softening \(C\ge0.10\), only three baseline-\(C=0.16\) cases survive and their maxima shift to \(h_{\rm tr}/h_c=0.25,0.30,0.35\) with alignments \(0.9998,0.9989,0.9999\) | results/matched_compactness_transition_20260918.json | scripts/matched_compactness_transition.py |
+| Fixed-depth \(h_{\rm tr}/h_c\simeq0.45\)--0.50 is therefore not promoted as a universal vulnerable shell | results/matched_compactness_transition_20260918.json | scripts/matched_compactness_transition.py |
+
+The next fixed-final-compactness experiment is designed to remove this global-expansion confound.

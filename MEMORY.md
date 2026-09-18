@@ -132,3 +132,53 @@ n_A G^{AB}n_B,\qquad n_A t^A=0,\qquad n_A g^{AB}n_B=1.
 \]
 The implementation tests invariance under consistent EOS-basis and
 observable-coordinate transformations.
+
+
+## 2026-09-18 integrability, curvature, and transition-stage decisions
+
+H3 passed in the tested domain.  A genuine three-dimensional Frobenius audit,
+not the automatic 2D I--Love integrability, gives normalized obstruction
+\(\eta_F\) with median \(1.23\times10^{-3}\), 90th percentile
+\(3.48\times10^{-3}\), and maximum \(7.36\times10^{-3}\) across nine
+high-resolution zero/smooth/rough patches.  A cubic scalar potential trained
+only on soft-covector gradients generalizes across held-out EOS backgrounds
+with median \(\sigma(F)=8.48\times10^{-3}\), versus
+\(1.98\times10^{-2}\) for the one-dimensional I--Love gradient
+reconstruction.
+
+H4 passed only within a finite perturbative radius.  Across nine background
+configurations and random GP EOS directions, median relative RMSE for the
+quadratic response is 0.0062, 0.024, 0.156, and 0.553 at latent amplitudes
+0.05, 0.10, 0.25, and 0.50.  Do not imply second order explains arbitrary
+finite EOS excursions.
+
+Controlled localized sound-speed softening shows a specific H5 mechanism:
+ordinary I--Love can degrade strongly while the full soft/hard normal
+hierarchy survives.  In the refined center=0.16, width=0.04, depth=2 case at
+h_c=0.30, the I--Love alignment is 0.90245 and I--Love/C--Love RMS ratio
+0.49559, while the full soft/hard RMS ratio remains 0.09619.  The
+covariance-weighted I--Love variance increases by 85.06, with 90.24% of the
+positive excess direct sensitivity inside the imposed h=0.14--0.18 layer
+and a peak at h=0.155.
+
+Novelty re-check specific to this stage:
+- Jiang & Yagi (Phys. Rev. D 101, 124006, 2020) already derive analytic
+  I--Love--C relations.  Do not claim the inclusion of compactness or a
+  C-I-Love relation/surface as first.
+- Han & Steiner (Phys. Rev. D 99, 083014, 2019) already show that sharp
+  phase transitions can limit the accuracy of tidal universal relations.
+  Do not claim first phase-transition breakdown of a universal relation.
+- Hybrid/exotic-star studies, including recent elastic hybrid-star work,
+  show that useful universal relations can persist with exotic cores.
+- The candidate new contribution is narrower: the metric-aware differential
+  response operator distinguishes breakdown of a chosen projection from
+  breakdown of low-dimensional response itself, identifies rotation of the
+  soft covector, and localizes the added sensitivity to the responsible EOS
+  layer.  This wording remains provisional until the systematic
+  transition-location refinement is complete.
+
+The 33-node transition screen contains 69 stable/physical points out of 96.
+Its strongest stable degradation follows a moving ridge:
+\((h_c,h_{\rm tr})=(0.20,0.10),(0.30,0.14),(0.40,0.18)\), suggesting
+\(h_{\rm tr}/h_c\sim0.45\)--0.50.  This must be checked at 65 nodes and
+mapped into \(r/R\) and \(m/M\) before physical interpretation.

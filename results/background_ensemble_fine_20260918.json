@@ -1,0 +1,71 @@
+{
+  "provenance": {
+    "date": "2026-09-18",
+    "execution": "local mirror of current GitHub numerical core because GitHub Actions jobs were failing before any step started",
+    "script_in_repo": "scripts/background_ensemble.py",
+    "seed": 260918,
+    "n_nodes": 17,
+    "n_steps": 2048,
+    "n_high": 1024
+  },
+  "background_ensemble": {
+    "n_draws": 16,
+    "amplitude": 1.0,
+    "families": {
+      "smooth_se": {"kernel": "squared_exponential", "length_scale": 0.08, "draws": 8},
+      "rough_matern32": {"kernel": "matern32", "length_scale": 0.04, "draws": 8}
+    }
+  },
+  "local_response_metric": {
+    "kernel": "squared_exponential",
+    "amplitude": 0.1,
+    "length_scale": 0.08,
+    "observable_metric": "identity in log observables"
+  },
+  "overall": {
+    "total_points": 48,
+    "stable_points": 44,
+    "stable_fraction": 0.9166666666666666,
+    "rms_ratio_min": 0.012466267881129915,
+    "rms_ratio_median": 0.0696871066638314,
+    "rms_ratio_p90": 0.20483614156928998,
+    "rms_ratio_max": 0.4856080894161109,
+    "fraction_ratio_below_0p25": 0.9545454545454546,
+    "fraction_ratio_below_0p5": 1.0
+  },
+  "families": {
+    "smooth_se": {
+      "stable_points": 22,
+      "rms_ratio_min": 0.012466267881129915,
+      "rms_ratio_median": 0.06373747073015416,
+      "rms_ratio_p90": 0.16468903553283445,
+      "rms_ratio_max": 0.4856080894161109,
+      "fraction_ratio_below_0p25": 0.9545454545454546
+    },
+    "rough_matern32": {
+      "stable_points": 22,
+      "rms_ratio_min": 0.015864685018037512,
+      "rms_ratio_median": 0.07151189300692737,
+      "rms_ratio_p90": 0.21130395939559507,
+      "rms_ratio_max": 0.4530580652697585,
+      "fraction_ratio_below_0p25": 0.9545454545454546
+    }
+  },
+  "compactness_cuts": {
+    "C>=0.05": {"n": 41, "median": 0.0660864636311448, "p90": 0.1749402452598552, "max": 0.2306149376519335, "fraction_below_0p25": 1.0},
+    "C>=0.08": {"n": 37, "median": 0.06948548964143499, "p90": 0.17252213032592104, "max": 0.21786218243403208, "fraction_below_0p25": 1.0},
+    "C>=0.10": {"n": 33, "median": 0.06988872368622784, "p90": 0.1741342069485438, "max": 0.21786218243403208, "fraction_below_0p25": 1.0},
+    "C>=0.12": {"n": 25, "median": 0.09292674931641995, "p90": 0.17929536561027526, "max": 0.21786218243403208, "fraction_below_0p25": 1.0}
+  },
+  "weakest_stable_cases": [
+    {"draw_id": 7, "family": "smooth_se", "h_c": 0.12, "compactness": 0.029614649110127688, "rms_ratio": 0.4856080894161109},
+    {"draw_id": 16, "family": "rough_matern32", "h_c": 0.12, "compactness": 0.045131862053944496, "rms_ratio": 0.4530580652697585},
+    {"draw_id": 3, "family": "smooth_se", "h_c": 0.12, "compactness": 0.059116778752730074, "rms_ratio": 0.2306149376519335},
+    {"draw_id": 13, "family": "rough_matern32", "h_c": 0.12, "compactness": 0.1336329787366747, "rms_ratio": 0.21786218243403208}
+  ],
+  "screening_note": {
+    "coarse_512_256_max_ratio": 0.8013230000738024,
+    "fine_resolution_same_case_ratio": 0.21786218243403208,
+    "lesson": "coarse screening can badly overestimate the response ratio on unusual EOS backgrounds; all reported ensemble numbers above use 2048/1024 resolution"
+  }
+}

@@ -43,3 +43,17 @@ def test_background_map_is_differentiable_in_central_enthalpy():
     grad = jax.grad(mass_of_h)(0.15)
     assert np.isfinite(float(grad))
     assert float(grad) > 0.0
+
+
+def test_profile_endpoint_matches_solve_star():
+    eos = IncompressibleEOS(epsilon0=1.0)
+    star = solve_star(eos, 0.15, n_steps=2048)
+
+    from ns_response_geometry.tov import solve_star_profile
+    profile = solve_star_profile(eos, 0.15, n_steps=2048)
+
+    np.testing.assert_allclose(profile.radius[-1], star.radius, rtol=1e-12, atol=1e-12)
+    np.testing.assert_allclose(profile.mass[-1], star.mass, rtol=1e-12, atol=1e-12)
+    assert np.all(np.diff(np.asarray(profile.enthalpy)) < 0.0)
+    assert np.all(np.diff(np.asarray(profile.radius)) > 0.0)
+    assert np.all(np.diff(np.asarray(profile.mass)) > 0.0)

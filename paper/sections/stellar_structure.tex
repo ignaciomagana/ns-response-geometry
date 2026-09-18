@@ -262,32 +262,51 @@ Thus every finite perturbation used in the Jacobian corresponds to a
 thermodynamically consistent barotrope, with \(0<c_s^2<1\) enforced by the
 latent logistic map.
 
-The current numerical basis consists of localized Gaussian functions,
+For the production response coordinates we use nodal values of the latent
+perturbation,
 \begin{equation}
-    \phi_i(h)
-    =
-    \exp\left[
-        -\frac{(h-h_i)^2}{2w^2}
-    \right],
+    a_i \equiv \delta u(h_i),
+    \qquad
+    u(h)=u_0(h)+\delta u(h),
+    \label{eq:nodal-coordinates}
 \end{equation}
-but the basis is not assigned physical meaning.  One baseline metric on the
-coefficient perturbations is a squared-exponential covariance,
+with \(\delta u(h)\) linearly interpolated between the nodes.  This choice is
+not intended to assign physical meaning to individual nodes.  Its purpose is
+to make basis refinement well defined: if \(C_{\rm EOS}(h,h')\) is a target
+functional covariance, then the finite-dimensional metric is simply its
+evaluation on the nodes,
 \begin{equation}
     C_{\rm EOS}^{ij}
     =
-    \sigma_a^2
+    C_{\rm EOS}(h_i,h_j).
+    \label{eq:nodal-covariance}
+\end{equation}
+Increasing the number of nodes therefore refines the representation of one
+fixed stochastic process rather than changing the normalization or meaning
+of the perturbation coefficients.
+
+Our baseline target metric is the squared-exponential kernel
+\begin{equation}
+    C_{\rm EOS}(h,h')
+    =
+    \sigma_u^2
     \exp\left[
-        -\frac{(h_i-h_j)^2}{2\ell_h^2}
+      -\frac{(h-h')^2}{2\ell_h^2}
     \right].
     \label{eq:eos-covariance}
 \end{equation}
-Basis refinement and alternative covariance operators are required before
-the response hierarchy is interpreted physically.
+We also use Mat\'ern-\(3/2\) and exponential kernels to test sensitivity to
+rougher EOS perturbations.  The amplitude \(\sigma_u\) scales the absolute
+linear-response variance but cancels from ratios of response scales formed
+with the same EOS metric.  The correlation length \(\ell_h\), in contrast,
+changes which density scales are allowed to vary coherently and is therefore
+a physical robustness parameter.
 
 For Stage 1 validation we additionally use two analytic EOS families. A
 constant-energy-density star provides the exact Schwarzschild-interior
 background solution. A relativistic \(\Gamma=2\) polytrope supplies the
 Newtonian \(n=1\) limits of \(k_2\) and \(I/(MR^2)\). Neither benchmark EOS
-defines the final EOS metric. The first response calculations use the
-\(\Gamma=2\) model only as a controlled reference point; broad realistic EOS
-ensembles enter after derivative and basis-convergence tests.
+defines the final EOS metric. The first response calculations use smooth
+causal relativistic polytropes only as controlled reference points; broad
+nonparametric EOS ensembles enter after derivative, node-refinement, and
+metric-robustness tests.

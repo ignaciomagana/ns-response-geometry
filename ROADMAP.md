@@ -3,136 +3,43 @@
 The paper is developed in lockstep with the mathematics/code. Every stage has a manuscript deliverable.
 
 ## Stage 0 — formulation and prior-art boundary
+Define the EOS-to-observable map, EOS metric/covariance, stellar-sequence quotient, local universality, global integrability, and second-order curvature program.
 
-**Science**
-- Define EOS-to-observable map.
-- Define EOS metric/covariance and induced response metric.
-- Separate stellar-sequence tangent from EOS directions.
-- Define local universality and global integrability.
-- State second-order curvature program.
-
-**Paper**
-- Draft Introduction.
-- Draft Mathematical formulation.
-- Write prior-art distinctions conservatively.
-- Create Results section structure with no invented outcomes.
-
-**Exit**
-Definitions are internally coherent and coordinate/basis caveats are explicit.
+**Paper:** Introduction and mathematical formulation; conservative novelty positioning; Results structure with no invented outcomes.
 
 ## Stage 1 — validated stellar structure
+Implement EOS protocol, enthalpy-coordinate TOV, \(l=2\) static tides, Hartle frame dragging and \(I\), with convergence and independent benchmark tests.
 
-**Code**
-- EOS protocol.
-- Enthalpy-coordinate TOV.
-- (l=2) static tidal perturbation and (k_2,Lambda_2).
-- Hartle frame dragging and (I).
-- convergence/benchmark tests.
-
-**Paper**
-- Complete Stellar structure subsection with equations and boundary conditions.
-- Add numerical validation subsection.
-- Add first validation table/figure when generated.
-
-**Exit**
-(M,R,Lambda_2,I) independently validated.
+**Paper:** stellar-structure equations, boundary conditions, numerical validation subsection, validation table/figure.
 
 ## Stage 2 — finite-dimensional response kernels
+Implement bounded sound-speed latent field, basis expansion, JAX Jacobians, symmetric finite-difference checks, and density/enthalpy-resolved sensitivity diagnostics.
 
-**Code**
-- bounded sound-speed latent field;
-- basis expansion;
-- JAX Jacobians;
-- symmetric finite-difference checks;
-- density/enthalpy-resolved sensitivity diagnostics.
-
-**Science**
-- inspect (K_I,K_Lambda,K_C);
-- establish basis convergence.
-
-**Paper**
-- write EOS perturbation and functional-derivative section;
-- first kernel figures;
-- explicitly compare to Chan/Yip-Leung stationarity.
-
-**Exit**
-Gradients are trustworthy.
+**Paper:** EOS perturbations and functional derivatives; kernel figures; explicit connection to Chan/Yip--Leung stationarity.
 
 ## Stage 3 — metric-aware transverse geometry
+Construct \(C_{\rm EOS}\), \(G_{\rm EOS}\), sequence tangent/quotient, eigenmodes, and invariance tests.
 
-**Code**
-- (C_{m EOS});
-- induced (G_{m EOS});
-- sequence tangent;
-- quotient/projector;
-- eigenmodes and invariance tests.
-
-**Science**
-- I--Love vs C--Love response hierarchy;
-- dependence on mass and EOS metric.
-
-**Paper**
-- this is the central Results section;
-- response spectra and transverse-mode figures.
-
-**Exit**
-Either H1/H2 survive robustly or the project is reframed.
+**Paper:** central Results section; I--Love versus C--Love response hierarchy.
 
 ## Stage 4 — local-to-global integrability
+Transport local low-response covectors, measure path dependence, test Frobenius/integrability where applicable, and reconstruct a global relation without inserting the standard I--Love polynomial.
 
-**Code/math**
-- transport local low-response covectors;
-- path-dependence diagnostics;
-- Frobenius/integrability tests where applicable;
-- reconstruct global relation without fitting the standard I--Love polynomial.
-
-**Paper**
-- integrability subsection;
-- reconstructed relation compared to empirical I--Love only after derivation.
-
-**Exit**
-Quantify whether local geometry explains a global relation.
+**Paper:** integrability section and derived relation.
 
 ## Stage 5 — curvature and finite scatter
+Compute Hessian-vector products/directional second derivatives and compare predicted finite perturbation scatter with nonlinear EOS ensembles.
 
-**Code/math**
-- Hessian-vector products/directional second derivatives;
-- predicted finite perturbation scatter;
-- nonlinear EOS ensemble validation.
-
-**Paper**
-- connect curvature to percent-level residuals;
-- compare predicted and measured scatter.
+**Paper:** second-order origin of residual scatter.
 
 ## Stage 6 — controlled breakdown
+Use broad nonparametric EOS ensembles and sharp/phase-transition structure. Identify density-resolved modes responsible for loss of universality.
 
-**Code/science**
-- broad nonparametric EOS ensemble;
-- sharp sound-speed structure/phase transitions;
-- identify density-resolved modes causing loss of universality.
-
-**Paper**
-- breakdown section;
-- clarify domain of validity rather than claiming universality everywhere.
+**Paper:** domain of validity and breakdown mechanism.
 
 ## Stage 7 — discovery extension
-
-Only after stages 1--6 work.
-
-Candidate observables:
-[
-ar Q,quad Lambda_3,quad Lambda_4,quad Momega_f,quad 	ext{dynamic response coefficients}.
-]
-
-Search for new approximately integrable low-response combinations. Any claimed new universal relation requires an explicit literature re-check at the time of discovery.
-
-## Final paper logic
-
-1. Existing quasi-universal relations are known empirically and have partial analytic explanations.
-2. We define a differential, metric-aware notion of EOS sensitivity.
-3. Quotienting the stellar-sequence direction exposes transverse EOS sensitivity.
-4. Known universality becomes a stringent validation of the construction.
-5. Integrability determines when local insensitivity produces a global relation.
-6. Curvature controls finite residual scatter.
-7. Breakdown reveals which EOS directions destroy universality.
-8. Only then use the framework for relation discovery.
+Only after stages 1--6 work, add candidates such as
+\[
+\bar Q,\quad \Lambda_3,\quad \Lambda_4,\quad M\omega_f
+\]
+and dynamical-response coefficients. Any new claimed relation triggers a fresh literature audit.

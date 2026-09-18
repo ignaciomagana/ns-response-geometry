@@ -1,7 +1,17 @@
 \section{Numerical implementation and validation}
 \label{sec:numerics}
 
-The production implementation is differentiable and uses automatic differentiation to evaluate the finite-basis Jacobian \(J^A{}_i\). Automatic differentiation is a computational method, not a validation. Every reported derivative is checked against symmetric finite differences,
+The production stellar calculation uses a fixed-step fourth-order
+Runge--Kutta integration in relativistic enthalpy.  Fixed control flow keeps
+the EOS-to-observable map differentiable and makes the derivative calculation
+transparent.  The background, static \(l=2\) tidal perturbation, and
+first-order frame-dragging equations are evolved together.  An independent
+adaptive calculation in the radius coordinate, using DOP853, is retained
+only for validation.
+
+Automatic differentiation is used to evaluate the finite-dimensional
+Jacobian \(J^A{}_i\).  It is a computational method rather than a validation.
+Every production derivative is checked against symmetric finite differences,
 \begin{equation}
     \frac{\partial y^A}{\partial a_i}
     \simeq
@@ -14,17 +24,93 @@ The production implementation is differentiable and uses automatic differentiati
 \end{equation}
 over a range of step sizes.
 
-Before any response-geometry result is used, we require:
+\subsection{Stellar-structure validation}
+
+The background integrator is first checked against the exact
+Schwarzschild-interior solution for a constant-energy-density star.  Using
+8192 enthalpy steps and the regular center offset
+\(\Delta h/h_c=10^{-4}\), the relative errors in \(M\), \(R\), and \(C\)
+are at the \(10^{-6}\) level over the three central enthalpies listed in
+Table~\ref{tab:background-validation}.
+
+\begin{table}[t]
+\caption{Relative error of the enthalpy-coordinate background solver against
+the exact constant-energy-density solution.}
+\label{tab:background-validation}
+\begin{ruledtabular}
+\begin{tabular}{cccc}
+\(h_c\) & \(\Delta M/M\) & \(\Delta R/R\) & \(\Delta C/C\)\\
+\hline
+0.05 & \(-2.16\times10^{-6}\) & \(-7.23\times10^{-7}\) &
+\(-1.44\times10^{-6}\)\\
+0.15 & \(-1.19\times10^{-6}\) & \(-4.00\times10^{-7}\) &
+\(-7.93\times10^{-7}\)\\
+0.30 & \(-5.57\times10^{-7}\) & \(-1.88\times10^{-7}\) &
+\(-3.70\times10^{-7}\)
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+The full observable solver is then compared against an independently coded
+radius-coordinate adaptive integration.  This cross-check shares the
+physical equations but not the integration variable or numerical stepping.
+For a constant-energy-density configuration at \(h_c=0.15\), the maximum
+absolute relative difference among
+\[
+(M,R,C,k_2,\Lamtwo,I,\Ibar,I/MR^2)
+\]
+is \(4.71\times10^{-7}\).  For a relativistic \(\Gamma=2\) polytrope at
+\(h_c=0.10\), the corresponding maximum difference is
+\(8.10\times10^{-7}\).  The largest discrepancy in both comparisons is in
+\(\Lamtwo\), whose \(C^{-5}\) dependence amplifies otherwise smaller
+differences in the background solution.
+
+As a separate low-compactness check, the homogeneous-star solution at
+\(C=4.96\times10^{-3}\) gives
+\[
+k_2=0.72897,\qquad I/(MR^2)=0.40171,
+\]
+approaching the Newtonian values \(3/4\) and \(2/5\), respectively.  A
+relativistic \(\Gamma=2\) polytrope at
+\(C=2.49\times10^{-3}\) gives
+\[
+k_2=0.25543,\qquad I/(MR^2)=0.26206,
+\]
+compared with the Newtonian \(n=1\) values
+\[
+k_2=\frac{15-\pi^2}{2\pi^2}=0.25991,\qquad
+\frac{I}{MR^2}
+=\frac{2}{3}\frac{\pi^2-6}{\pi^2}=0.26138.
+\]
+These finite-compactness differences have the expected sign and scale and
+vanish as the central enthalpy is lowered.
+
+\subsection{Derivative and response validation}
+
+The response calculation is accepted only after the following additional
+tests:
 \begin{enumerate}
-    \item convergence of \(M\) and \(R\) with integration tolerance;
-    \item agreement of \(\Lamtwo\) with an independent implementation or published benchmark;
-    \item agreement of \(I\) with an independent implementation or published benchmark;
-    \item agreement of automatic and finite-difference derivatives;
-    \item stability under EOS basis refinement;
-    \item repetition with more than one EOS covariance metric;
-    \item explicit tests of observable-coordinate dependence.
+    \item automatic derivatives agree with symmetric finite differences;
+    \item the induced response converges as the nodal latent-field grid is
+    refined while holding the target functional covariance fixed;
+    \item the I--Love versus C--Love hierarchy is repeated with more than one
+    EOS covariance kernel and correlation length;
+    \item the hierarchy is repeated about more than one reference EOS before
+    moving to a broad nonparametric ensemble;
+    \item local response scalars are invariant under observable-coordinate
+    transformations when the observable metric is transformed consistently;
+    \item the result is stable to the enthalpy integration and EOS
+    reconstruction resolution.
 \end{enumerate}
 
-The coordinate test is important because a numerical measure of thinness can change under nonlinear reparameterizations of observables. We therefore distinguish the physical statement that EOS perturbations approximately preserve a relation from the numerical value of a particular norm assigned to that perturbation.
+The observable-coordinate test is important because a numerical measure of
+thinness can change under reparameterization if the normal covector is
+normalized inconsistently.  We therefore transform \(G^{AB}\), \(t^A\), and
+\(g_{AB}\) as tensors and covariant metrics, rather than comparing Euclidean
+norms in unrelated coordinate systems.
 
-\todo{Stage 1: insert benchmark table and convergence figure.}
+The initial Gaussian-mode diagnostic used in
+Sec.~\ref{sec:localresults} predates the nodal production representation.  It
+is retained as a reproducibility check only.  All robustness and later
+science results use nodal values of the latent sound-speed field, for which
+grid refinement corresponds to a fixed functional EOS covariance.

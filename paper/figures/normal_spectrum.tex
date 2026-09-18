@@ -1,0 +1,34 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.78\columnwidth,
+  height=0.48\columnwidth,
+  xlabel={Compactness $C$},
+  ylabel={$\mathcal R_{\rm N}=\sqrt{\lambda_{\rm soft}/\lambda_{\rm hard}}$},
+  ymode=log,
+  ymin=1e-3,ymax=1e-1,
+  xmin=0.06,xmax=0.18,
+  grid=both,
+  legend style={draw=none,at={(0.03,0.97)},anchor=north west},
+]
+\addplot[thick,mark=*] table[x=C,y=RN]{data/normal_spectrum.dat};
+\addlegendentry{normal response}
+\end{axis}
+\begin{axis}[
+  width=0.78\columnwidth,
+  height=0.48\columnwidth,
+  xmin=0.06,xmax=0.18,
+  ymin=0.990,ymax=0.997,
+  axis x line=none,
+  axis y line*=right,
+  ylabel={I--Love alignment},
+  legend style={draw=none,at={(0.97,0.03)},anchor=south east},
+]
+\addplot[thick,dashed,mark=square*] table[x=C,y=alignment]{data/normal_spectrum.dat};
+\addlegendentry{$|n_{\rm soft}\!\cdot n_{I{\rm Love}}|$}
+\end{axis}
+\end{tikzpicture}
+\caption{Normal-response hierarchy along the $\Gamma=2$ reference sequence. After quotienting the stellar-sequence tangent, the soft-to-hard normal RMS ratio remains well below unity (left axis), while the soft covector stays closely aligned with the embedded I--Love normal (right axis).}
+\label{fig:normal-spectrum}
+\end{figure}

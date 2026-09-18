@@ -1,0 +1,23 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.78\columnwidth,
+  height=0.48\columnwidth,
+  xlabel={Latent EOS amplitude $s$},
+  ylabel={Median relative RMSE},
+  ymode=log,
+  xmin=0.04,xmax=0.55,
+  ymin=4e-3,ymax=1.4,
+  grid=both,
+  legend style={draw=none,at={(0.03,0.97)},anchor=north west},
+]
+\addplot[thick,mark=*] table[x=amplitude,y=linear]{data/curvature.dat};
+\addlegendentry{linear}
+\addplot[thick,dashed,mark=square*] table[x=amplitude,y=quadratic]{data/curvature.dat};
+\addlegendentry{linear + quadratic}
+\end{axis}
+\end{tikzpicture}
+\caption{Finite-radius accuracy of the local response expansion. Including the directional curvature reduces the prediction error by more than an order of magnitude for small EOS displacements and remains useful through $s\simeq0.25$ before higher orders become important.}
+\label{fig:curvature}
+\end{figure}

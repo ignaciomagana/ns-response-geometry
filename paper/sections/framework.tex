@@ -1,0 +1,177 @@
+\section{Response geometry}
+\label{sec:geometry}
+
+\subsection{The stellar map}
+
+Let \(\eos\) denote a cold barotropic EOS and let \(h_c\) denote the central relativistic enthalpy labeling a stellar configuration. Solving the stellar-structure and perturbation equations defines
+\begin{equation}
+    \Phi:(\eos,h_c)\longrightarrow \yvec .
+    \label{eq:stellar-map}
+\end{equation}
+The EOS is an infinite-dimensional object. For numerical work we introduce coordinates \(a^i\) on a finite approximation to EOS function space, with the functional limit recovered under basis refinement.
+
+The differential of Eq.~\eqref{eq:stellar-map} separates into an EOS part and a stellar-sequence part,
+\begin{equation}
+    d y^A
+    =
+    J^A{}_i\, da^i
+    +
+    t^A\, dh_c ,
+    \label{eq:differential-map}
+\end{equation}
+where
+\begin{equation}
+    J^A{}_i
+    \equiv
+    \left.\frac{\partial y^A}{\partial a^i}\right|_{h_c},
+    \qquad
+    t^A
+    \equiv
+    \left.\frac{\partial y^A}{\partial h_c}\right|_{\eos}.
+    \label{eq:J-t-defs}
+\end{equation}
+The vector \(t^A\) is tangent to a fixed-EOS stellar sequence. Quasi-universality concerns the extent to which changing the EOS moves this sequence transversely rather than merely reparameterizing motion along it.
+
+\subsection{Metric-aware EOS response}
+
+A singular-value decomposition of \(J^A{}_i\) is not by itself a coordinate-independent characterization of EOS sensitivity. Under a change of EOS coordinates \(a^i\rightarrow\tilde a^\alpha(a)\), the numerical scale of the columns of \(J\) changes. In particular, a rescaling \(a^i\rightarrow\lambda_i a^i\) changes the singular spectrum without changing the underlying set of EOSs.
+
+We therefore equip EOS perturbations with a positive covariance or inverse metric \(\aeos^{ij}\). In a probabilistic interpretation this can be the local covariance of a nonparametric EOS process; geometrically it defines which perturbations are considered comparable. The EOS-induced second moment in observable space is
+\begin{equation}
+    \Geos^{AB}
+    =
+    J^A{}_i\,\aeos^{ij}\,J^B{}_j .
+    \label{eq:induced-response}
+\end{equation}
+Under a consistent coordinate transformation of both \(J\) and \(\aeos\), Eq.~\eqref{eq:induced-response} is invariant.
+
+In the functional limit, choose an EOS field \(s(h)\), for example a latent field controlling the sound speed, and define
+\begin{equation}
+    K^A(h)
+    =
+    \frac{\delta y^A}{\delta s(h)} .
+    \label{eq:functional-kernel}
+\end{equation}
+Then
+\begin{equation}
+    \Geos^{AB}
+    =
+    \int dh\,dh'\,
+    K^A(h)\,
+    C_{\rm EOS}(h,h')\,
+    K^B(h') .
+    \label{eq:functional-G}
+\end{equation}
+Equation~\eqref{eq:functional-G} is the central first-order object.
+
+\subsection{Quotienting the stellar-sequence direction}
+
+Observable space also requires a metric to define orthogonality and normalize covectors. Let \(g_{AB}\) denote a declared positive metric on observable space. A Euclidean metric in logarithmic observables is a useful baseline, but it is not assumed unique; coordinate dependence is a required robustness test.
+
+The normalized sequence tangent is
+\begin{equation}
+    \hat t^A
+    =
+    \frac{t^A}{(g_{BC}t^Bt^C)^{1/2}} .
+\end{equation}
+The projector onto directions \(g\)-orthogonal to the sequence is
+\begin{equation}
+    P^A{}_B
+    =
+    \delta^A{}_B
+    -
+    \hat t^A \hat t_B ,
+    \qquad
+    \hat t_B=g_{BC}\hat t^C .
+    \label{eq:projector}
+\end{equation}
+The transverse EOS response is
+\begin{equation}
+    \Gperp^{AB}
+    =
+    P^A{}_C\,
+    \Geos^{CD}\,
+    P^B{}_D .
+    \label{eq:Gperp}
+\end{equation}
+
+For a two-dimensional observable plane such as \((\ln\Lamtwo,\ln\Ibar)\), the quotient by the one-dimensional sequence tangent leaves a single normal direction. Its response gives a local scalar measure of non-universality. In higher-dimensional observable spaces, the eigensystem of the projected operator defines a hierarchy of transverse directions.
+
+\subsection{Local quasi-universal covectors}
+
+A covector \(n_A\) defines a local candidate relation when its EOS-induced variance
+\begin{equation}
+    \mathcal V[n]
+    =
+    n_A\,\Geos^{AB}\,n_B
+    \label{eq:variance-functional}
+\end{equation}
+is small subject to
+\begin{equation}
+    n_A t^A=0,
+    \qquad
+    n_A g^{AB}n_B=1 .
+    \label{eq:normalization}
+\end{equation}
+Equivalently, \(n_A\) is a low-response mode in the normal cotangent space to the stellar sequence. This definition makes prior dependence explicit through \(C_{\rm EOS}\), rather than hiding it in the composition of a finite EOS catalog.
+
+\subsection{From local insensitivity to a global relation}
+\label{sec:integrability}
+
+A local normal field is not automatically the gradient of a scalar relation. A global quasi-universal relation requires a function \(F(\yvec)\) such that
+\begin{equation}
+    F(\yvec)\simeq {\rm const},
+    \qquad
+    n_A(\yvec)\propto\partial_A F .
+    \label{eq:global-relation}
+\end{equation}
+Thus the existence of a suppressed local response mode and the existence of a global fitted curve or hypersurface are distinct statements.
+
+For a codimension-one distribution represented by the one-form
+\begin{equation}
+    \omega=n_A\,dy^A,
+\end{equation}
+Frobenius integrability requires
+\begin{equation}
+    \omega\wedge d\omega=0
+    \label{eq:frobenius}
+\end{equation}
+where the condition is nontrivial. In the two-observable I--Love plane local line fields are automatically integrable, but path dependence becomes nontrivial when the construction is embedded in a larger observable/configuration space or when several low-response directions are retained. We therefore use both local Frobenius diagnostics in higher dimension and direct path-dependence tests of transported covectors.
+
+Operationally, the global relation is reconstructed after determining \(n_A\) from the stellar response. The standard empirical I--Love fit is used only for comparison.
+
+\subsection{Second order and residual scatter}
+
+Suppose \(F(\Phi)\) is stationary at first order under EOS perturbations. For finite EOS displacement \(\delta a^i\),
+\begin{align}
+    \delta F
+    &=
+    \partial_A F\,J^A{}_i\,\delta a^i
+    \nonumber\\
+    &\quad+
+    \frac{1}{2}
+    \left[
+        \partial_A F\,H^A{}_{ij}
+        +
+        \partial_A\partial_BF\,
+        J^A{}_iJ^B{}_j
+    \right]
+    \delta a^i\delta a^j
+    +\mathcal O(\delta a^3),
+    \label{eq:second-order}
+\end{align}
+with
+\begin{equation}
+    H^A{}_{ij}
+    =
+    \frac{\partial^2y^A}{\partial a^i\partial a^j}.
+\end{equation}
+When the first line of Eq.~\eqref{eq:second-order} is suppressed, the bracketed term is the leading local source of finite scatter. Its contraction with the EOS covariance gives a prediction for how residual universality should degrade as the allowed EOS perturbations broaden.
+
+\subsection{Relation to previous stationarity results}
+
+The perturbative results of Refs.~\cite{chan2016stationarity,yip2017tidal} imply a vanishing or strongly suppressed first variation for specific moment--Love combinations near the incompressible limit. In the present notation, such stationarity corresponds schematically to
+\begin{equation}
+    n_AJ^A{}_i\simeq0
+\end{equation}
+for the relevant perturbations. The difference here is the order of construction. We do not begin with a chosen \(n_A\). We calculate the EOS response of several observables, quotient the sequence direction, and infer the low-response normal field from the resulting operator. The known I--Love relation is therefore a test of the construction.

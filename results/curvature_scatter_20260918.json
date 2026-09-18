@@ -1,0 +1,77 @@
+{
+  "provenance": {
+    "date": "2026-09-18",
+    "execution": "local VM mirror of current GitHub numerical core",
+    "script_in_repo": "scripts/curvature_scatter.py",
+    "n_nodes": 17,
+    "n_steps": 2048,
+    "n_high": 1024,
+    "n_directions": 48,
+    "curvature_step": 0.03,
+    "backgrounds": ["zero", "smooth_1", "rough_1"],
+    "h_c_values": [0.12, 0.20, 0.28]
+  },
+  "summary": {
+    "0.05": {
+      "linear": {
+        "median_relative_rmse": 0.14239073761959617,
+        "p90_relative_rmse": 0.4284134237541928,
+        "max_relative_rmse": 0.8150768505337589
+      },
+      "quadratic": {
+        "median_relative_rmse": 0.0062062469446913906,
+        "p90_relative_rmse": 0.016216135949797365,
+        "max_relative_rmse": 0.030974550408525606
+      },
+      "quadratic_fraction_median": 0.1452061326934219
+    },
+    "0.10": {
+      "linear": {
+        "median_relative_rmse": 0.284823036659986,
+        "p90_relative_rmse": 0.7039849037138672,
+        "max_relative_rmse": 1.0146165190715624
+      },
+      "quadratic": {
+        "median_relative_rmse": 0.02427781902053479,
+        "p90_relative_rmse": 0.058408805298634334,
+        "max_relative_rmse": 0.08028274488017166
+      },
+      "quadratic_fraction_median": 0.29171853397529607
+    },
+    "0.25": {
+      "linear": {
+        "median_relative_rmse": 0.6504830089669839,
+        "p90_relative_rmse": 0.9940324246547493,
+        "max_relative_rmse": 1.0482910147402198
+      },
+      "quadratic": {
+        "median_relative_rmse": 0.15585211865632362,
+        "p90_relative_rmse": 0.2550791474521344,
+        "max_relative_rmse": 0.32817394635964603
+      },
+      "quadratic_fraction_median": 0.6341005717668382
+    },
+    "0.50": {
+      "linear": {
+        "median_relative_rmse": 1.0280081411853057,
+        "p90_relative_rmse": 1.1509582895149884,
+        "max_relative_rmse": 1.2094293427656924
+      },
+      "quadratic": {
+        "median_relative_rmse": 0.5529008625693429,
+        "p90_relative_rmse": 0.7862141140657029,
+        "max_relative_rmse": 0.8587653436628834
+      },
+      "quadratic_fraction_median": 0.8547274274497964
+    }
+  },
+  "curvature_step_convergence": {
+    "reference_h_c": 0.20,
+    "steps_compared": [0.015, 0.03, 0.06],
+    "relative_rms_difference_q_0p015_vs_0p03": 0.000492253924086244,
+    "relative_rms_difference_q_0p03_vs_0p06": 0.001977936821199894,
+    "relative_rms_difference_q_0p015_vs_0p06": 0.0024698092481404226,
+    "minimum_correlation": 0.9999941798891067
+  },
+  "interpretation": "Second-order curvature predicts finite normal displacement extremely well through latent amplitudes 0.1 and remains useful at 0.25. The perturbative expansion ceases to be quantitatively reliable by amplitude 0.5. The curvature coefficient itself is stable to the finite-difference radius at the 0.25 percent level or better in the convergence check."
+}

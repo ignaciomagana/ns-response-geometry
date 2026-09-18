@@ -559,3 +559,29 @@ Instead, it can inject a localized EOS-sensitive direction into a particular
 projection, rotating the globally soft covector away from the ordinary
 I--Love normal.  The systematic scan below tests how this rotation depends on
 the location, depth, and width of the softened layer.
+
+\subsection{Systematic transition-location scan}
+
+We scanned transition centers \(h_{\rm tr}=0.10,0.14,0.18,0.22\), widths \(0.04\) and \(0.08\), depths \(D=0.5,1,1.5,2\), and three stellar configurations at \(h_c=0.20,0.30,0.40\). Of the 96 screening configurations, 69 remain on a stable branch and satisfy \(0<C<0.35\). The strongest stable I--Love degradation moves with the stellar sequence rather than remaining at one absolute enthalpy: for fixed width \(0.08\) and depth \(1.5\), the extrema occur near
+\begin{equation}
+ (h_c,h_{\rm tr})
+ =
+ (0.20,0.10),\ (0.30,0.14),\ (0.40,0.18),
+\end{equation}
+corresponding to \(h_{\rm tr}/h_c\simeq0.45\)--0.50.
+
+We refined these cases with 65 EOS nodes and 2048-point stellar and thermodynamic integrations. The response effect survives. The three refined I--Love/C--Love RMS ratios are \(0.756\), \(0.439\), and \(0.388\), while the corresponding full soft-to-hard RMS ratios remain \(0.063\), \(0.106\), and \(0.126\). More than \(90\%\) of the positive excess I--Love sensitivity remains localized on the softened interval in all three cases.
+
+To separate the diffuse low-compactness endpoint from the more compact stars, we additionally scanned transition location in units of the central enthalpy, with fixed \(h\)-width \(0.25h_c\) and depth \(D=1.5\). For configurations with \(C\ge0.1\), the strongest stable rotation occurs at \(h_{\rm tr}/h_c=0.45\). At \(h_c=0.40\), this configuration has \(C=0.113\),
+\begin{equation}
+ {cal A}_{I{\rm Love}}=0.922,\qquad
+ \frac{\sigma_\perp^{I{\rm Love}}}{\sigma_\perp^{C{\rm Love}}}=0.447,\qquad
+ \mathcal R_{\rm N}=0.135.
+\end{equation}
+The I--Love variance is enhanced by a factor \(56.7\), and \(93.3\%\) of the positive excess direct sensitivity lies within the imposed layer.
+
+The enthalpy-coordinate background profile provides a physical location for this vulnerability. In the deformed star the softened layer is centered at
+\begin{equation}
+ r/R=0.453,\qquad m/M=0.759,
+\end{equation}
+and spans approximately \(0.386<r/R<0.535\). The same enthalpy interval in the undeformed reference configuration is centered at \(r/R=0.618\). We do not interpret these numbers as a universal radius: they are properties of the present controlled \(\Gamma=2\) experiment. Their role is to demonstrate that the response formalism can identify both the EOS-space direction and the stellar region responsible for loss of a particular universal projection.

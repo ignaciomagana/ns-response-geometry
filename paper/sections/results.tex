@@ -411,11 +411,11 @@ particular functional form as a new fundamental universal relation.
 \section{Curvature and finite EOS scatter}
 \label{sec:curvature}
 
-We next test whether the leading finite departure from the local soft
-relation is controlled by second-order response.  At a fixed background
-configuration, let \(n_0\) be the soft covector and let \(d\) be a random
-unit-scale EOS perturbation drawn from the declared GP metric.  Define the
-normal displacement
+We next test whether the leading finite departure from the \emph{local soft
+tangent plane} is controlled by the second derivative of the
+EOS-to-observable map.  At a fixed background configuration, let \(n_0\) be
+the frozen soft covector and let \(d\) be a random unit-scale EOS
+perturbation drawn from the declared GP metric.  Define the normal displacement
 \begin{equation}
     R(s)
     =
@@ -473,11 +473,13 @@ second-order approximation is no longer quantitatively reliable.
 The curvature coefficient is stable to its finite-difference radius:
 changing the curvature step from \(0.015\) to \(0.06\) changes the
 directional-curvature RMS by \(2.5\times10^{-3}\) fractionally in the
-reference convergence test, with correlation \(>0.99999\).  These results
-support H4 over a finite but explicitly limited neighborhood of EOS function
-space: after the first-order soft response is suppressed, second-order
-curvature controls the leading nonlinear displacement until higher orders
-become important.
+reference convergence test, with correlation \(>0.99999\).  These results support the local form of H4 over a finite but explicitly
+limited neighborhood of EOS function space: after the first-order soft
+response is suppressed, the extrinsic curvature of the EOS-to-observable
+image controls displacement away from the local soft tangent plane until
+higher orders become important.  This test does not by itself evaluate the
+additional Hessian term associated with the curvature of the globally
+reconstructed scalar \(F\).
 
 \input{figures/curvature}
 

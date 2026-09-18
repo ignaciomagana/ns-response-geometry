@@ -239,6 +239,55 @@ background solution.  A relativistic \(\Gamma=2\) polytrope supplies the
 Newtonian \(n=1\) limits of \(k_2\) and \(I/(MR^2)\).  Neither benchmark EOS
 is used to define the later EOS metric.
 
-The production sound-speed field, thermodynamic reconstruction, density
-domain, and crust treatment will be frozen before the response kernels are
-computed.
+For the initial response calculation, \(u_0(h)\) is taken from a causal
+reference EOS above a matching enthalpy \(h_{\rm match}\).  Below the match,
+the reference EOS is retained unchanged.  Above it, the perturbed sound speed
+is used to reconstruct the thermodynamics rather than perturbing pressure and
+energy-density tables independently.  From the definition of enthalpy and
+\(c_s^2=dp/d\epsilon\),
+\begin{align}
+    \frac{dp}{dh}
+    &=
+    \epsilon+p,
+    \label{eq:dpdh-eos}
+    \\
+    \frac{d\epsilon}{dh}
+    &=
+    \frac{\epsilon+p}{c_s^2(h)}.
+    \label{eq:dedh-eos}
+\end{align}
+Equations~\eqref{eq:dpdh-eos}--\eqref{eq:dedh-eos} are initialized with
+\(p(h_{\rm match})\) and \(\epsilon(h_{\rm match})\) from the reference EOS.
+Thus every finite perturbation used in the Jacobian corresponds to a
+thermodynamically consistent barotrope, with \(0<c_s^2<1\) enforced by the
+latent logistic map.
+
+The current numerical basis consists of localized Gaussian functions,
+\begin{equation}
+    \phi_i(h)
+    =
+    \exp\left[
+        -\frac{(h-h_i)^2}{2w^2}
+    \right],
+\end{equation}
+but the basis is not assigned physical meaning.  One baseline metric on the
+coefficient perturbations is a squared-exponential covariance,
+\begin{equation}
+    C_{\rm EOS}^{ij}
+    =
+    \sigma_a^2
+    \exp\left[
+        -\frac{(h_i-h_j)^2}{2\ell_h^2}
+    \right].
+    \label{eq:eos-covariance}
+\end{equation}
+Basis refinement and alternative covariance operators are required before
+the response hierarchy is interpreted physically.
+
+For Stage 1 validation we additionally use two analytic EOS families. A
+constant-energy-density star provides the exact Schwarzschild-interior
+background solution. A relativistic \(\Gamma=2\) polytrope supplies the
+Newtonian \(n=1\) limits of \(k_2\) and \(I/(MR^2)\). Neither benchmark EOS
+defines the final EOS metric. The first response calculations use the
+\(\Gamma=2\) model only as a controlled reference point; broad realistic EOS
+ensembles enter after derivative and basis-convergence tests.

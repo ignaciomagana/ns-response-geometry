@@ -1,0 +1,35 @@
+\begin{figure*}[t]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[
+  group style={group size=3 by 1,horizontal sep=1.25cm},
+  width=0.30\textwidth,
+  height=0.25\textwidth,
+  xmin=0.22,xmax=0.58,
+  xtick={0.25,0.35,0.45,0.55},
+  xlabel={$h_{\rm tr}/h_c$},
+  grid=both,
+  legend style={draw=none,font=\small},
+]
+\nextgroupplot[ylabel={I--Love alignment},ymin=0.88,ymax=1.005,legend pos=south west]
+\addplot[thick,mark=*] table[x=x,y=alignment]{data/transition_hc020.dat};
+\addlegendentry{$h_c=0.20$}
+\addplot[thick,dashed,mark=square*] table[x=x,y=alignment]{data/transition_hc030.dat};
+\addlegendentry{$h_c=0.30$}
+\addplot[thick,dotted,mark=triangle*] table[x=x,y=alignment]{data/transition_hc040.dat};
+\addlegendentry{$h_c=0.40$}
+
+\nextgroupplot[ylabel={$\sigma_\perp^{I{\rm Love}}/\sigma_\perp^{C{\rm Love}}$},ymin=0,ymax=0.55]
+\addplot[thick,mark=*] table[x=x,y=ilove_clove]{data/transition_hc020.dat};
+\addplot[thick,dashed,mark=square*] table[x=x,y=ilove_clove]{data/transition_hc030.dat};
+\addplot[thick,dotted,mark=triangle*] table[x=x,y=ilove_clove]{data/transition_hc040.dat};
+
+\nextgroupplot[ylabel={$\mathcal R_{\rm N}$},ymin=0,ymax=0.15]
+\addplot[thick,mark=*] table[x=x,y=normal_ratio]{data/transition_hc020.dat};
+\addplot[thick,dashed,mark=square*] table[x=x,y=normal_ratio]{data/transition_hc030.dat};
+\addplot[thick,dotted,mark=triangle*] table[x=x,y=normal_ratio]{data/transition_hc040.dat};
+\end{groupplot}
+\end{tikzpicture}
+\caption{High-resolution transition-location scan at fixed depth $D=1.5$ and width $0.25h_c$. Only stable configurations passing the physical screen are shown. The I--Love projection can rotate strongly near $h_{\rm tr}/h_c\simeq0.45$--0.55 (left and center), while the full normal hierarchy remains separated (right).}
+\label{fig:transition-location}
+\end{figure*}

@@ -17,6 +17,7 @@ from .response import (
 )
 from .response_eos import (
     TabulatedSoundSpeedEOS,
+    build_nodal_sound_speed_eos,
     build_sound_speed_eos,
     gaussian_basis,
     squared_exponential_covariance,
@@ -31,6 +32,7 @@ __all__ = [
     "StellarObservables",
     "solve_star",
     "solve_observables",
+    "build_nodal_sound_speed_eos",
     "build_sound_speed_eos",
     "gaussian_basis",
     "squared_exponential_covariance",

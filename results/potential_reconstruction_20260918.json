@@ -1,0 +1,55 @@
+{
+  "provenance": {
+    "date": "2026-09-18",
+    "execution": "local VM mirror of current GitHub numerical core",
+    "script_in_repo": "scripts/potential_reconstruction.py",
+    "seed": 260918,
+    "n_nodes": 17,
+    "n_steps": 2048,
+    "n_high": 1024,
+    "dataset_points": 79,
+    "fit_input": "soft-covector gradients only; observable values are not fit"
+  },
+  "model_selection": {
+    "statement": "Quadratic through quartic potentials were tested. Cubic is retained as the global reconstruction diagnostic because it improves over quadratic in cross-validation and both family holdouts, while quartic shows overfitting in the rough-to-smooth family transfer.",
+    "selected_degree": 3
+  },
+  "four_fold_background_cv": {
+    "degree_3_ilove_1d": {
+      "alignment_median_across_folds": 0.9974389095210842,
+      "invariant_std_median_across_folds": 0.019768422537360997,
+      "invariant_std_min": 0.014954647532211152,
+      "invariant_std_max": 0.02717068299983653
+    },
+    "degree_3_soft_surface_2d": {
+      "alignment_median_across_folds": 0.9988851284943947,
+      "alignment_p10_median_across_folds": 0.994345319358005,
+      "invariant_std_median_across_folds": 0.008476201278687532,
+      "invariant_std_min": 0.005688704428081548,
+      "invariant_std_max": 0.015159329584693817
+    },
+    "fractional_scatter_reduction": 0.5712252071368831
+  },
+  "family_holdout": {
+    "smooth_to_rough": {
+      "ilove_1d_invariant_std": 0.025986730127677007,
+      "soft_surface_2d_invariant_std": 0.008889363412331526,
+      "soft_surface_alignment_median": 0.9986711344180336,
+      "fractional_scatter_reduction": 0.6579268200094184
+    },
+    "rough_to_smooth": {
+      "ilove_1d_invariant_std": 0.01884494535355306,
+      "soft_surface_2d_invariant_std": 0.009269724260614525,
+      "soft_surface_alignment_median": 0.999257041631264,
+      "fractional_scatter_reduction": 0.508105537760724
+    }
+  },
+  "degree_2_cross_check": {
+    "ilove_1d_invariant_std_median": 0.01795464602914105,
+    "soft_surface_2d_invariant_std_median": 0.009607774234668753,
+    "fractional_scatter_reduction": 0.46488645785191296
+  },
+  "degree_4_warning": {
+    "statement": "Quartic fits tighten some four-fold summaries but degrade the rough-to-smooth family transfer, so they are not used for the paper-level reconstruction diagnostic."
+  }
+}

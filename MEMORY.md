@@ -182,3 +182,26 @@ Its strongest stable degradation follows a moving ridge:
 \((h_c,h_{\rm tr})=(0.20,0.10),(0.30,0.14),(0.40,0.18)\), suggesting
 \(h_{\rm tr}/h_c\sim0.45\)--0.50.  This must be checked at 65 nodes and
 mapped into \(r/R\) and \(m/M\) before physical interpretation.
+
+
+## 2026-09-18 final terminology/novelty re-check
+
+A targeted search through September 18, 2026 still finds no neutron-star
+universal-relation paper that combines the nonparametric EOS response
+operator, an explicit EOS metric/covariance, quotient by the stellar-sequence
+direction, the full normal-response spectrum, Frobenius integrability, and
+curvature-controlled finite scatter.
+
+Terminology caveat: Siffert, "Response Geometry for Einstein metrics"
+(arXiv:2608.08777, 2026) independently uses the phrase "response geometry"
+for a general differential observation-map construction and response tensor
+in the mathematical study of Einstein metrics. This is not neutron-star
+universal-relation prior art and does not overlap the present calculations,
+but the manuscript must not imply that the generic phrase "response
+geometry" is coined here.
+
+Recent 2026 neutron-star work found in this re-check continues to focus on
+empirical/data-driven universal relations, large EOS databases, rotating-star
+relations, sensitivity to microscopic EOS parameters, or neural surrogates of
+the EOS-to-observable map. None found performs the normal-spectrum and
+integrability construction used here.

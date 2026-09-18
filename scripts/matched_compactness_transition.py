@@ -60,13 +60,18 @@ def transition_profile(center, width, depth=DEPTH):
 
 
 def find_hc_for_compactness(reference, target):
-    """Bisection on the stable branch using the unperturbed analytic EOS."""
+    """Bisection on the stable branch using a jitted compactness map."""
     lo, hi = 0.03, 0.55
 
+    compactness_jit = jax.jit(
+        lambda h: solve_observables(
+            reference, h, n_steps=1024
+        ).compactness
+    )
+    compactness_jit(jnp.asarray(0.20)).block_until_ready()
+
     def compactness(h):
-        return float(
-            solve_observables(reference, h, n_steps=1024).compactness
-        )
+        return float(compactness_jit(jnp.asarray(h)))
 
     clo = compactness(lo)
     chi = compactness(hi)
@@ -205,9 +210,6 @@ def evaluate(reference, eos_kwargs, response_state, h_c, x):
         min_cs20,
     ) = response_state(zero, jnp.asarray(h_c))
 
-    eos = build_nodal_sound_speed_eos(reference, values, **eos_kwargs)
-    eos0 = build_nodal_sound_speed_eos(reference, zero, **eos_kwargs)
-
     compactness = float(jnp.exp(y[0]))
     baseline_compactness = float(jnp.exp(y0[0]))
     finite = (
@@ -241,10 +243,6 @@ def evaluate(reference, eos_kwargs, response_state, h_c, x):
             jnp.sqrt(ilove_var0 / clove_var0)
         ),
         baseline_normal_rms_ratio=float(jnp.sqrt(evals0[1] / evals0[2])),
-        transition_shell=physical_shell(eos, h_c, center, width)
-        if physical else None,
-        baseline_shell=physical_shell(eos0, h_c, center, width)
-        if physical else None,
     )
 
 
@@ -305,6 +303,29 @@ def main():
             ]
             best = strongest(subset)
             if best is not None:
+                # Compute physical-shell mappings only for the six winners.
+                reference = RelativisticPolytrope(K=100.0, gamma=gamma)
+                eos_kwargs = dict(
+                    h_match=0.02,
+                    h_max=0.50,
+                    h_nodes=nodes,
+                    n_low=128,
+                    n_high=N_HIGH,
+                )
+                values = transition_profile(best["center"], best["width"])
+                eos = build_nodal_sound_speed_eos(
+                    reference, values, **eos_kwargs
+                )
+                eos0 = build_nodal_sound_speed_eos(
+                    reference, jnp.zeros(N_NODES), **eos_kwargs
+                )
+                best = dict(best)
+                best["transition_shell"] = physical_shell(
+                    eos, best["h_c"], best["center"], best["width"]
+                )
+                best["baseline_shell"] = physical_shell(
+                    eos0, best["h_c"], best["center"], best["width"]
+                )
                 best_by_case.append(best)
 
     x_values = np.asarray([r["x"] for r in best_by_case])

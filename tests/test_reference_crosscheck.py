@@ -7,7 +7,7 @@ jax.config.update("jax_enable_x64", True)
 from ns_response_geometry.eos import IncompressibleEOS, RelativisticPolytrope
 from ns_response_geometry.observables import solve_observables
 
-from reference_scipy import solve_reference
+from tests.reference_scipy import solve_reference
 
 
 @pytest.mark.parametrize(

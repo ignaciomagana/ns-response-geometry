@@ -1,7 +1,13 @@
 """Neutron-star EOS response geometry."""
 
 from .eos import IncompressibleEOS, RelativisticPolytrope
-from .geometry import induced_response, metric_projector, transverse_response
+from .geometry import (
+    induced_response,
+    metric_projector,
+    normal_response_spectrum,
+    plane_normal_variance,
+    transverse_response,
+)
 from .observables import StellarObservables, solve_observables
 from .response import (
     local_response_geometry,
@@ -35,4 +41,6 @@ __all__ = [
     "induced_response",
     "metric_projector",
     "transverse_response",
+    "normal_response_spectrum",
+    "plane_normal_variance",
 ]

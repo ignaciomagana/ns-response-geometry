@@ -4,41 +4,89 @@
 
 ## Stage
 
-Stage 0 — repository initialization and mathematical manuscript scaffold.
+Stage 2/3 transition — stellar structure is validated; production nodal EOS
+response kernels are implemented; robustness of the local response hierarchy
+is being audited.
 
 ## Completed
 
-- Repository initialized.
-- Core question fixed: characterize quasi-universal relations using the differential geometry of the EOS-to-observable map.
-- Literature novelty boundary recorded in \`MEMORY.md\`.
-- Basis dependence of a raw Jacobian SVD identified; primary finite-dimensional object is \(G=JC_{\rm EOS}J^T\).
-- Stellar-sequence motion identified as a tangent direction that must be quotiented before defining EOS universality.
-- Continuous-paper policy fixed.
+- Mathematical manuscript scaffold and novelty boundaries.
+- Differentiable enthalpy-coordinate TOV solver.
+- Static \(l=2\) tidal response including self-bound surface correction.
+- First-order Hartle moment of inertia.
+- Exact constant-density background benchmark.
+- Newtonian homogeneous and \(n=1\) polytrope limits.
+- Independent adaptive radius-coordinate DOP853 cross-check.
+- Stage 1 maximum cross-solver discrepancy below \(10^{-6}\).
+- Metric-aware observable response \(G=JC_{\rm EOS}J^T\).
+- Cotangent-space normalization of universal-relation normals.
+- EOS basis-change and observable-coordinate invariance unit tests.
+- Thermodynamically consistent latent sound-speed EOS reconstruction.
+- Production nodal latent-field coordinates for a fixed functional EOS metric.
+- Legacy Gaussian pilot: strong I--Love suppression relative to C--Love,
+  retained as a diagnostic only.
+- Manuscript updated with the exact stellar equations and Stage 1 validation
+  numbers.
 
 ## Current scientific target
 
-Demonstrate, without inserting an empirical I--Love fit, that EOS-induced response transverse to the stellar sequence is much smaller for \((\ln\bar I,\ln\Lambda_2)\) than for a weaker control such as \((\ln C,\ln\Lambda_2)\).
+Establish whether the I--Love transverse-response suppression survives:
+1. refinement of the nodal EOS field;
+2. squared-exponential, Mat\'ern-3/2, and exponential EOS covariances;
+3. multiple correlation lengths;
+4. multiple smooth causal reference EOSs;
+5. consistent observable-coordinate transformations and alternative
+   normalization metrics;
+6. stellar/EOS reconstruction resolution.
+
+The workflow \`response-robustness\` is executing this audit.
 
 ## Immediate next actions
 
-1. Complete initial mathematical paper draft.
-2. Implement EOS interfaces and a validated enthalpy-coordinate TOV solver.
-3. Add \(l=2\) static tides and first-order frame dragging.
-4. Validate \(M,R,\Lambda_2,I\) independently before response-geometry claims.
-5. Build finite-basis response kernels and finite-difference derivative checks.
+1. Read and commit the robustness result as a versioned result file.
+2. Update the Results section with only the tests that pass.
+3. If H1/H2 survive, move from controlled polytropic references to a broad
+   nonparametric EOS ensemble.
+4. Build the full three-observable normal spectrum; do not call 2D
+   reconstruction an integrability test because the 2D normal is unique from
+   the sequence tangent alone.
+5. Only after the full response field is sampled in a sufficiently
+   multidimensional domain, implement a genuine Frobenius/path-dependence
+   test.
+6. Then evaluate second-order directional curvature and finite-amplitude
+   scatter.
 
-## Gate to Stage 1 completion
+## Validation status
 
-Do not proceed to response geometry until mass/radius convergence is demonstrated; \(\Lambda_2\) and \(I\) agree with independent references; and gradients are stable under numerical tolerances.
+Stage 1: passed.
+
+Production response derivatives: nodal autodiff/finite-difference audit is
+part of the current robustness workflow.
 
 ## Manuscript status
 
-Initial manuscript is being created with the formal response-geometry definitions and explicit relationship to prior stationarity work. No numerical results are to be stated until produced.
+- Introduction: drafted.
+- Response geometry: drafted.
+- Stellar equations: synchronized with production solver.
+- Numerical validation: Stage 1 results written.
+- Results: original Gaussian pilot written explicitly as a restricted
+  development diagnostic.
+- Production robustness results: pending current workflow.
+- Integrability/curvature/breakdown: structured placeholders only.
 
-## Blockers
+## Blockers / risks
 
-None at repository level. Main technical risk: differentiable surface/EOS interpolation without contaminating functional derivatives.
+- The broad nonparametric EOS ensemble has not yet been defined; do not call
+  the controlled polytropic robustness study a population-independent result.
+- Observable-metric dependence must be separated from mere coordinate
+  dependence.
+- A genuine integrability test requires a response covector field sampled in
+  more than the one-dimensional stellar sequence.
 
 ## Session protocol
 
-At the beginning of every session read \`STATE.md\`, \`MEMORY.md\`, \`SCIENCE_CONTRACT.md\`, and inspect current commits. At the end update \`STATE.md\`, record durable decisions in \`MEMORY.md\`, update the paper, and leave the repository reproducible.
+At the beginning of every session read \`STATE.md\`, \`MEMORY.md\`,
+\`SCIENCE_CONTRACT.md\`, inspect recent commits, and inspect CI. At the end
+update \`STATE.md\`, record durable decisions in \`MEMORY.md\`, update the
+paper, and leave all reported numerical results reproducible from scripts or
+versioned result files.

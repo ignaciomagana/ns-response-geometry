@@ -274,6 +274,15 @@ def main():
                         )
                     )
 
+    public_baselines = {
+        key: {
+            name: value
+            for name, value in baseline.items()
+            if name != "ilove_response"
+        }
+        for key, baseline in baselines.items()
+    }
+
     payload = dict(
         screening=True,
         n_nodes=N_NODES,
@@ -286,7 +295,7 @@ def main():
             depths=list(DEPTHS),
             h_c_values=list(H_C_VALUES),
         ),
-        baselines=baselines,
+        baselines=public_baselines,
         extrema=extrema(rows),
         rows=rows,
     )

@@ -135,11 +135,57 @@ one percent.
 
 These tests establish H1 and H2 for a controlled family of smooth causal
 reference EOSs: the known I--Love relation appears as a strongly suppressed
-transverse EOS response without entering the construction.  They do not yet
-establish the claim over the full physically allowed EOS space.  The next
-test therefore moves the background point itself through a broad
-nonparametric latent sound-speed ensemble rather than perturbing only around
-a small collection of polytropic references.
+transverse EOS response without entering the construction.
+
+\subsection{Broad nonparametric background ensemble}
+
+We next move the expansion point itself through EOS function space.  Starting
+from the same low-density anchor, we draw 16 finite latent sound-speed
+backgrounds with unit RMS-scale perturbations: eight from a smooth
+squared-exponential process with \(\ell_h=0.08\) and eight from a rougher
+Mat\'ern-\(3/2\) process with \(\ell_h=0.04\).  Each background remains causal
+by construction.  The local response Jacobian is recomputed about the
+nonzero field at \(h_c=0.12,0.20,0.28\).  Four of the 48 configurations lie
+on a negative-\(dM/dh_c\) branch and are excluded from the stable-star
+summary.
+
+At the fine \(2048\)-step stellar and \(1024\)-point thermodynamic
+resolution, the 44 stable configurations have
+\begin{equation}
+ {\rm median}\left(
+ \frac{\sigma_\perp^{I{\rm Love}}}
+      {\sigma_\perp^{C{\rm Love}}}
+ \right)=0.0697,
+ \qquad
+ q_{0.90}=0.205.
+ \label{eq:broad-summary}
+\end{equation}
+All stable configurations retain an I--Love response smaller than C--Love;
+the largest ratio is \(0.486\).  The two weakest cases occur at very low
+compactness, \(C=0.030\) and \(0.045\).  Once configurations with
+\(C<0.05\) are removed, all 41 remaining stable points satisfy
+\begin{equation}
+ \frac{\sigma_\perp^{I{\rm Love}}}
+      {\sigma_\perp^{C{\rm Love}}}
+ <0.231,
+\end{equation}
+and for \(C\ge0.08\) the maximum is \(0.218\).  The smooth and rough
+background families give similar median ratios, \(0.064\) and \(0.072\),
+respectively.
+
+This result is deliberately broader than the small-polytrope study but
+should not be confused with a nuclear-physics posterior over realistic EOSs.
+It tests the functional geometry under large causal deformations of the
+sound-speed profile.  Within that domain, the suppression is generic through
+the neutron-star compactness range and weakens most clearly toward the
+low-compactness limit.
+
+A coarse \(512/256\) screening calculation initially assigned one rough
+background a response ratio \(0.80\).  Recomputing the same configuration at
+the production resolution gives \(0.218\).  This case demonstrates that
+response ratios can be substantially more resolution-sensitive than the
+baseline stellar observables for unusual EOS profiles.  All ensemble
+statistics quoted above therefore use the fine calculation.
 
 \section{Integrability and global reconstruction}
 \label{sec:global}

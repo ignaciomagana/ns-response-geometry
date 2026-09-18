@@ -1,0 +1,78 @@
+{
+  "provenance": {
+    "date": "2026-09-18",
+    "execution": "GitHub Actions",
+    "workflow_run_id": 35325485285,
+    "script": "scripts/transition_breakdown.py",
+    "n_nodes": 65,
+    "n_steps": 2048,
+    "n_high": 2048
+  },
+  "baseline_h030": {
+    "compactness": 0.17125601690123107,
+    "dM_dh": 1.3402590554357774,
+    "h_c": 0.3,
+    "ibar": 10.873668441011457,
+    "ilove_alignment": 0.9924246071407797,
+    "ilove_clove_rms_ratio": 0.13480156732379958,
+    "lambda2": 249.47014973891675,
+    "min_cs2": 0.019801326693244702,
+    "normal_rms_ratio": 0.051726348971727815,
+    "soft_covector": [-0.12173204418092112, 0.9586300845944902, -0.25731239832136854]
+  },
+  "baseline_h036": {
+    "compactness": 0.18787280565279996,
+    "dM_dh": 0.751794884432111,
+    "h_c": 0.36,
+    "ibar": 9.223900286204891,
+    "ilove_alignment": 0.9910732528334599,
+    "ilove_clove_rms_ratio": 0.1505177297037938,
+    "lambda2": 126.42522121686851,
+    "min_cs2": 0.019801326693244702,
+    "normal_rms_ratio": 0.06604615373716889,
+    "soft_covector": [-0.13223205182247572, 0.9612765045277974, -0.24178950827866413]
+  },
+  "transition_A": {
+    "profile": {"center": 0.16, "depth": 2.0, "edge": 0.008, "width": 0.04},
+    "response": {
+      "compactness": 0.1064611122986236,
+      "dM_dh": 0.009231824435296243,
+      "h_c": 0.3,
+      "ibar": 16.93104862024913,
+      "ilove_alignment": 0.9024490814685846,
+      "ilove_clove_rms_ratio": 0.495588100511608,
+      "lambda2": 1726.61438649891,
+      "min_cs2": 0.019801326693241063,
+      "normal_rms_ratio": 0.09618777589620026,
+      "soft_covector": [-0.42716792677039017, 0.8510322557433422, -0.3054040962775139]
+    }
+  },
+  "transition_B": {
+    "profile": {"center": 0.16, "depth": 2.0, "edge": 0.008, "width": 0.08},
+    "response": {
+      "compactness": 0.08205500967911686,
+      "dM_dh": 0.38379856479020535,
+      "h_c": 0.36,
+      "ibar": 14.708564678583253,
+      "ilove_alignment": 0.9259528714671563,
+      "ilove_clove_rms_ratio": 0.4305837697567593,
+      "lambda2": 1795.5302515319597,
+      "min_cs2": 0.019801326692705592,
+      "normal_rms_ratio": 0.12031505898138323,
+      "soft_covector": [-0.3732129214019255, 0.8932409320048051, -0.25066462193502015]
+    }
+  },
+  "localization_A": {
+    "baseline_compactness": 0.17125601690123107,
+    "transition_compactness": 0.1064611122986236,
+    "covariance_weighted_ilove_variance_baseline": 5.991533596933224e-06,
+    "covariance_weighted_ilove_variance_transition": 0.0005096271928124614,
+    "covariance_weighted_variance_factor": 85.05788786251902,
+    "transition_window": [0.14, 0.18],
+    "transition_window_fraction_of_direct_sensitivity": 0.8983596505202557,
+    "transition_window_fraction_of_positive_excess": 0.9023719429776885,
+    "excess_peak_enthalpy": 0.155,
+    "excess_centroid_enthalpy": 0.15615538743634103
+  },
+  "interpretation": "Localized softening can strongly degrade the ordinary I-Love projection and rotate the soft covector while preserving a strong full soft/hard response hierarchy. The added I-Love sensitivity is spatially localized on the imposed soft layer."
+}

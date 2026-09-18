@@ -9,50 +9,36 @@ Stage 0 — repository initialization and mathematical manuscript scaffold.
 ## Completed
 
 - Repository initialized.
-- Core scientific question fixed: characterize quasi-universal relations using the differential geometry of the EOS-to-observable map.
-- Literature novelty boundary recorded in `MEMORY.md`.
-- Basis dependence of a raw Jacobian SVD identified; the primary finite-dimensional object is instead (G=JC_{m EOS}J^T).
-- Stellar-sequence motion identified as a nuisance/tangent direction that must be quotiented before defining EOS universality.
-- Paper will be drafted continuously at every stage.
+- Core question fixed: characterize quasi-universal relations using the differential geometry of the EOS-to-observable map.
+- Literature novelty boundary recorded in \`MEMORY.md\`.
+- Basis dependence of a raw Jacobian SVD identified; primary finite-dimensional object is \(G=JC_{\rm EOS}J^T\).
+- Stellar-sequence motion identified as a tangent direction that must be quotiented before defining EOS universality.
+- Continuous-paper policy fixed.
 
 ## Current scientific target
 
-Demonstrate, without inserting an empirical I--Love fit, that the EOS-induced response transverse to the stellar sequence is much smaller for the ((lnar I,lnLambda_2)) plane than for a weaker control relation such as ((ln C,lnLambda_2)).
+Demonstrate, without inserting an empirical I--Love fit, that EOS-induced response transverse to the stellar sequence is much smaller for \((\ln\bar I,\ln\Lambda_2)\) than for a weaker control such as \((\ln C,\ln\Lambda_2)\).
 
 ## Immediate next actions
 
-1. Write the initial mathematical paper draft with definitions, novelty positioning, and explicit local-to-global integrability problem.
+1. Complete initial mathematical paper draft.
 2. Implement EOS interfaces and a validated enthalpy-coordinate TOV solver.
-3. Add the (l=2) tidal perturbation and slow-rotation frame-dragging equations.
-4. Validate (M,R,Lambda_2,I) against independent benchmarks before enabling autodiff claims.
+3. Add \(l=2\) static tides and first-order frame dragging.
+4. Validate \(M,R,\Lambda_2,I\) independently before response-geometry claims.
 5. Build finite-basis response kernels and finite-difference derivative checks.
 
 ## Gate to Stage 1 completion
 
-Do not proceed to response geometry until:
-- TOV mass/radius convergence is demonstrated;
-- tidal deformability agrees with an independent implementation/reference benchmark;
-- moment of inertia agrees with an independent implementation/reference benchmark;
-- gradients are numerically stable under integration/grid tolerances.
+Do not proceed to response geometry until mass/radius convergence is demonstrated; \(\Lambda_2\) and \(I\) agree with independent references; and gradients are stable under numerical tolerances.
 
 ## Manuscript status
 
-Initial manuscript scaffold is being created now. It must already contain the formal response-geometry definitions and explicit relationship to prior stationarity work. No numerical results are to be stated until produced.
+Initial manuscript is being created with the formal response-geometry definitions and explicit relationship to prior stationarity work. No numerical results are to be stated until produced.
 
 ## Blockers
 
-None at repository level. The main technical risk is differentiable treatment of the surface/EOS interpolation without contaminating functional derivatives.
+None at repository level. Main technical risk: differentiable surface/EOS interpolation without contaminating functional derivatives.
 
 ## Session protocol
 
-At the beginning of every future work session:
-1. read `STATE.md`;
-2. read `MEMORY.md`;
-3. read `SCIENCE_CONTRACT.md`;
-4. inspect the latest commits / changed files.
-
-At the end:
-1. update `STATE.md`;
-2. record durable decisions in `MEMORY.md`;
-3. update the paper for whatever changed;
-4. leave the repository in a reproducible state.
+At the beginning of every session read \`STATE.md\`, \`MEMORY.md\`, \`SCIENCE_CONTRACT.md\`, and inspect current commits. At the end update \`STATE.md\`, record durable decisions in \`MEMORY.md\`, update the paper, and leave the repository reproducible.

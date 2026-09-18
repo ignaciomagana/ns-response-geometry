@@ -20,6 +20,12 @@ class Star(NamedTuple):
     central_enthalpy: jnp.ndarray
 
 
+class StarProfile(NamedTuple):
+    enthalpy: jnp.ndarray
+    radius: jnp.ndarray
+    mass: jnp.ndarray
+
+
 def _rhs(h, y, eos):
     r, m = y
     p = eos.pressure(h)
@@ -84,6 +90,41 @@ def solve_star(
         radius=radius,
         compactness=mass / radius,
         central_enthalpy=h_c,
+    )
+
+
+def solve_star_profile(
+    eos,
+    h_c,
+    *,
+    n_steps: int = 4096,
+    central_fractional_offset: float = 1.0e-4,
+) -> StarProfile:
+    """Return the background enthalpy, radius, and enclosed-mass profile.
+
+    The first point is the regular series start just below the center and the
+    final point is the stellar surface. This uses the identical fixed-step
+    integrator as solve_star.
+    """
+    h_c = jnp.asarray(h_c)
+    h0, y0 = _central_start(h_c, eos, central_fractional_offset)
+    dh = -h0 / float(n_steps)
+
+    def body(carry, _):
+        h, y = carry
+        y_new = _rk4_step(h, y, dh, eos)
+        return (h + dh, y_new), y_new
+
+    (_, _), history = jax.lax.scan(
+        body, (h0, y0), xs=None, length=n_steps
+    )
+    states = jnp.concatenate((y0[None, :], history), axis=0)
+    enthalpy = h0 + dh * jnp.arange(n_steps + 1)
+
+    return StarProfile(
+        enthalpy=enthalpy,
+        radius=states[:, 0],
+        mass=states[:, 1],
     )
 
 

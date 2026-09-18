@@ -205,3 +205,29 @@ empirical/data-driven universal relations, large EOS databases, rotating-star
 relations, sensitivity to microscopic EOS parameters, or neural surrogates of
 the EOS-to-observable map. None found performs the normal-spectrum and
 integrability construction used here.
+
+
+## 2026-09-18 added analytic prior art
+
+Two 2026 papers discovered in the final literature sweep must be treated as
+central antecedents:
+
+- Hu, Gao & Shao, Phys. Rev. D 113, 044056 (2026),
+  arXiv:2505.13110, "Linear analysis of I-C-Love universal relations for
+  neutron stars."  They separate the linear deviation of fixed I-C and
+  I-Love relations into an EOS-difference factor and a factor determined by
+  the background stellar structure.  Therefore do not claim first linear
+  response explanation or first factorization of EOS sensitivity.
+- Kamata, Minamiguchi & Minato, arXiv:2608.19939 (submitted 20 Aug 2026),
+  "Universal Relations for Neutron Stars from Asymptotic Analysis."  They
+  derive I-Love-Q and Love-C universality from asymptotic expansions of the
+  relativistic stellar equations and boundary conditions and identify a
+  reduced set of surface-surviving parameters.  Therefore do not claim first
+  derivation of universality directly from the relativistic ODE structure.
+
+These papers do not, in the literature audit performed through
+2026-09-18, construct the metric-weighted full EOS response operator,
+quotient the stellar-sequence direction, infer the soft normal mode before
+choosing a relation, test Frobenius integrability, or connect finite residuals
+to the Hessian/curvature of the EOS-to-observable map.  Those are the
+scientific distinctions the manuscript should retain.

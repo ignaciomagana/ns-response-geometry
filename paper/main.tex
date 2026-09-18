@@ -1,0 +1,37 @@
+\documentclass[aps,prd,onecolumn,nofootinbib,superscriptaddress]{revtex4-2}
+
+\usepackage{amsmath,amssymb,bm,mathtools}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+\newcommand{\eos}{\mathcal{E}}
+\newcommand{\yvec}{\bm{y}}
+\newcommand{\aeos}{C_{\rm EOS}}
+\newcommand{\Geos}{G_{\rm EOS}}
+\newcommand{\Gperp}{G_{\perp}}
+\newcommand{\Ibar}{\bar I}
+\newcommand{\Lamtwo}{\Lambda_2}
+\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
+
+\begin{document}
+
+\title{Neutron-star universal relations from equation-of-state response geometry}
+\author{Ignacio Magana}
+\date{\today}
+
+\begin{abstract}
+Relations among neutron-star bulk observables can depend only weakly on the equation of state (EOS), despite the strong EOS dependence of the observables separately. The best known example is the I--Love--Q family. Existing explanations connect this behavior to approximate self-similarity, stiffness and proximity to the incompressible limit, while perturbative calculations establish stationarity of moment--Love relations under EOS or density perturbations in controlled limits. Here we formulate quasi-universality as a property of the differential map from EOS function space to relativistic stellar observables. For observables \(y^A\) and EOS coordinates \(a^i\), the Jacobian \(J^A{}_i=\partial y^A/\partial a^i\) is not itself a basis-independent measure of sensitivity. We instead equip EOS space with a covariance or metric \(C_{\rm EOS}^{ij}\) and study the induced observable response \(G_{\rm EOS}^{AB}=J^A{}_i C_{\rm EOS}^{ij}J^B{}_j\). We explicitly separate EOS-driven motion from displacement along a stellar sequence and define local quasi-universal directions by suppressed response in the corresponding quotient space. A global universal relation requires, in addition, approximate integrability of these local low-response covectors. At second order, curvature of the EOS-to-observable map controls the finite residual scatter. We develop the construction first for compactness, dimensionless moment of inertia and quadrupolar tidal deformability in general relativity, with the I--Love relation treated as a validation target rather than an input. \todo{Replace final sentence with measured hierarchy, integrability error, and breakdown result.}
+\end{abstract}
+
+\maketitle
+
+\input{sections/introduction}
+\input{sections/framework}
+\input{sections/stellar_structure}
+\input{sections/numerics}
+\input{sections/results}
+\input{sections/discussion}
+
+\bibliography{references}
+
+\end{document}

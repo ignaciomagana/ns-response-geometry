@@ -1,7 +1,7 @@
 """Equation-of-state interfaces used by the stellar solver.
 
-The production response analysis will use a bounded sound-speed field.  These
-simple EOS classes exist first to validate the background integrator.
+The production response analysis will use a bounded sound-speed field. These
+simple EOS classes exist first to validate the stellar integrators.
 """
 
 from __future__ import annotations
@@ -13,13 +13,7 @@ import jax.numpy as jnp
 
 @dataclass(frozen=True)
 class IncompressibleEOS:
-    """Constant-energy-density star.
-
-    This is not a causal material EOS and is used only as an analytic TOV
-    benchmark.  With h = integral dp/(epsilon+p),
-
-        p(h) = epsilon_0 [exp(h) - 1].
-    """
+    """Constant-energy-density star used only as an analytic benchmark."""
 
     epsilon0: float = 1.0
 
@@ -31,17 +25,23 @@ class IncompressibleEOS:
         h = jnp.asarray(h)
         return jnp.ones_like(h) * self.epsilon0
 
+    def sound_speed_squared(self, h):
+        h = jnp.asarray(h)
+        return jnp.ones_like(h) * jnp.inf
+
+    @property
+    def surface_energy_density(self):
+        return self.epsilon0
+
 
 @dataclass(frozen=True)
 class RelativisticPolytrope:
     """Cold relativistic polytrope in units G=c=1.
 
     p = K rho^Gamma,
-    epsilon = rho + p/(Gamma-1).
+    epsilon = rho + p/(Gamma-1),
 
-    The relativistic enthalpy has the closed form
-
-        exp(h) = 1 + Gamma/(Gamma-1) K rho^(Gamma-1).
+    with exp(h) = 1 + Gamma K rho^(Gamma-1)/(Gamma-1).
     """
 
     K: float
@@ -61,3 +61,14 @@ class RelativisticPolytrope:
         rho = self.rest_mass_density(h)
         p = self.K * rho**self.gamma
         return rho + p / (self.gamma - 1.0)
+
+    def sound_speed_squared(self, h):
+        rho = self.rest_mass_density(h)
+        p = self.K * rho**self.gamma
+        eps = rho + p / (self.gamma - 1.0)
+        denom = jnp.where(eps + p > 0.0, eps + p, 1.0)
+        return jnp.where(p > 0.0, self.gamma * p / denom, 0.0)
+
+    @property
+    def surface_energy_density(self):
+        return 0.0

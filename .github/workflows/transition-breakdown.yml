@@ -23,7 +23,9 @@ jobs:
         env:
           JAX_ENABLE_X64: "true"
           XLA_PYTHON_CLIENT_PREALLOCATE: "false"
-        run: python scripts/transition_breakdown.py | tee transition_breakdown.log
+        run: |
+          set -o pipefail
+          python scripts/transition_breakdown.py | tee transition_breakdown.log
       - uses: actions/upload-artifact@v4
         with:
           name: transition-breakdown-log

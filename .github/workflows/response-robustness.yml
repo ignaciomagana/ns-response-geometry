@@ -1,0 +1,28 @@
+name: response-robustness
+
+on:
+  push:
+    paths:
+      - "scripts/response_robustness.py"
+      - ".github/workflows/response-robustness.yml"
+      - "src/ns_response_geometry/response.py"
+      - "src/ns_response_geometry/response_eos.py"
+      - "src/ns_response_geometry/geometry.py"
+      - "src/ns_response_geometry/observables.py"
+
+jobs:
+  robustness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install
+        run: python -m pip install -e ".[test]"
+      - name: Run robustness audit
+        env:
+          JAX_ENABLE_X64: "true"
+          XLA_PYTHON_CLIENT_PREALLOCATE: "false"
+        run: python scripts/response_robustness.py

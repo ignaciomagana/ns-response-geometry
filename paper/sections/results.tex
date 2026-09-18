@@ -270,16 +270,210 @@ statistics quoted above therefore use the fine calculation.
 \section{Integrability and global reconstruction}
 \label{sec:global}
 
-The low-response covector field is transported across the stellar domain and integrated without reference to the standard I--Love fitting formula. In the two-dimensional I--Love plane the local normal field is integrable, but a nontrivial test is obtained by embedding the construction in the full \((\ln C,\ln\Ibar,\ln\Lamtwo)\) space and checking path dependence after quotienting the stellar-sequence direction.
+A soft normal direction is a local statement.  A common quasi-universal
+surface additionally requires the corresponding one-form to be approximately
+integrable.  This is nontrivial only in the full three-dimensional observable
+space: a line field in the two-dimensional I--Love plane is locally
+integrable automatically.
 
-\todo{Stage 4: add integrability diagnostic, path-dependence statistic, and reconstructed I--Love curve. Compare to the empirical relation only after reconstruction.}
+\subsection{Frobenius obstruction}
+
+At each stellar configuration we construct a three-dimensional domain patch
+\[
+x^i=(h_c,\alpha_{\rm hard},\alpha_{\rm soft}),
+\]
+where the EOS directions are the covariance-normalized right singular
+vectors of the projected EOS response.  Centered derivatives of both
+\(y^A=(\ln C,\ln\Ibar,\ln\Lamtwo)\) and the unit soft covector \(n_A\)
+give
+\begin{equation}
+    \frac{\partial n_A}{\partial y^B}
+    =
+    \frac{\partial n_A}{\partial x^i}
+    \left(
+      \frac{\partial y}{\partial x}
+    \right)^{-1\,i}{}_B .
+\end{equation}
+In the baseline Euclidean metric on logarithmic observables, the
+codimension-one Frobenius condition becomes
+\begin{equation}
+    n\cdot(\nabla_y\times n)=0.
+\end{equation}
+We quote
+\begin{equation}
+    \eta_{\rm F}
+    =
+    \frac{|n\cdot(\nabla_y\times n)|}
+         {|\nabla_y\times n|}.
+    \label{eq:eta-f}
+\end{equation}
+
+Because derivatives of the response eigenvector are more
+resolution-sensitive than the first-order observables, this calculation is
+performed with 4096 stellar steps and 2048 EOS reconstruction points.
+Across nine patches---the undeformed reference, one smooth finite EOS
+deformation, and one rough finite deformation, each at
+\(h_c=0.12,0.20,0.28\)---we find
+\begin{equation}
+    {\rm median}(\eta_{\rm F})=1.23\times10^{-3},
+    \qquad
+    q_{0.90}=3.48\times10^{-3},
+    \qquad
+    \max\eta_{\rm F}=7.36\times10^{-3}.
+    \label{eq:frobenius-result}
+\end{equation}
+A candidate \(3\times10^{-2}\) obstruction seen at half this resolution
+collapses to \(1.23\times10^{-3}\) at the production
+second-derivative resolution, so we do not interpret the coarse value as
+physical non-integrability.
+
+\subsection{Cross-validated scalar potential}
+
+The local Frobenius result can be tested globally without fitting the
+stellar observables themselves.  Since the \(\ln\Ibar\) component of the
+soft covector is nonzero throughout the sampled domain, normalize the
+one-form as
+\begin{equation}
+    d\ln\Ibar
+    +A(\yvec)\,d\ln C
+    +B(\yvec)\,d\ln\Lamtwo
+    \simeq0 .
+\end{equation}
+If the field is integrable there exists a scalar
+\begin{equation}
+    F(\yvec)
+    =
+    \ln\Ibar+g(\ln C,\ln\Lamtwo)
+    \label{eq:soft-potential}
+\end{equation}
+with
+\[
+\partial_{\ln C}g\simeq A,
+\qquad
+\partial_{\ln\Lamtwo}g\simeq B .
+\]
+We reconstruct \(g\) using only these gradient constraints; the observable
+values themselves are never regression targets.
+
+The dataset contains 79 stable configurations with \(C\ge0.05\), drawn from
+16 smooth and rough latent-field backgrounds at six central enthalpies.
+Polynomial potentials of degree two through four are tested.  A cubic is
+retained as the reconstruction diagnostic because it improves over the
+quadratic in both background cross-validation and EOS-family transfer,
+whereas the quartic begins to overfit one family direction.
+
+In four-fold cross-validation with complete EOS backgrounds held out, the
+cubic reconstruction gives
+\begin{equation}
+    {\rm median}\,{\cal A}(\nabla F,n_{\rm soft})=0.9989
+\end{equation}
+and median held-out scatter
+\begin{equation}
+    \sigma(F)=8.48\times10^{-3}.
+    \label{eq:potential-scatter}
+\end{equation}
+For a one-dimensional reconstruction constrained to depend only on
+\(\ln\Lamtwo\), using the same gradient data,
+\[
+    \sigma(F_{I{\rm Love}})=1.98\times10^{-2}.
+\]
+The compactness-dependent soft surface therefore reduces the held-out scalar
+scatter by \(57\%\).
+
+The result transfers between qualitatively different EOS-background
+families.  Training only on smooth backgrounds and testing only on rough
+ones gives
+\[
+    \sigma(F)=8.89\times10^{-3},
+    \qquad
+    \sigma(F_{I{\rm Love}})=2.60\times10^{-2},
+\]
+while reversing the train/test families gives
+\[
+    \sigma(F)=9.27\times10^{-3},
+    \qquad
+    \sigma(F_{I{\rm Love}})=1.88\times10^{-2}.
+\]
+These are reductions of \(66\%\) and \(51\%\), respectively.  Since the
+reconstruction is trained on the covector field rather than on the surface
+values, this probes the common integrability of the local soft directions
+rather than the flexibility of a direct fit through the stellar points.
+
+Equations~\eqref{eq:frobenius-result}--\eqref{eq:potential-scatter}
+provide complementary local and global tests of H3.  We use the polynomial
+surface only as an integrability diagnostic here and do not interpret its
+particular functional form as a new fundamental universal relation.
 
 \section{Curvature and finite EOS scatter}
 \label{sec:curvature}
 
-The second-order tensor entering Eq.~\eqref{eq:second-order} is evaluated using directional Hessian-vector products. Its covariance-weighted contraction gives a local prediction for finite EOS scatter after first-order cancellation.
+We next test whether the leading finite departure from the local soft
+relation is controlled by second-order response.  At a fixed background
+configuration, let \(n_0\) be the soft covector and let \(d\) be a random
+unit-scale EOS perturbation drawn from the declared GP metric.  Define the
+normal displacement
+\begin{equation}
+    R(s)
+    =
+    n_0\cdot
+    \left[
+      \yvec(a_0+s d)-\yvec(a_0)
+    \right].
+\end{equation}
+The first- and second-order predictions are
+\begin{align}
+    R_1(s)
+    &=
+    s\,n_0 J d,
+    \\
+    R_2(s)
+    &=
+    s\,n_0 J d
+    +
+    \frac{s^2}{2}\,
+    n_0 H[d,d].
+    \label{eq:curvature-prediction}
+\end{align}
+The directional curvature \(n_0H[d,d]\) is evaluated with a centered
+second difference at latent amplitude \(0.03\).
 
-\todo{Stage 5: compare curvature-predicted scatter with direct nonlinear EOS draws over increasing perturbation amplitude.}
+We use 48 random EOS directions at each of nine zero, smooth, and rough
+background configurations.  Table~\ref{tab:curvature} summarizes the
+relative RMSE of the two approximations against the exact finite
+displacement.
+
+\begin{table}[t]
+\caption{Median relative RMSE across nine background configurations for
+finite EOS displacement along random GP directions.}
+\label{tab:curvature}
+\begin{ruledtabular}
+\begin{tabular}{ccc}
+Amplitude \(s\) & Linear & Linear + quadratic\\
+\hline
+0.05 & 0.142 & 0.0062\\
+0.10 & 0.285 & 0.024\\
+0.25 & 0.650 & 0.156\\
+0.50 & 1.028 & 0.553
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+At \(s=0.05\) and \(0.10\), the second-order prediction is essentially
+quantitative, with 90th-percentile relative RMSE \(0.016\) and \(0.058\),
+respectively.  At \(s=0.25\), the median error remains \(0.156\), while the
+curvature contribution itself carries a median \(63\%\) of the exact normal
+RMS.  Thus the finite departure is already curvature dominated in a regime
+where the quadratic expansion remains predictive.  By \(s=0.5\), the
+second-order approximation is no longer quantitatively reliable.
+
+The curvature coefficient is stable to its finite-difference radius:
+changing the curvature step from \(0.015\) to \(0.06\) changes the
+directional-curvature RMS by \(2.5\times10^{-3}\) fractionally in the
+reference convergence test, with correlation \(>0.99999\).  These results
+support H4 over a finite but explicitly limited neighborhood of EOS function
+space: after the first-order soft response is suppressed, second-order
+curvature controls the leading nonlinear displacement until higher orders
+become important.
 
 \section{Controlled breakdown}
 \label{sec:breakdown}

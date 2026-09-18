@@ -1,0 +1,38 @@
+{
+  "provenance": {
+    "date": "2026-09-18",
+    "execution": "local VM mirror of current GitHub numerical core",
+    "script_in_repo": "scripts/integrability_frobenius.py",
+    "seed": 260918,
+    "n_nodes": 17,
+    "n_steps": 4096,
+    "n_high": 2048,
+    "delta_alpha": 0.03,
+    "delta_h": 0.001
+  },
+  "summary": {
+    "n": 9,
+    "normalized_helicity_min": 0.0003312860543670838,
+    "normalized_helicity_median": 0.0012268320825990456,
+    "normalized_helicity_p90": 0.0034834639571205625,
+    "normalized_helicity_max": 0.007362701629630415
+  },
+  "rows": [
+    {"background": "zero", "h_c": 0.12, "compactness": 0.09326908723729133, "normalized_helicity": 0.002122089372302396},
+    {"background": "zero", "h_c": 0.20, "compactness": 0.13439557905367908, "normalized_helicity": 0.000954407464287283},
+    {"background": "zero", "h_c": 0.28, "compactness": 0.16490513293937042, "normalized_helicity": 0.0003312860543670838},
+    {"background": "smooth_1", "h_c": 0.12, "compactness": 0.10525847305745835, "normalized_helicity": 0.007362701629630415},
+    {"background": "smooth_1", "h_c": 0.20, "compactness": 0.1469116339618644, "normalized_helicity": 0.0023007864377731944},
+    {"background": "smooth_1", "h_c": 0.28, "compactness": 0.16886347106931965, "normalized_helicity": 0.0007950986616212483},
+    {"background": "rough_1", "h_c": 0.12, "compactness": 0.06729929826530606, "normalized_helicity": 0.002513654538993098},
+    {"background": "rough_1", "h_c": 0.20, "compactness": 0.1330204761067005, "normalized_helicity": 0.0011682410888663498},
+    {"background": "rough_1", "h_c": 0.28, "compactness": 0.18151189240135068, "normalized_helicity": 0.0012268320825990456}
+  ],
+  "resolution_note": {
+    "statement": "The Frobenius diagnostic is substantially more resolution-sensitive than the first-order normal spectrum. Coarse 1024/512 values were not used. A candidate 2048/1024 outlier with normalized helicity about 0.031 collapsed to about 0.00123 at 4096/2048.",
+    "outlier_background": "rough_1",
+    "outlier_h_c": 0.28,
+    "coarse_2048_1024_delta_h_0p002": 0.031225534552347577,
+    "fine_4096_2048_delta_h_0p001": 0.0012268320825990456
+  }
+}

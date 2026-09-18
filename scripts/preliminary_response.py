@@ -52,6 +52,7 @@ def main():
             h_c,
             n_steps=2048,
             eos_kwargs=eos_kwargs,
+            eos_builder=build_sound_speed_eos,
         )
         tangent = sequence_tangent(
             reference,
@@ -59,6 +60,7 @@ def main():
             h_c,
             n_steps=2048,
             eos_kwargs=eos_kwargs,
+            eos_builder=build_sound_speed_eos,
         )
         G = induced_response(J, covariance)
 
@@ -87,7 +89,8 @@ def main():
     # One explicit autodiff vs symmetric finite-difference check at h_c=0.16.
     h_c = 0.16
     J = response_jacobian(
-        reference, coeffs, h_c, n_steps=2048, eos_kwargs=eos_kwargs
+        reference, coeffs, h_c, n_steps=2048, eos_kwargs=eos_kwargs,
+        eos_builder=build_sound_speed_eos
     )
     eps = 2.0e-4
     fd_cols = []

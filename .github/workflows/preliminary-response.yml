@@ -1,0 +1,24 @@
+name: preliminary-response
+
+on:
+  push:
+    paths:
+      - "scripts/preliminary_response.py"
+      - ".github/workflows/preliminary-response.yml"
+      - "src/ns_response_geometry/**"
+
+jobs:
+  response:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install
+        run: python -m pip install -e ".[test]"
+      - name: Run preliminary response geometry
+        env:
+          JAX_ENABLE_X64: "true"
+          XLA_PYTHON_CLIENT_PREALLOCATE: "false"
+        run: python scripts/preliminary_response.py

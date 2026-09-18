@@ -95,3 +95,40 @@ The paper is a live research document. Every stage updates \`paper/main.tex\`. M
 ## Style
 
 Physics/mathematics first. State assumptions explicitly. Distinguish identity, approximation, numerical observation, and conjecture.
+
+
+## 2026-09-18 implementation decisions and first diagnostics
+
+Stage 1 stellar structure is validated. The production fixed-step enthalpy
+solver agrees with an independent adaptive radius-coordinate DOP853 solver
+to maximum absolute relative differences of \(4.71\times10^{-7}\) for the
+constant-density test case and \(8.10\times10^{-7}\) for the
+\(\Gamma=2\) polytrope when comparing
+\(M,R,C,k_2,\Lambda_2,I,\bar I,I/(MR^2)\). The exact incompressible
+background is reproduced at the \(10^{-6}\) level.
+
+The original five-Gaussian-mode pilot found an I--Love/C--Love transverse RMS
+response ratio of \(0.093\)--\(0.133\) over
+\(C\simeq0.067\)--\(0.171\), with the Jacobian agreeing with symmetric
+finite differences to \(8.2\times10^{-8}\) maximum relative error. This is a
+development diagnostic only.
+
+Important correction: a Gaussian basis with a covariance placed directly on
+its coefficients does not represent a fixed function-space prior as the
+number/width of basis functions changes. It must not be used to claim basis
+convergence.
+
+Production response coordinates are therefore nodal values
+\(a_i=\delta u(h_i)\) of the latent sound-speed perturbation. A target
+functional covariance \(C_{\rm EOS}(h,h')\) is evaluated at those nodes.
+Increasing node density then refines one fixed process. Baseline covariance:
+squared exponential; robustness kernels: Mat\'ern-3/2 and exponential.
+The legacy Gaussian builder remains only to reproduce the first pilot.
+
+Universal directions are covectors, not displacement eigenvectors. The
+primary local scalar in a two-observable plane is
+\[
+n_A G^{AB}n_B,\qquad n_A t^A=0,\qquad n_A g^{AB}n_B=1.
+\]
+The implementation tests invariance under consistent EOS-basis and
+observable-coordinate transformations.

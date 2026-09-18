@@ -246,14 +246,15 @@ def evaluate(reference, eos_kwargs, response_state, h_c, x):
     )
 
 
-def strongest(rows):
+def strongest(rows, min_compactness=None):
     good = [r for r in rows if r["physical_screen"]]
+    if min_compactness is not None:
+        good = [r for r in good if r["compactness"] >= min_compactness]
     if not good:
         return None
 
     # Primary definition: largest I--Love/C--Love response ratio.
-    best = max(good, key=lambda r: r["ilove_clove_rms_ratio"])
-    return best
+    return max(good, key=lambda r: r["ilove_clove_rms_ratio"])
 
 
 def main():
@@ -293,7 +294,36 @@ def main():
                 rows.append(row)
                 subset.append(row)
 
+    def attach_shell(best, gamma):
+        if best is None:
+            return None
+        reference = RelativisticPolytrope(K=100.0, gamma=gamma)
+        eos_kwargs = dict(
+            h_match=0.02,
+            h_max=0.50,
+            h_nodes=nodes,
+            n_low=128,
+            n_high=N_HIGH,
+        )
+        values = transition_profile(best["center"], best["width"])
+        eos = build_nodal_sound_speed_eos(
+            reference, values, **eos_kwargs
+        )
+        eos0 = build_nodal_sound_speed_eos(
+            reference, jnp.zeros(N_NODES), **eos_kwargs
+        )
+        out = dict(best)
+        out["transition_shell"] = physical_shell(
+            eos, out["h_c"], out["center"], out["width"]
+        )
+        out["baseline_shell"] = physical_shell(
+            eos0, out["h_c"], out["center"], out["width"]
+        )
+        return out
+
     best_by_case = []
+    best_by_case_C_ge_0p10 = []
+
     for gamma in GAMMAS:
         for target in TARGET_COMPACTNESS:
             subset = [
@@ -301,42 +331,37 @@ def main():
                 if abs(r["gamma"] - gamma) < 1e-12
                 and abs(r["requested_target_compactness"] - target) < 1e-12
             ]
-            best = strongest(subset)
+            best = attach_shell(strongest(subset), gamma)
+            best_cut = attach_shell(
+                strongest(subset, min_compactness=0.10), gamma
+            )
             if best is not None:
-                # Compute physical-shell mappings only for the six winners.
-                reference = RelativisticPolytrope(K=100.0, gamma=gamma)
-                eos_kwargs = dict(
-                    h_match=0.02,
-                    h_max=0.50,
-                    h_nodes=nodes,
-                    n_low=128,
-                    n_high=N_HIGH,
-                )
-                values = transition_profile(best["center"], best["width"])
-                eos = build_nodal_sound_speed_eos(
-                    reference, values, **eos_kwargs
-                )
-                eos0 = build_nodal_sound_speed_eos(
-                    reference, jnp.zeros(N_NODES), **eos_kwargs
-                )
-                best = dict(best)
-                best["transition_shell"] = physical_shell(
-                    eos, best["h_c"], best["center"], best["width"]
-                )
-                best["baseline_shell"] = physical_shell(
-                    eos0, best["h_c"], best["center"], best["width"]
-                )
                 best_by_case.append(best)
+            if best_cut is not None:
+                best_by_case_C_ge_0p10.append(best_cut)
 
-    x_values = np.asarray([r["x"] for r in best_by_case])
-    r_values = np.asarray([
-        r["transition_shell"]["center"]["r_over_R"]
-        for r in best_by_case
-    ])
-    m_values = np.asarray([
-        r["transition_shell"]["center"]["m_over_M"]
-        for r in best_by_case
-    ])
+    def summarize(cases):
+        x_values = np.asarray([r["x"] for r in cases])
+        r_values = np.asarray([
+            r["transition_shell"]["center"]["r_over_R"]
+            for r in cases
+        ])
+        m_values = np.asarray([
+            r["transition_shell"]["center"]["m_over_M"]
+            for r in cases
+        ])
+        return dict(
+            n_cases=len(cases),
+            x_min=float(np.min(x_values)),
+            x_median=float(np.median(x_values)),
+            x_max=float(np.max(x_values)),
+            r_over_R_min=float(np.min(r_values)),
+            r_over_R_median=float(np.median(r_values)),
+            r_over_R_max=float(np.max(r_values)),
+            m_over_M_min=float(np.min(m_values)),
+            m_over_M_median=float(np.median(m_values)),
+            m_over_M_max=float(np.max(m_values)),
+        )
 
     payload = dict(
         n_nodes=N_NODES,
@@ -350,18 +375,9 @@ def main():
         x_grid=list(X_VALUES),
         matched_baselines=matched,
         best_by_case=best_by_case,
-        summary=dict(
-            n_cases=len(best_by_case),
-            x_min=float(np.min(x_values)),
-            x_median=float(np.median(x_values)),
-            x_max=float(np.max(x_values)),
-            r_over_R_min=float(np.min(r_values)),
-            r_over_R_median=float(np.median(r_values)),
-            r_over_R_max=float(np.max(r_values)),
-            m_over_M_min=float(np.min(m_values)),
-            m_over_M_median=float(np.median(m_values)),
-            m_over_M_max=float(np.max(m_values)),
-        ),
+        best_by_case_C_ge_0p10=best_by_case_C_ge_0p10,
+        summary=summarize(best_by_case),
+        summary_C_ge_0p10=summarize(best_by_case_C_ge_0p10),
         rows=rows,
     )
 

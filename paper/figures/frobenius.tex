@@ -1,0 +1,25 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.78\columnwidth,
+  height=0.48\columnwidth,
+  xlabel={Compactness $C$},
+  ylabel={Frobenius diagnostic $\eta_{\rm F}$},
+  ymode=log,
+  ymin=2e-4,ymax=1e-2,
+  xmin=0.06,xmax=0.19,
+  grid=both,
+  legend style={draw=none,at={(0.97,0.97)},anchor=north east},
+]
+\addplot[thick,mark=*] table[x=C,y=eta]{data/frobenius_zero.dat};
+\addlegendentry{reference}
+\addplot[thick,dashed,mark=square*] table[x=C,y=eta]{data/frobenius_smooth.dat};
+\addlegendentry{smooth deformation}
+\addplot[thick,dotted,mark=triangle*] table[x=C,y=eta]{data/frobenius_rough.dat};
+\addlegendentry{rough deformation}
+\end{axis}
+\end{tikzpicture}
+\caption{High-resolution Frobenius obstruction of the soft normal field. The normalized obstruction remains at the $10^{-3}$ level across undeformed, smooth, and rough EOS backgrounds.}
+\label{fig:frobenius}
+\end{figure}

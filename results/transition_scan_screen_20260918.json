@@ -1,0 +1,122 @@
+{
+  "provenance": {
+    "date": "2026-09-18",
+    "execution": "GitHub Actions",
+    "workflow_run_id": 35325753408,
+    "script": "scripts/transition_scan.py",
+    "screening": true,
+    "n_nodes": 33,
+    "n_steps": 1024,
+    "n_high": 1024
+  },
+  "grid": {
+    "centers": [0.10, 0.14, 0.18, 0.22],
+    "widths": [0.04, 0.08],
+    "depths": [0.5, 1.0, 1.5, 2.0],
+    "h_c_values": [0.20, 0.30, 0.40],
+    "n_total": 96,
+    "n_physical": 69
+  },
+  "global_extrema": {
+    "weakest_alignment": {
+      "center": 0.10,
+      "width": 0.08,
+      "depth": 1.5,
+      "h_c": 0.20,
+      "compactness": 0.051270957202388605,
+      "ilove_alignment": 0.8179394309812691,
+      "ilove_clove_rms_ratio": 0.7283582045214786,
+      "normal_rms_ratio": 0.06498308840225635,
+      "ilove_variance_factor": 588.8632834432615,
+      "localized_positive_excess_fraction": 0.9649517273673729,
+      "excess_peak_enthalpy": 0.095
+    },
+    "largest_normal_ratio": {
+      "center": 0.18,
+      "width": 0.08,
+      "depth": 2.0,
+      "h_c": 0.40,
+      "compactness": 0.09316525741186205,
+      "ilove_alignment": 0.8998839999440945,
+      "ilove_clove_rms_ratio": 0.5080421211454592,
+      "normal_rms_ratio": 0.1261981301085038,
+      "ilove_variance_factor": 105.70335347285148,
+      "localized_positive_excess_fraction": 0.9455790189573352,
+      "excess_peak_enthalpy": 0.185
+    }
+  },
+  "compactness_cuts": {
+    "C_ge_0p10": {
+      "n": 61,
+      "weakest_alignment": 0.9406064016006032,
+      "largest_ilove_clove_rms_ratio": 0.38620497930387593,
+      "largest_normal_rms_ratio": 0.12433757365128675,
+      "representative_extreme": {
+        "center": 0.18,
+        "width": 0.08,
+        "depth": 1.5,
+        "h_c": 0.40,
+        "compactness": 0.12814895686782465,
+        "ilove_variance_factor": 31.33484424923744,
+        "localized_positive_excess_fraction": 0.9134741673905136
+      }
+    },
+    "C_ge_0p15": {
+      "n": 31,
+      "weakest_alignment": 0.9689742246952467,
+      "largest_ilove_clove_rms_ratio": 0.27809644510122855,
+      "largest_normal_rms_ratio": 0.10494584708661871,
+      "representative_extreme": {
+        "center": 0.18,
+        "width": 0.08,
+        "depth": 1.0,
+        "h_c": 0.40,
+        "compactness": 0.15853666230024724,
+        "ilove_variance_factor": 8.480696462398134,
+        "localized_positive_excess_fraction": 0.8654079933981079
+      }
+    }
+  },
+  "moving_ridge": [
+    {
+      "h_c": 0.20,
+      "center": 0.10,
+      "center_over_h_c": 0.50,
+      "width": 0.08,
+      "depth": 1.5,
+      "compactness": 0.051270957202388605,
+      "ilove_alignment": 0.8179394309812691,
+      "ilove_clove_rms_ratio": 0.7283582045214786,
+      "normal_rms_ratio": 0.06498308840225635
+    },
+    {
+      "h_c": 0.30,
+      "center": 0.14,
+      "center_over_h_c": 0.4666666666666667,
+      "width": 0.08,
+      "depth": 1.5,
+      "compactness": 0.09467721910778508,
+      "ilove_alignment": 0.9242678526641263,
+      "ilove_clove_rms_ratio": 0.432954355402871,
+      "normal_rms_ratio": 0.1049638207036184
+    },
+    {
+      "h_c": 0.40,
+      "center": 0.18,
+      "center_over_h_c": 0.45,
+      "width": 0.08,
+      "depth": 1.5,
+      "compactness": 0.12814895686782465,
+      "ilove_alignment": 0.9406064016006032,
+      "ilove_clove_rms_ratio": 0.38620497930387593,
+      "normal_rms_ratio": 0.12433757365128675
+    }
+  ],
+  "by_transition_center": {
+    "0.10": {"n": 23, "median_ilove_clove": 0.13762469628603807, "max_ilove_clove": 0.7283582045214786, "min_alignment": 0.8179394309812691, "median_normal_ratio": 0.07483413270787181},
+    "0.14": {"n": 19, "median_ilove_clove": 0.17363329043297732, "max_ilove_clove": 0.6345869328970167, "min_alignment": 0.8520138377434173, "median_normal_ratio": 0.08232174767450245},
+    "0.18": {"n": 14, "median_ilove_clove": 0.21646702485339486, "max_ilove_clove": 0.5080421211454592, "min_alignment": 0.8998839999440945, "median_normal_ratio": 0.0863030233738096},
+    "0.22": {"n": 13, "median_ilove_clove": 0.14071886182789228, "max_ilove_clove": 0.2353619789340762, "min_alignment": 0.9778010485263651, "median_normal_ratio": 0.02642085405628064}
+  },
+  "interpretation": "The strongest stable I-Love degradation shifts outward in absolute enthalpy as h_c increases, approximately following h_transition/h_c about 0.45-0.50. Across the stable screen the full soft/hard hierarchy remains substantially stronger than the I-Love projection, consistent with rotation rather than destruction of the low-response manifold."
+}

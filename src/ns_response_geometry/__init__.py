@@ -22,15 +22,17 @@ from .response_eos import (
     gaussian_basis,
     squared_exponential_covariance,
 )
-from .tov import Star, solve_star
+from .tov import Star, StarProfile, solve_star, solve_star_profile
 
 __all__ = [
     "IncompressibleEOS",
     "RelativisticPolytrope",
     "TabulatedSoundSpeedEOS",
     "Star",
+    "StarProfile",
     "StellarObservables",
     "solve_star",
+    "solve_star_profile",
     "solve_observables",
     "build_nodal_sound_speed_eos",
     "build_sound_speed_eos",

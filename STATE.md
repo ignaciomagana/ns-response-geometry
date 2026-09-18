@@ -4,64 +4,102 @@
 
 ## Stage
 
-Stage 2/3 transition — stellar structure is validated; production nodal EOS
-response kernels are implemented; robustness of the local response hierarchy
-is being audited.
+Stage 4 — local-to-global geometry. Stages 1--3 are complete for the current
+static/slow-rotation observable set \((C,\bar I,\Lambda_2)\).
 
 ## Completed
 
-- Mathematical manuscript scaffold and novelty boundaries.
+- Mathematical formulation and conservative novelty boundary.
 - Differentiable enthalpy-coordinate TOV solver.
-- Static \(l=2\) tidal response including self-bound surface correction.
-- First-order Hartle moment of inertia.
-- Exact constant-density background benchmark.
-- Newtonian homogeneous and \(n=1\) polytrope limits.
+- Static \(l=2\) tidal response and first-order Hartle moment of inertia.
+- Exact constant-density benchmark and Newtonian limiting checks.
 - Independent adaptive radius-coordinate DOP853 cross-check.
 - Stage 1 maximum cross-solver discrepancy below \(10^{-6}\).
-- Metric-aware observable response \(G=JC_{\rm EOS}J^T\).
-- Cotangent-space normalization of universal-relation normals.
-- EOS basis-change and observable-coordinate invariance unit tests.
 - Thermodynamically consistent latent sound-speed EOS reconstruction.
-- Production nodal latent-field coordinates for a fixed functional EOS metric.
-- Legacy Gaussian pilot: strong I--Love suppression relative to C--Love,
-  retained as a diagnostic only.
-- Manuscript updated with the exact stellar equations and Stage 1 validation
-  numbers.
+- Production nodal EOS coordinates that refine a fixed functional covariance.
+- Metric-aware response \(G=JC_{\rm EOS}J^T\).
+- Cotangent-space normalization and observable-coordinate invariance tests.
+- Nodal-grid, covariance-kernel, correlation-length, reference-EOS,
+  observable-metric, derivative, and numerical-resolution robustness audit.
+- Fine broad background ensemble: 44 stable configurations from 16 large
+  smooth/rough causal latent-field backgrounds.
+- Full three-observable normal-spectrum calculation.
+
+## Central result so far
+
+After quotienting motion along a stellar sequence, the full
+\((\ln C,\ln\bar I,\ln\Lambda_2)\) EOS response contains one strongly
+suppressed normal mode.
+
+For the broad 44-point stable background ensemble:
+- median soft/hard normal RMS ratio: \(0.0204\);
+- 90th percentile: \(0.0469\);
+- maximum: \(0.0883\);
+- median cosine alignment of the soft covector with the embedded I--Love
+  normal: \(0.9977\).
+
+For \(C\ge0.05\), the maximum normal-mode RMS ratio is \(0.0797\), the
+minimum I--Love alignment is \(0.9756\), and the median alignment is
+\(0.9979\).
+
+The simpler I--Love/C--Love plane comparison also survives large functional
+EOS deformations. For the same broad stable ensemble its median RMS ratio is
+\(0.0697\), with 90th percentile \(0.205\). For all stable points with
+\(C\ge0.05\), the ratio is below \(0.231\).
 
 ## Current scientific target
 
-Establish whether the I--Love transverse-response suppression survives:
-1. refinement of the nodal EOS field;
-2. squared-exponential, Mat\'ern-3/2, and exponential EOS covariances;
-3. multiple correlation lengths;
-4. multiple smooth causal reference EOSs;
-5. consistent observable-coordinate transformations and alternative
-   normalization metrics;
-6. stellar/EOS reconstruction resolution.
+Test H3: whether the soft normal covector field is approximately integrable,
+rather than merely locally soft.
 
-The workflow \`response-robustness\` is executing this audit.
+The first nontrivial calculation uses three-dimensional domain patches
+\[
+(h_c,\alpha_i,\alpha_j)
+\]
+where \(\alpha_i,\alpha_j\) move the EOS along covariance principal
+directions.  The map into
+\((\ln C,\ln\bar I,\ln\Lambda_2)\) is locally inverted to obtain
+\(\partial n_A/\partial y^B\), after which the Frobenius quantity
+\[
+n\cdot(\nabla_y\times n)
+\]
+is evaluated.  Multiple EOS-direction pairs and finite-amplitude background
+points are required.
+
+A 2D I--Love reconstruction alone is not an integrability test and must not
+be presented as one.
 
 ## Immediate next actions
 
-1. Read and commit the robustness result as a versioned result file.
-2. Update the Results section with only the tests that pass.
-3. If H1/H2 survive, move from controlled polytropic references to a broad
-   nonparametric EOS ensemble.
-4. Build the full three-observable normal spectrum; do not call 2D
-   reconstruction an integrability test because the 2D normal is unique from
-   the sequence tangent alone.
-5. Only after the full response field is sampled in a sufficiently
-   multidimensional domain, implement a genuine Frobenius/path-dependence
-   test.
-6. Then evaluate second-order directional curvature and finite-amplitude
-   scatter.
+1. Sample the soft covector on several 3D domain patches built from leading
+   EOS covariance eigenmodes.
+2. Evaluate the Frobenius obstruction and its normalized form.
+3. Check sign/gauge continuity of the eigen-covector and repeat under finite
+   background displacement.
+4. If locally integrable, reconstruct a scalar quasi-invariant \(F(y)\) and
+   test closed-loop/path dependence directly.
+5. Update the manuscript immediately with either the positive or negative
+   result.
+6. Only then proceed to Hessian/directional-curvature tests of finite scatter.
+7. Follow curvature with sharp-transition/rapid-sound-speed-variation stress
+   tests.
 
-## Validation status
+## Validation / execution status
 
 Stage 1: passed.
 
-Production response derivatives: nodal autodiff/finite-difference audit is
-part of the current robustness workflow.
+Stages 2--3: passed for the declared response metrics and tested broad
+functional backgrounds. Versioned numerical summaries:
+- \`results/response_robustness_20260918.json\`
+- \`results/background_ensemble_fine_20260918.json\`
+- \`results/normal_spectrum_20260918.json\`
+
+GitHub Actions entered a runner-start failure mode on 2026-09-18: failed
+jobs contained no executed steps, including the unchanged pytest workflow
+that had passed earlier. Broad-ensemble and normal-spectrum calculations
+were therefore reproduced on a local mirror of the exact GitHub numerical
+core and committed back with scripts and provenance. Re-run CI when Actions
+resumes; do not reinterpret runner-start failures as physics failures.
 
 ## Manuscript status
 
@@ -69,24 +107,17 @@ part of the current robustness workflow.
 - Response geometry: drafted.
 - Stellar equations: synchronized with production solver.
 - Numerical validation: Stage 1 results written.
-- Results: original Gaussian pilot written explicitly as a restricted
-  development diagnostic.
-- Production robustness results: pending current workflow.
-- Integrability/curvature/breakdown: structured placeholders only.
-
-## Blockers / risks
-
-- The broad nonparametric EOS ensemble has not yet been defined; do not call
-  the controlled polytropic robustness study a population-independent result.
-- Observable-metric dependence must be separated from mere coordinate
-  dependence.
-- A genuine integrability test requires a response covector field sampled in
-  more than the one-dimensional stellar sequence.
+- Production robustness: written.
+- Broad functional-background result: written.
+- Full normal-spectrum hierarchy and I--Love alignment: written.
+- Integrability: next active section.
+- Curvature/breakdown: placeholders only.
 
 ## Session protocol
 
 At the beginning of every session read \`STATE.md\`, \`MEMORY.md\`,
-\`SCIENCE_CONTRACT.md\`, inspect recent commits, and inspect CI. At the end
-update \`STATE.md\`, record durable decisions in \`MEMORY.md\`, update the
-paper, and leave all reported numerical results reproducible from scripts or
-versioned result files.
+\`SCIENCE_CONTRACT.md\`, inspect recent commits/results, and inspect CI.
+At the end update \`STATE.md\`, record durable mathematical/implementation
+decisions in \`MEMORY.md\`, update the paper, and leave every reported
+numerical result reproducible from a committed script plus a versioned result
+file.

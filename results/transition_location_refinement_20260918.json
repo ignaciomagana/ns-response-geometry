@@ -1,0 +1,87 @@
+{
+  "provenance": {
+    "date": "2026-09-18",
+    "execution": "GitHub Actions",
+    "workflow_run_id": 35326497284,
+    "script": "scripts/transition_location_refinement.py",
+    "n_nodes": 65,
+    "n_steps": 2048,
+    "n_high": 2048,
+    "note": "This file supersedes the first transition-location run whose r/R and m/M normalizations were wrong. Response-geometry values in that earlier run were unaffected."
+  },
+  "fixed_width_ridge": [
+    {
+      "h_c": 0.20,
+      "center": 0.10,
+      "center_over_h_c": 0.50,
+      "width": 0.08,
+      "depth": 1.5,
+      "compactness": 0.050292173150659494,
+      "ilove_alignment": 0.8080074265982191,
+      "ilove_clove_rms_ratio": 0.7555234141590863,
+      "normal_rms_ratio": 0.06342177501612427,
+      "ilove_variance_factor": 657.1601408093624,
+      "localized_positive_excess_fraction": 0.9522414137292701,
+      "transition_center": {"r_over_R": 0.3439225399067794, "m_over_M": 0.7152907313445264},
+      "baseline_same_enthalpy": {"r_over_R": 0.5980014501766531, "m_over_M": 0.5142792512277654}
+    },
+    {
+      "h_c": 0.30,
+      "center": 0.14,
+      "center_over_h_c": 0.4666666666666667,
+      "width": 0.08,
+      "depth": 1.5,
+      "compactness": 0.09359267481638175,
+      "ilove_alignment": 0.9223775334775431,
+      "ilove_clove_rms_ratio": 0.4388443769220622,
+      "normal_rms_ratio": 0.10550350767636554,
+      "ilove_variance_factor": 83.01231223859261,
+      "localized_positive_excess_fraction": 0.936596818761431,
+      "transition_center": {"r_over_R": 0.44679990990451873, "m_over_M": 0.7402844933181378},
+      "baseline_same_enthalpy": {"r_over_R": 0.6152334540425828, "m_over_M": 0.5625298969443571}
+    },
+    {
+      "h_c": 0.40,
+      "center": 0.18,
+      "center_over_h_c": 0.45,
+      "width": 0.08,
+      "depth": 1.5,
+      "compactness": 0.1272776207452024,
+      "ilove_alignment": 0.9400682442023438,
+      "ilove_clove_rms_ratio": 0.38838699832855555,
+      "normal_rms_ratio": 0.1257472528550384,
+      "ilove_variance_factor": 32.26534454229778,
+      "localized_positive_excess_fraction": 0.9036118431659466,
+      "transition_center": {"r_over_R": 0.4876306081282739, "m_over_M": 0.732410245019131},
+      "baseline_same_enthalpy": {"r_over_R": 0.6182578124418457, "m_over_M": 0.5863374965025419}
+    }
+  ],
+  "scaled_location_scan": {
+    "depth": 1.5,
+    "width_over_h_c": 0.25,
+    "center_over_h_c_grid": [0.25, 0.35, 0.45, 0.55, 0.65, 0.75],
+    "strongest_stable_C_ge_0p10": {
+      "h_c": 0.40,
+      "center_over_h_c": 0.45,
+      "center": 0.18,
+      "width": 0.10,
+      "compactness": 0.11266540854759698,
+      "ilove_alignment": 0.9217735162462546,
+      "ilove_clove_rms_ratio": 0.4473858732554749,
+      "normal_rms_ratio": 0.13450154786936697,
+      "ilove_variance_factor": 56.69624727242239,
+      "localized_positive_excess_fraction": 0.9330736350319778,
+      "transition_shell": {
+        "center": {"r_over_R": 0.4532374957668796, "m_over_M": 0.7585782526381019},
+        "radial_range": [0.3858093939241405, 0.5350893578146136],
+        "mass_fraction_range": [0.5902031946207418, 0.8407249948873398]
+      },
+      "baseline_same_enthalpy_shell": {
+        "center": {"r_over_R": 0.6182578124418456, "m_over_M": 0.5863374965025419},
+        "radial_range": [0.529117099240263, 0.708084531192452],
+        "mass_fraction_range": [0.4275015159277025, 0.7392954851516211]
+      }
+    },
+    "interpretation": "For the compactness range C >= 0.1 sampled here, the strongest stable degradation lies near h_transition/h_c = 0.45. In the deformed star this layer is centered near r/R = 0.45 and encloses about 0.76 of the mass. The location is model-dependent and is not claimed as a universal radius."
+  }
+}

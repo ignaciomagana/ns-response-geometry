@@ -1,0 +1,30 @@
+name: pytest-diagnostic
+
+on:
+  push:
+    paths:
+      - ".github/workflows/pytest-diagnostic.yml"
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install
+        run: python -m pip install -e ".[test]"
+      - name: Run pytest and retain output
+        shell: bash
+        run: |
+          set +e
+          pytest -vv > pytest.log 2>&1
+          code=$?
+          echo "PYTEST_EXIT_CODE=$code"
+          tail -200 pytest.log
+          exit 0
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pytest-diagnostic-log
+          path: pytest.log

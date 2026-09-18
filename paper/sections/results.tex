@@ -478,6 +478,84 @@ become important.
 \section{Controlled breakdown}
 \label{sec:breakdown}
 
-Flexible EOS models and sharp phase-transition-like structure provide a stress test rather than an extension of the universality claim. We will determine whether loss of I--Love accuracy is accompanied by a growing transverse response, loss of integrability, enhanced curvature, or some combination of these effects. The density localization of the functional kernels will be used to identify which EOS regions produce the breakdown.
+The broad latent-field ensemble above contains rough EOSs but does not isolate
+a localized structural feature.  To test a controlled breakdown mechanism we
+therefore impose a smooth, phase-transition-like softening window directly in
+the latent sound-speed field.  The sound speed remains causal and the
+thermodynamics are reconstructed exactly as in the baseline calculation.
+The profile is
+\begin{equation}
+ \delta u(h)
+ =
+ -\frac{D}{2}
+ \left[
+  \tanh\frac{h-h_-}{\Delta h_{\rm edge}}
+  -
+  \tanh\frac{h-h_+}{\Delta h_{\rm edge}}
+ \right],
+ \label{eq:transition-window}
+\end{equation}
+where \(h_\pm\) define the softened interval.  We use 65 EOS nodes and
+2048-point stellar and thermodynamic integrations for the refined cases.
 
-\todo{Stage 6: insert broad-EOS and phase-transition results, with the same diagnostics used in the baseline analysis.}
+For a window centered at \(h=0.16\), width \(0.04\), depth \(D=2\), and
+edge scale \(0.008\), the minimum sound speed squared is
+\(c_s^2\simeq0.0198\).  At \(h_c=0.30\) the compactness changes from
+\(C=0.1713\) in the undeformed star to \(C=0.1065\).  More importantly, the
+response geometry changes from
+\begin{align}
+ {\cal A}_{I{\rm Love}}
+ &:
+ 0.9924\rightarrow0.9024,
+ \\
+ \frac{\sigma_\perp^{I{\rm Love}}}
+      {\sigma_\perp^{C{\rm Love}}}
+ &:
+ 0.1348\rightarrow0.4956,
+ \\
+ \mathcal R_{\rm N}
+ &:
+ 0.0517\rightarrow0.0962.
+ \label{eq:transition-rotation}
+\end{align}
+Thus the ordinary I--Love projection degrades by almost a factor of four in
+relative RMS response, while the full observable-space response still
+contains a pronounced soft normal direction.  The effect is therefore better
+described as a rotation of the low-response manifold than as a disappearance
+of low-dimensional structure.
+
+A broader window of width \(0.08\), evaluated at \(h_c=0.36\), gives the same
+qualitative result:
+\[
+ {\cal A}_{I{\rm Love}}=0.9260,
+ \qquad
+ \frac{\sigma_\perp^{I{\rm Love}}}
+      {\sigma_\perp^{C{\rm Love}}}=0.4306,
+ \qquad
+ \mathcal R_{\rm N}=0.1203.
+\]
+The persistence of \(\mathcal R_{\rm N}\ll1\) is important: a localized EOS
+feature can spoil the standard two-observable relation without destroying
+the hierarchy of the full EOS response.
+
+The origin of the rotation is visible directly in the EOS sensitivity
+kernel.  For the first transition case, the covariance-weighted I--Love
+normal variance increases from
+\[
+ 5.99\times10^{-6}
+ \quad\hbox{to}\quad
+ 5.10\times10^{-4},
+\]
+a factor of \(85.1\).  Of the positive excess in the direct nodal
+I--Love sensitivity, \(90.2\%\) lies inside the imposed interval
+\(h=0.14\)--0.18.  The excess peaks at \(h=0.155\) and has centroid
+\(h=0.156\).  The breakdown of the I--Love projection is therefore localized
+on the softened layer rather than being a global numerical displacement of
+the star.
+
+This controlled example supports H5 in a more specific form than originally
+posed.  Sharp EOS structure need not eliminate the low-response manifold.
+Instead, it can inject a localized EOS-sensitive direction into a particular
+projection, rotating the globally soft covector away from the ordinary
+I--Love normal.  The systematic scan below tests how this rotation depends on
+the location, depth, and width of the softened layer.

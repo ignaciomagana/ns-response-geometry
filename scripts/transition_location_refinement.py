@@ -116,12 +116,20 @@ def response_state(values, h_c):
 
 def physical_shell(eos, h_c, center, width):
     profile = solve_star_profile(eos, h_c, n_steps=N_STEPS)
-    h = np.asarray(profile.enthalpy)[::-1]
-    radius = np.asarray(profile.radius)[::-1]
-    mass_profile = np.asarray(profile.mass)[::-1]
 
-    R = float(radius[-1])
-    M = float(mass_profile[-1])
+    # The production profile is ordered from the regular center start toward
+    # the surface: h decreases while r and m increase.  Save the surface
+    # normalization before reversing the arrays to make h ascending for
+    # interpolation.
+    h_desc = np.asarray(profile.enthalpy)
+    radius_desc = np.asarray(profile.radius)
+    mass_desc = np.asarray(profile.mass)
+    R = float(radius_desc[-1])
+    M = float(mass_desc[-1])
+
+    h = h_desc[::-1]
+    radius = radius_desc[::-1]
+    mass_profile = mass_desc[::-1]
 
     def at(target):
         r = float(np.interp(target, h, radius))

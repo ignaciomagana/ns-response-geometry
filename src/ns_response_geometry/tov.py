@@ -61,7 +61,7 @@ def solve_star(
     h_c,
     *,
     n_steps: int = 4096,
-    central_fractional_offset: float = 1.0e-6,
+    central_fractional_offset: float = 1.0e-4,
 ) -> Star:
     """Integrate one stable or unstable spherical configuration.
 

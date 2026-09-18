@@ -1,0 +1,26 @@
+name: stage1-validation-report
+
+on:
+  push:
+    paths:
+      - "scripts/stage1_validation.py"
+      - ".github/workflows/stage1-validation-report.yml"
+      - "src/ns_response_geometry/observables.py"
+      - "src/ns_response_geometry/tov.py"
+      - "tests/reference_scipy.py"
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install
+        run: python -m pip install -e ".[test]"
+      - name: Emit validation report
+        env:
+          JAX_ENABLE_X64: "true"
+          XLA_PYTHON_CLIENT_PREALLOCATE: "false"
+        run: python scripts/stage1_validation.py

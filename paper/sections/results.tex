@@ -43,11 +43,103 @@ Table~\ref{tab:pilot-response} reports the resulting local normal RMS responses.
 
 At \(h_c=0.16\), the automatically differentiated observable Jacobian was compared component by component with a symmetric finite difference using a coefficient step \(2\times10^{-4}\). The maximum relative discrepancy was \(8.2\times10^{-8}\), with an RMS relative discrepancy \(2.2\times10^{-8}\). This derivative check is specific to the diagnostic configuration; the production analysis repeats it under basis, integration, and EOS changes.
 
-\subsection{Production hierarchy}
+\subsection{Production nodal response and robustness}
 
-The production result will replace the restricted diagnostic as the main claim. It must demonstrate stability under basis refinement, more than one EOS covariance, multiple reference EOSs or a nonparametric EOS ensemble, and observable-coordinate/metric changes.
+We next repeat the calculation using nodal latent-field values,
+Eq.~\eqref{eq:nodal-coordinates}, so that increasing the number of EOS
+coordinates refines a fixed functional covariance.  At \(h_c=0.16\) for the
+\(\Gamma=2\) reference sequence, the I--Love/C--Love normal RMS ratio is
+\[
+0.10102,\quad 0.10286,\quad 0.10279,\quad 0.10278
+\]
+for \(5,9,17,\) and \(33\) nodes, respectively.  The 17-node result differs
+from the 33-node value by \(3.6\times10^{-5}\) fractionally.  We use 17 nodes
+for the remaining robustness tests.
 
-\todo{Stage 3: report the production transverse response as a function of mass or central enthalpy, including variation under EOS metric, observable metric, basis size, and numerical tolerance.}
+For the Euclidean metric in logarithmic observables, changing the EOS
+covariance among squared-exponential, Mat\'ern-\(3/2\), and exponential
+kernels and varying \(\ell_h=0.04,0.08,0.16\) gives
+\begin{equation}
+    0.1024
+    \le
+    \frac{\sigma_\perp^{I{\rm Love}}}
+         {\sigma_\perp^{C{\rm Love}}}
+    \le
+    0.1034.
+    \label{eq:kernel-robustness}
+\end{equation}
+Thus the order-of-magnitude suppression is insensitive to both the
+correlation length and the differentiability of the allowed EOS
+perturbations in this controlled reference problem.
+
+Changing the observable normalization metric changes the numerical response
+scale, as it must.  A metric that weights the \(\ln\Ibar\) direction four
+times more strongly gives RMS ratios \(0.183\)--\(0.185\), while weighting
+the \(\ln\Lamtwo\) direction gives \(0.1048\)--\(0.1058\).  The hierarchy
+therefore persists under these deliberately nonuniform normalizations,
+although the numerical ratio itself is metric dependent.  This should be
+distinguished from a coordinate transformation: transforming from
+\((\ln C,\ln\Ibar,\ln\Lamtwo)\) to
+\((C,\Ibar,\Lamtwo)\) while transforming \(G^{AB}\), \(t^A\), and \(g_{AB}\)
+consistently changes the I--Love and C--Love variances by only
+\(8.4\times10^{-14}\) and \(9.4\times10^{-16}\) fractionally, respectively.
+
+The hierarchy is also present away from the \(\Gamma=2\) reference.  For
+smooth causal relativistic polytropes with
+\(\Gamma=1.70,1.85,2.00\) and \(h_c=0.12,0.20,0.30\), spanning
+\(C=0.073\)--\(0.171\), we find
+\begin{equation}
+    0.096
+    \le
+    \frac{\sigma_\perp^{I{\rm Love}}}
+         {\sigma_\perp^{C{\rm Love}}}
+    \le
+    0.207.
+    \label{eq:reference-robustness}
+\end{equation}
+Even the weakest case therefore retains a factor \(4.8\) suppression in
+RMS response.
+
+\begin{table}[t]
+\caption{Summary of the production local-response robustness tests.  The
+ranges quote the I--Love/C--Love normal RMS ratio.}
+\label{tab:response-robustness}
+\begin{ruledtabular}
+\begin{tabular}{lc}
+Test & RMS-ratio result\\
+\hline
+Nodal refinement, \(N=17\rightarrow33\)
+& fractional change \(3.6\times10^{-5}\)\\
+SE/Mat\'ern-3/2/exponential, \(\ell_h=0.04\)--0.16
+& \(0.1024\)--\(0.1034\)\\
+I-weighted observable metric
+& \(0.1829\)--\(0.1847\)\\
+Love-weighted observable metric
+& \(0.1048\)--\(0.1058\)\\
+\(\Gamma=1.70\)--2.00 reference sequences
+& \(0.096\)--\(0.207\)\\
+1024/512 to 2048/1024 numerical resolution
+& fractional change \(3.4\times10^{-3}\)
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+For the nodal production representation, a nine-node Jacobian at
+\(h_c=0.16\) agrees with a symmetric finite difference of step
+\(2\times10^{-4}\) to \(6.5\times10^{-8}\) maximum relative error and
+\(1.3\times10^{-8}\) RMS relative error.  Increasing the stellar integration
+and thermodynamic-reconstruction resolutions from \(1024/512\) to
+\(2048/1024\) steps changes the response ratio by \(3.4\times10^{-3}\).
+The coarser \(512/256\) calculation differs from the finest result by about
+one percent.
+
+These tests establish H1 and H2 for a controlled family of smooth causal
+reference EOSs: the known I--Love relation appears as a strongly suppressed
+transverse EOS response without entering the construction.  They do not yet
+establish the claim over the full physically allowed EOS space.  The next
+test therefore moves the background point itself through a broad
+nonparametric latent sound-speed ensemble rather than perturbing only around
+a small collection of polytropic references.
 
 \section{Integrability and global reconstruction}
 \label{sec:global}

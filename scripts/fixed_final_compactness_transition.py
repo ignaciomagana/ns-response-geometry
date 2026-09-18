@@ -140,7 +140,7 @@ def make_functions(reference, h_c):
     @jax.jit
     def compactness_for(values):
         eos = build_nodal_sound_speed_eos(reference, values, **eos_kwargs)
-        return solve_observables(eos, h_c, n_steps=1024).compactness
+        return solve_observables(eos, h_c, n_steps=N_STEPS).compactness
 
     @jax.jit
     def response_state(values):
@@ -220,10 +220,9 @@ def solve_depth(compactness_for, center, width):
     return 0.5 * (lo + hi)
 
 
-def evaluate(reference, h_c, x):
+def evaluate(reference, h_c, x, eos_kwargs, compactness_for, response_state):
     center = x * h_c
     width = WIDTH_FRACTION * h_c
-    eos_kwargs, compactness_for, response_state = make_functions(reference, h_c)
 
     depth = solve_depth(compactness_for, center, width)
     if depth is None:
@@ -289,8 +288,19 @@ def main():
             )
         )
 
+        eos_kwargs, compactness_for, response_state = make_functions(
+            reference, h_c
+        )
+
         for x in X_VALUES:
-            row = evaluate(reference, h_c, x)
+            row = evaluate(
+                reference,
+                h_c,
+                x,
+                eos_kwargs,
+                compactness_for,
+                response_state,
+            )
             rows.append(row)
 
     stable = [r for r in rows if r.get("stable", False)]

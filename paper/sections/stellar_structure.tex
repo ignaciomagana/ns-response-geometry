@@ -29,38 +29,197 @@ We use relativistic enthalpy
     h(p)=\int_0^p\frac{dp'}{\epsilon(p')+p'}
     \label{eq:enthalpy}
 \end{equation}
-as the integration coordinate. This fixes the stellar surface at \(h=0\) and makes the domain convenient for differentiating stellar observables with respect to EOS degrees of freedom.
-
-The surface values define
+as the integration coordinate. Since
 \begin{equation}
-    M=m(R),
-    \qquad
-    C=M/R .
+    \frac{dh}{dr}
+    =
+    -\frac{m+4\pi r^3p}{r(r-2m)},
+\end{equation}
+the background system integrated in the code is
+\begin{align}
+    \frac{dr}{dh}
+    &=
+    -\frac{r(r-2m)}{m+4\pi r^3p},
+    \label{eq:drdh}
+    \\
+    \frac{dm}{dh}
+    &=
+    4\pi r^2\epsilon\frac{dr}{dh}.
+    \label{eq:dmdh}
+\end{align}
+The stellar surface is at \(h=0\), and
+\begin{equation}
+    M=m(R),\qquad C=M/R.
 \end{equation}
 
-\subsection{Tidal deformability and moment of inertia}
+The enthalpy equations are singular at the exact center.  We start a small interval
+\(\Delta h\) below \(h_c\) using the regular series
+\begin{align}
+    r_0^2
+    &=
+    \frac{3\Delta h}{2\pi(\epsilon_c+3p_c)}
+    +\mathcal O(\Delta h^2),
+    \\
+    m_0
+    &=
+    \frac{4\pi}{3}\epsilon_c r_0^3
+    +\mathcal O(r_0^5).
+    \label{eq:center-series}
+\end{align}
+The production fixed-step integration presently uses
+\(\Delta h/h_c=10^{-4}\); convergence with respect to both this offset and
+the number of integration steps is part of the validation described in
+Sec.~\ref{sec:numerics}.
 
-The quadrupolar tidal deformability is
+\subsection{Quadrupolar tidal response}
+
+We use the standard relativistic static \(l=2\) tidal equations
+\cite{hinderer2008love,postnikov2010love}.  Defining
 \begin{equation}
-    \lambda_2=\frac{2}{3}k_2R^5,
-    \qquad
-    \Lamtwo=\frac{\lambda_2}{M^5}
-    =\frac{2}{3}k_2C^{-5}.
+    y(r)\equiv r\frac{H'(r)}{H(r)},
+\end{equation}
+the first-order equation is
+\begin{equation}
+    r\frac{dy}{dr}
+    +
+    y^2+F(r)y+r^2Q(r)=0,
+    \label{eq:y-tidal}
+\end{equation}
+with
+\begin{equation}
+    F(r)
+    =
+    \frac{1-4\pi r^2(\epsilon-p)}
+    {1-2m/r},
+\end{equation}
+and
+\begin{align}
+    Q(r)
+    &=
+    \frac{4\pi}
+    {1-2m/r}
+    \left[
+        5\epsilon+9p+\frac{\epsilon+p}{c_s^2}
+        -\frac{6}{4\pi r^2}
+    \right]
+    \nonumber\\
+    &\quad
+    -
+    4
+    \left[
+        \frac{m+4\pi r^3p}
+        {r^2(1-2m/r)}
+    \right]^2.
+    \label{eq:Q-tidal}
+\end{align}
+In enthalpy coordinates we use \(dy/dh=(dy/dr)(dr/dh)\), with regular
+central condition
+\begin{equation}
+    y(r\rightarrow0)=2+\mathcal O(r^2).
+\end{equation}
+
+For an EOS with nonzero surface energy density, the logarithmic derivative
+must include the surface-density jump \cite{postnikov2010love},
+\begin{equation}
+    y_R
+    =
+    y(R^-)
+    -
+    \frac{4\pi R^3\epsilon_s}{M}.
+    \label{eq:y-surface}
+\end{equation}
+The Love number is then
+\begin{align}
+k_2
+&=
+\frac{8C^5}{5}(1-2C)^2
+\left[2+2C(y_R-1)-y_R\right]
+\nonumber\\
+&\quad\times
+\Big\{
+2C[6-3y_R+3C(5y_R-8)]
+\nonumber\\
+&\qquad
++4C^3[13-11y_R+C(3y_R-2)+2C^2(1+y_R)]
+\nonumber\\
+&\qquad
++3(1-2C)^2
+[2-y_R+2C(y_R-1)]
+\ln(1-2C)
+\Big\}^{-1}.
+\label{eq:k2}
+\end{align}
+We report the dimensionless tidal deformability
+\begin{equation}
+    \Lamtwo=\frac{2}{3}k_2C^{-5}.
     \label{eq:lambda}
 \end{equation}
-We integrate the standard even-parity \(l=2\) static perturbation equation together with the background and evaluate \(k_2\) from the surface logarithmic derivative and compactness. \todo{Insert the exact enthalpy-coordinate perturbation equation once the implementation is frozen so the manuscript cannot drift from the production code.}
 
-For uniform rotation at first order in angular velocity, the Hartle frame-dragging equation determines the angular momentum \(J\), from which
+\subsection{Moment of inertia}
+
+The moment of inertia is calculated at first order in uniform rotation using
+Hartle's slow-rotation formalism \cite{hartle1967rotation}.  Let
+\(\bar\omega(r)=\Omega-\omega(r)\) and
 \begin{equation}
-    I=\frac{J}{\Omega},
+    j(r)
+    =
+    e^{-\nu(r)}
+    \sqrt{1-\frac{2m(r)}{r}}.
+\end{equation}
+The frame-dragging equation is
+\begin{equation}
+    \frac{d}{dr}
+    \left(
+      r^4j\frac{d\bar\omega}{dr}
+    \right)
+    +
+    4r^3\frac{dj}{dr}\bar\omega
+    =0.
+    \label{eq:hartle}
+\end{equation}
+Only \(d\ln j/dr\) is needed in the first-order system, so the arbitrary
+normalization of \(\nu\) never enters. Near the center,
+\begin{equation}
+    \bar\omega(r)
+    =
+    1
+    +
+    \frac{8\pi}{5}(\epsilon_c+p_c)r^2
+    +\mathcal O(r^4),
+    \label{eq:w-center}
+\end{equation}
+where the overall normalization is arbitrary.
+
+Matching to
+\begin{equation}
+    \bar\omega_{\rm ext}(r)
+    =
+    \Omega-\frac{2J}{r^3}
+\end{equation}
+gives
+\begin{equation}
+    J=\frac{R^4}{6}\bar\omega'(R),
+    \qquad
+    \Omega
+    =
+    \bar\omega(R)
+    +
+    \frac{R}{3}\bar\omega'(R),
+\end{equation}
+and therefore
+\begin{equation}
+    I
+    =
+    \frac{R^4\bar\omega'(R)}
+    {6\bar\omega(R)+2R\bar\omega'(R)},
     \qquad
     \Ibar=\frac{I}{M^3}.
+    \label{eq:I}
 \end{equation}
-The exact enthalpy-coordinate system used for the production calculation will likewise be inserted after the benchmark stage.
 
 \subsection{EOS coordinates and perturbations}
 
-We require EOS perturbations that approach a functional description while satisfying thermodynamic stability and causality by construction. The baseline representation uses a latent field \(u(h)\) mapped to the sound speed,
+The final response calculation requires EOS perturbations that approach a functional description while satisfying thermodynamic stability and causality by construction. The baseline representation uses a latent field \(u(h)\) mapped to the sound speed,
 \begin{equation}
     c_s^2(h)=\sigma[u(h)],
     \qquad
@@ -74,6 +233,12 @@ with stricter bounds applied explicitly if required. The latent field is expande
 \end{equation}
 The basis \(\phi_i\) is a numerical representation only. Physical conclusions must converge as \(N_b\) and the basis family are varied.
 
-Given \(c_s^2=dp/d\epsilon\), the remaining thermodynamic functions are reconstructed consistently from an anchor point and joined to an adopted low-density crust treatment. \todo{Freeze the exact thermodynamic reconstruction, density domain, and crust prescription after Stage 1 validation.}
+For Stage 1 validation we additionally use two analytic EOS families.  A
+constant-energy-density star provides the exact Schwarzschild-interior
+background solution.  A relativistic \(\Gamma=2\) polytrope supplies the
+Newtonian \(n=1\) limits of \(k_2\) and \(I/(MR^2)\).  Neither benchmark EOS
+is used to define the later EOS metric.
 
-For the EOS response metric we will use at least two choices for \(C_{\rm EOS}\): a smooth covariance in the latent field and a second covariance with shorter correlation length or broader localized freedom. A response hierarchy that exists only for one EOS metric will not be interpreted as universal.
+The production sound-speed field, thermodynamic reconstruction, density
+domain, and crust treatment will be frozen before the response kernels are
+computed.

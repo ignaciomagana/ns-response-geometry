@@ -73,6 +73,21 @@ def squared_exponential_covariance(points, *, amplitude=1.0, length_scale=0.08):
     return amplitude**2 * jnp.exp(-0.5 * (delta / length_scale) ** 2)
 
 
+def matern32_covariance(points, *, amplitude=1.0, length_scale=0.08):
+    """Matern-3/2 covariance evaluated at latent-field nodes."""
+    points = jnp.asarray(points)
+    distance = jnp.abs(points[:, None] - points[None, :])
+    x = jnp.sqrt(3.0) * distance / length_scale
+    return amplitude**2 * (1.0 + x) * jnp.exp(-x)
+
+
+def exponential_covariance(points, *, amplitude=1.0, length_scale=0.08):
+    """Exponential covariance with rougher latent-field realizations."""
+    points = jnp.asarray(points)
+    distance = jnp.abs(points[:, None] - points[None, :])
+    return amplitude**2 * jnp.exp(-distance / length_scale)
+
+
 def _logit(x):
     return jnp.log(x) - jnp.log1p(-x)
 

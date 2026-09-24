@@ -97,3 +97,21 @@ ledger in the same commit.
 | Selected maxima have I--Love alignment \(0.911\)--0.983, I--Love/C--Love RMS ratio \(0.227\)--0.477, and soft/hard RMS ratio \(0.063\)--0.201 | results/fixed_final_compactness_refinement_20260918.json | scripts/fixed_final_compactness_refinement.py |
 
 These statements are superseded pending the branch-safe replacement and must not be used in the manuscript.
+
+
+## Branch-safe fixed-final-compactness control
+
+| Manuscript claim | Versioned source | Generator |
+|---|---|---|
+| Common baseline \(C=0.14\) has positive \(dM/dh_c=0.707,2.902,2.685\) for \(\Gamma=1.70,1.85,2.00\) | results/fixed_final_compactness_branchsafe_20260924.json | scripts/fixed_final_compactness_branchsafe.py |
+| Depth roots are bracketed from sampled \(C(D)\); maximum refined root residual \(1.1\times10^{-15}\) | results/fixed_final_compactness_branchsafe_20260924.json | scripts/fixed_final_compactness_branchsafe.py |
+| Four multiple-root cases occur at high \(h_{\rm tr}/h_c\), and all four fail the positive-mass-slope path screen | results/fixed_final_compactness_branchsafe_20260924.json | scripts/fixed_final_compactness_branchsafe.py |
+| Largest retained responses occur at \(h_{\rm tr}/h_c=(0.475,0.550,0.600)\) for \(C_{\rm final}=0.10\) and \((0.500,0.650,0.725)\) for \(C_{\rm final}=0.12\), ordered by \(\Gamma=1.70,1.85,2.00\) | results/fixed_final_compactness_branchsafe_20260924.json | scripts/fixed_final_compactness_branchsafe.py |
+| In all six cases the largest response is the deepest retained grid point; the next location fails the positive-mass-slope path screen | results/fixed_final_compactness_branchsafe_20260924.json | scripts/fixed_final_compactness_branchsafe.py |
+| Selected points span I--Love/C--Love RMS \(0.229\)--0.398, I--Love alignment \(0.939\)--0.979, and soft/hard RMS \(0.046\)--0.139 | results/fixed_final_compactness_branchsafe_20260924.json | scripts/fixed_final_compactness_branchsafe.py |
+| Selected layer centers span \(r/R=0.368\)--0.476 and \(m/M=0.235\)--0.675; no reference-EOS-independent shell is identified | results/fixed_final_compactness_branchsafe_20260924.json | scripts/fixed_final_compactness_branchsafe.py |
+
+The branch-safe result supersedes both cross-EOS control sections above. The
+scientific interpretation is that the strongest retained degradation tracks
+the positive-mass-slope branch boundary; it is not an interior universal
+transition location.

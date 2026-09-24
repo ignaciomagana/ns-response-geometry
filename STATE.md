@@ -31,7 +31,7 @@ complete for the current static/slow-rotation observable set
 - 65-node transition-location refinement and mapping into \(r/R\) and \(m/M\).
 - Matched-reference transition-location null test across \(\Gamma=1.70,1.85,2.00\).
 - Fixed-final-compactness control that removes the dominant global-expansion confound.
-- Finer fixed-final-compactness refinement completed successfully in GitHub Actions; its workflow artifact still needs promotion to a committed result file.
+- Finer fixed-final-compactness refinement completed in GitHub Actions and promoted to `results/fixed_final_compactness_refinement_20260918.json` with workflow provenance.
 - Production figures and manuscript introduction/results/discussion updates.
 - Core science reproduction and paper-build workflows passing in GitHub Actions.
 - Manuscript workflow now compiles and renders every PDF page on every push/pull request.
@@ -103,23 +103,22 @@ The deformed layer is centered at \(r/R=0.453\), \(m/M=0.759\).
 
 ## Current scientific target
 
-The matched-reference test is complete and rules out promoting the original
-fixed-depth \(h_{\rm tr}/h_c\simeq0.45\)--0.50 ridge as a
-reference-EOS-independent vulnerable shell. The fixed-final-compactness
-control is also complete and a finer refinement has run successfully in
-GitHub Actions.
+The transition-location program is complete for the present controlled
+polytropic family.  After fixing the final compactness, the stable maximizing
+locations span \(h_{\rm tr}/h_c=0.35\)--0.65 and
+\(m_{\rm tr}/M=0.340\)--0.852.  Seven of eight maxima fall in the narrower
+range \(r_{\rm tr}/R=0.426\)--0.457\), but one lies at \(0.533\), and the
+\(\Gamma=1.70\) sequence has no stable point at
+\(C_{\rm final}=0.14\).  The result therefore does not support a universal
+vulnerable shell; the fractional-radius clustering is retained only as a
+diagnostic observation.
 
-The immediate target is to:
-1. recover the finer refinement artifact from workflow run 35387620727;
-2. commit its full JSON with provenance;
-3. integrate the controlled fixed-final-compactness result into the manuscript;
-4. decide what, if anything, can be said robustly about location in
-   \(h_{\rm tr}/h_c\), \(r/R\), or \(m/M\);
-5. proceed to the final literature, claim-provenance, figure, and clean-room
-   numerical review.
-
-The purpose remains diagnostic; no universal microphysical transition radius
-should be claimed without stronger evidence.
+The current target is the final paper-quality pass:
+1. targeted literature/novelty re-check through the current date;
+2. numerical/claim provenance audit against all committed result files;
+3. figure and rendered-page readability audit;
+4. clean-room consistency review of the manuscript against the code/results;
+5. only then decide whether additional physics is required before submission.
 
 ## Validation / execution status
 
@@ -139,6 +138,9 @@ Versioned science results include:
 - results/transition_breakdown_20260918.json
 - results/transition_scan_screen_20260918.json
 - results/transition_location_refinement_20260918.json
+- results/matched_compactness_transition_20260918.json
+- results/fixed_final_compactness_transition_20260918.json
+- results/fixed_final_compactness_refinement_20260918.json
 
 ## Manuscript status
 
@@ -148,13 +150,14 @@ Versioned science results include:
 - Local hierarchy/full normal spectrum: written.
 - Integrability/global reconstruction: written.
 - Curvature: written.
-- Controlled breakdown and systematic location refinement: written.
-- Production figures: inserted.
-- Discussion/conclusions: updated through current H5 interpretation.
-- Remaining work before final paper pass: promote and interpret the finer
-  fixed-final-compactness refinement, integrate it into Results/Discussion,
-  final novelty/literature check, figure/claim audit, and clean-room numerical
-  consistency pass.
+- Controlled breakdown, matched-reference null test, and fixed-final-
+  compactness refinement: written.
+- Production figures: inserted, including the fixed-final-compactness
+  location summary.
+- Discussion/conclusions: updated through the final H5 interpretation.
+- Remaining work before submission-level review: final novelty/literature
+  check, claim-provenance audit, rendered figure/readability audit, and
+  clean-room numerical consistency pass.
 
 ## Session protocol
 

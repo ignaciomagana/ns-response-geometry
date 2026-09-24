@@ -348,3 +348,14 @@ function-space stress tests. They are not a nuclear-theory posterior and do
 not establish coverage of a named realistic-hadronic EOS catalog. The paper
 already states this limitation; H3 should be read only over the tested cold
 causal domain.
+
+
+## 2026-09-24 paper-one strengthening versus paper-two scope
+
+Author decision: complete two additional paper-one validation items before
+submission: named realistic-EOS response validation and true radial l=0
+stability for the transition sequences.
+
+Stage 7 discovery extensions are explicitly deferred to a separate paper.
+The first-paper strengthening must not expand the observable vector beyond
+(C, Ibar, Lambda2).

@@ -601,7 +601,65 @@ branch audit: one matched reference lay on a negative-\(dM/dh_c\) branch,
 and the first fixed-final-compactness depth solver assumed a globally
 monotonic compactness response that is not satisfied at all transition
 locations.  Those intermediate values are retained in the project history
-but are not used for scientific claims here.  The cross-EOS comparison below
-is therefore restricted to the branch-safe construction described after its
-validation.
+but are not used for scientific claims here.
+
+\subsection{Branch-safe cross-EOS control}
+
+We therefore repeated the comparison with a branch-safe construction.  The
+three reference polytropes \(\Gamma=1.70,1.85,2.00\) are matched at the
+lower common baseline compactness \(C=0.14\), where their mass slopes are
+positive:
+\begin{equation}
+ \frac{dM}{dh_c}=0.707,\ 2.902,\ 2.685,
+\end{equation}
+respectively.  For each transition center
+\(x\equiv h_{\rm tr}/h_c\), with width \(0.25h_c\), we sample the
+compactness as a function of softening depth over \(0\le D\le3\), bracket
+all roots of \(C(D)-C_{\rm final}\), and select the smallest-depth root
+connected continuously to \(D=0\).  We retain a point only if
+\(dM/dh_c>0\) at the target configuration and at 11 intermediate depths
+along the deformation path.  The location grid covers
+\(0.25\le x\le0.875\), the full range for which the nominal
+\(0.25h_c\)-wide layer remains inside the star, and we test
+\(C_{\rm final}=0.10\) and \(0.12\).
+
+The depth-root construction is numerically well behaved.  The maximum
+compactness residual at a refined root is \(1.1\times10^{-15}\).  Four
+high-\(x\) cases possess two depth roots, demonstrating why a global
+monotonicity assumption is unsafe; all four fail the positive-mass-slope
+path screen and therefore do not enter the retained comparison.
+
+The branch-safe result does not select an interior universal shell.  For
+\(C_{\rm final}=0.10\), the largest retained I--Love/C--Love response
+occurs at
+\[
+ x=0.475,\ 0.550,\ 0.600
+\]
+for \(\Gamma=1.70,1.85,2.00\), respectively.  For
+\(C_{\rm final}=0.12\), the corresponding locations are
+\[
+ x=0.500,\ 0.650,\ 0.725.
+\]
+In every one of these six cases, this is also the largest \(x\) that
+survives the positive-mass-slope path screen; the next grid point fails it.
+The response is still increasing over the final retained points.  The
+apparent maximum therefore tracks the screened branch boundary rather than
+a preferred transition location.
+
+Across the six boundary-adjacent retained points, the I--Love/C--Love RMS
+ratio spans \(0.229\)--\(0.398\), the I--Love alignment spans
+\(0.939\)--\(0.979\), and the full soft-to-hard RMS ratio remains
+\(0.046\)--\(0.139\).  Mapping their layer centers into stellar
+coordinates gives
+\[
+ 0.368\le r_{\rm tr}/R\le0.476,
+ \qquad
+ 0.235\le m_{\rm tr}/M\le0.675 .
+\]
+Neither enthalpy coordinate nor physical shell coordinate collapses to a
+reference-EOS-independent value.  The robust conclusion is therefore the
+localization capability demonstrated by the fixed-depth experiment, not a
+universal vulnerable shell.
+
+\input{figures/branchsafe_fixed_final}
 

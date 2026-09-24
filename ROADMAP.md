@@ -1,5 +1,12 @@
 # Roadmap
 
+## Status
+
+Stages 0--6 are complete for paper 1. Stage 7 is deliberately deferred.
+The authoritative current state is in `STATE.md`; superseded analyses are
+listed in `LEGACY.md`.
+
+
 The paper is developed in lockstep with the mathematics/code. Every stage has a manuscript deliverable.
 
 ## Stage 0 — formulation and prior-art boundary

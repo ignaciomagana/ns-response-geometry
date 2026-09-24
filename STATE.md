@@ -4,9 +4,9 @@
 
 ## Stage
 
-Stage 6 — controlled breakdown and physical localization. Stages 1--5 are
-complete for the current static/slow-rotation observable set
-\((C,\bar I,\Lambda_2)\).
+Paper-1 analysis complete through Stage 6 for the current static/slow-rotation
+observable set \((C,\bar I,\Lambda_2)\). Stage 7 discovery extensions are
+deferred.
 
 ## Completed
 
@@ -148,9 +148,9 @@ Versioned science results include:
 - results/transition_breakdown_20260918.json
 - results/transition_scan_screen_20260918.json
 - results/transition_location_refinement_20260918.json
-- results/matched_compactness_transition_20260918.json
-- results/fixed_final_compactness_transition_20260918.json
-- results/fixed_final_compactness_refinement_20260918.json  [superseded]
+- results/matched_compactness_transition_20260918.json  [superseded; provenance only]
+- results/fixed_final_compactness_transition_20260918.json  [superseded; provenance only]
+- results/fixed_final_compactness_refinement_20260918.json  [superseded; provenance only]
 - results/fixed_final_compactness_branchsafe_20260924.json
 
 ## Manuscript status
@@ -199,3 +199,18 @@ path.  Its result is versioned in
 `results/fixed_final_compactness_branchsafe_20260924.json`.  The original
 \(\Gamma=2\) fixed-depth scans remain valid; the older cross-EOS controls
 remain in the repository only as superseded provenance.
+
+
+## Continuity guardrails
+
+- `results/fixed_final_compactness_branchsafe_20260924.json` is the only
+  current cross-EOS fixed-final transition control.
+- The matched-reference, original fixed-final, and fixed-final refinement
+  analyses are historical provenance only; their automatic workflows are
+  disabled.
+- The broad EOS ensemble is a causal function-space stress test, not a
+  realistic nuclear-EOS posterior.
+- `paper/CLAIM_PROVENANCE.md` is the authority for quantitative manuscript
+  claims; `LEGACY.md` is the authority for superseded artifacts.
+- Stage 7 is deferred. Do not add new observables to paper 1 without an
+  explicit scope change and fresh literature audit.

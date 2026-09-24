@@ -1,0 +1,46 @@
+\begin{figure*}[t]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[
+  group style={group size=3 by 1,horizontal sep=1.25cm},
+  width=0.30\textwidth,
+  height=0.25\textwidth,
+  xmin=0.23,xmax=0.77,
+  xtick={0.25,0.40,0.55,0.70},
+  ymin=0,ymax=0.43,
+  xlabel={$h_{\rm tr}/h_c$},
+  grid=both,
+  unbounded coords=jump,
+  legend style={draw=none,font=\small},
+]
+\nextgroupplot[
+  title={$\Gamma=1.70$},
+  ylabel={$\sigma_\perp^{I{\rm Love}}/\sigma_\perp^{C{\rm Love}}$},
+  legend pos=north west,
+]
+\addplot[thick,mark=*] table[x=x,y=ratio]{data/branchsafe_gamma_1p7_C0p10.dat};
+\addlegendentry{$C_{\rm final}=0.10$}
+\addplot[thick,dashed,mark=square*] table[x=x,y=ratio]{data/branchsafe_gamma_1p7_C0p12.dat};
+\addlegendentry{$C_{\rm final}=0.12$}
+
+\nextgroupplot[title={$\Gamma=1.85$}]
+\addplot[thick,mark=*] table[x=x,y=ratio]{data/branchsafe_gamma_1p85_C0p10.dat};
+\addplot[thick,dashed,mark=square*] table[x=x,y=ratio]{data/branchsafe_gamma_1p85_C0p12.dat};
+
+\nextgroupplot[title={$\Gamma=2.00$}]
+\addplot[thick,mark=*] table[x=x,y=ratio]{data/branchsafe_gamma_2_C0p10.dat};
+\addplot[thick,dashed,mark=square*] table[x=x,y=ratio]{data/branchsafe_gamma_2_C0p12.dat};
+\end{groupplot}
+\end{tikzpicture}
+\caption{Branch-safe fixed-final-compactness transition scan.  The three
+reference polytropes start at the common baseline compactness $C=0.14$ with
+positive $dM/dh_c$.  At each transition location, the smallest-depth root
+connected continuously to the undeformed configuration is used to reach the
+specified final compactness; points are shown only while the positive-mass-
+slope screen remains satisfied along the deformation path.  In every panel
+and for both target compactnesses, the I--Love/C--Love response grows toward
+the end of the retained branch.  The largest retained response therefore
+tracks the branch boundary rather than selecting an interior,
+reference-EOS-independent transition shell.}
+\label{fig:branchsafe-fixed-final}
+\end{figure*}

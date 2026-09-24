@@ -231,3 +231,15 @@ quotient the stellar-sequence direction, infer the soft normal mode before
 choosing a relation, test Frobenius integrability, or connect finite residuals
 to the Hessian/curvature of the EOS-to-observable map.  Those are the
 scientific distinctions the manuscript should retain.
+
+
+## 2026-09-24 round rendering policy
+
+Every research round must leave the manuscript build visible, not merely
+compilable. The `paper` GitHub Actions workflow runs on every push and pull
+request, compiles `paper/main.tex`, renders every PDF page to PNG, and uploads
+the PDF plus page renders as the `manuscript-render` artifact.
+
+At the end of each working round, inspect the rendered manuscript pages for
+cropping, unreadable figures, bad floats, broken equations, and bibliography
+or layout regressions. A green LaTeX compile alone is not sufficient.

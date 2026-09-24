@@ -86,7 +86,7 @@ ledger in the same commit.
 
 ## Superseded fixed-final-compactness control
 
-**Do not use these values for scientific claims.** The 2026-09-24 audit found a negative-mass-slope \(\Gamma=1.70\), baseline-\(C=0.16\) reference and non-monotonic \(C(D)\) curves at 18/51 locations, invalidating the original global-bisection control. The table is retained only to trace the superseded manuscript state. A branch-safe replacement is required.
+**Do not use these values for scientific claims.** The 2026-09-24 audit found a negative-mass-slope \(\Gamma=1.70\), baseline-\(C=0.16\) reference and non-monotonic \(C(D)\) curves at 18/51 locations, invalidating the original global-bisection control. This supersedes both the coarse precursor in `results/fixed_final_compactness_transition_20260918.json` and the refinement in `results/fixed_final_compactness_refinement_20260918.json`. These files are retained only to trace historical manuscript states.
 
 | Superseded claim | Versioned source | Generator |
 |---|---|---|
@@ -111,7 +111,16 @@ These statements are superseded pending the branch-safe replacement and must not
 | Selected points span I--Love/C--Love RMS \(0.229\)--0.398, I--Love alignment \(0.939\)--0.979, and soft/hard RMS \(0.046\)--0.139 | results/fixed_final_compactness_branchsafe_20260924.json | scripts/fixed_final_compactness_branchsafe.py |
 | Selected layer centers span \(r/R=0.368\)--0.476 and \(m/M=0.235\)--0.675; no reference-EOS-independent shell is identified | results/fixed_final_compactness_branchsafe_20260924.json | scripts/fixed_final_compactness_branchsafe.py |
 
-The branch-safe result supersedes both cross-EOS control sections above. The
+The branch-safe result supersedes the matched-reference control, the coarse fixed-final precursor, and the fixed-final refinement above. The
 scientific interpretation is that the strongest retained degradation tracks
 the positive-mass-slope branch boundary; it is not an interior universal
 transition location.
+
+
+## Reproducibility environment
+
+Paper-level CPU Python workflows use the frozen constraints in
+`constraints-paper-20260924.txt`; the recorded package versions and runtime
+settings are documented in `ENVIRONMENT.md`. The ordinary package metadata
+retains broad lower bounds for development, but paper-reproduction workflows
+must use the frozen constraints unless an explicit revalidation is performed.

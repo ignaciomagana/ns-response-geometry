@@ -57,9 +57,10 @@ ledger in the same commit.
 ## Reproduction policy
 
 - The ordinary unit-test workflow guards the solver and geometry utilities.
-- The paper workflow guards LaTeX compilation.
+- The paper workflow runs on every push and pull request, compiles the manuscript, renders every PDF page, and uploads the PDF plus page renders.
 - The science-reproduction workflow reruns the broad ensemble, normal
   spectrum, Frobenius, global potential, and curvature calculations.
+- The core normal-spectrum, broad-ensemble, Frobenius, potential, and curvature calculations were reproduced successfully in GitHub Actions science-reproduction workflow run 35327438833; the emitted summaries agree with the committed result files to numerical precision.
 - Specialized transition workflows rerun the localized-softening analyses.
 - Local-VM calculations are acceptable for development, but paper-level
   quantitative claims should be reproduced in GitHub Actions when feasible.

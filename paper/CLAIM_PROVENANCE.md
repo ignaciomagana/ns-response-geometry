@@ -1,6 +1,6 @@
 # Quantitative claim provenance
 
-**Updated:** 2026-09-18
+**Updated:** 2026-09-24
 
 This file is the paper-facing numerical provenance ledger.  Every quantitative
 claim in the manuscript should map to a versioned result file and a committed
@@ -54,12 +54,6 @@ ledger in the same commit.
 | That case: \(C=0.113\), alignment \(0.922\), I--Love/C--Love \(0.447\), soft/hard \(0.135\), variance factor \(56.7\), localized fraction \(93.3\%\) | results/transition_location_refinement_20260918.json | scripts/transition_location_refinement.py |
 | Deformed shell center \(r/R=0.453\), \(m/M=0.759\) | results/transition_location_refinement_20260918.json | scripts/transition_location_refinement.py |
 
-## Pending
-
-The matched-compactness reference-EOS transition-location audit is running.
-Its results must be added here before any new shell-location statement enters
-the manuscript.
-
 ## Reproduction policy
 
 - The ordinary unit-test workflow guards the solver and geometry utilities.
@@ -79,4 +73,16 @@ the manuscript.
 | With post-softening \(C\ge0.10\), only three baseline-\(C=0.16\) cases survive and their maxima shift to \(h_{\rm tr}/h_c=0.25,0.30,0.35\) with alignments \(0.9998,0.9989,0.9999\) | results/matched_compactness_transition_20260918.json | scripts/matched_compactness_transition.py |
 | Fixed-depth \(h_{\rm tr}/h_c\simeq0.45\)--0.50 is therefore not promoted as a universal vulnerable shell | results/matched_compactness_transition_20260918.json | scripts/matched_compactness_transition.py |
 
-The next fixed-final-compactness experiment is designed to remove this global-expansion confound.
+## Fixed-final-compactness control
+
+| Manuscript claim | Versioned source | Generator |
+|---|---|---|
+| Baseline \(C=0.16\), target \(C_{\rm final}=0.10,0.12,0.14\), 65 EOS nodes, and \(h_{\rm tr}/h_c\) spacing 0.025 | results/fixed_final_compactness_refinement_20260918.json | scripts/fixed_final_compactness_refinement.py |
+| Stable maximizing \(h_{\rm tr}/h_c\) spans \(0.35\)--0.65 across the eight reference-EOS/target-compactness cases with a stable maximum | results/fixed_final_compactness_refinement_20260918.json | scripts/fixed_final_compactness_refinement.py |
+| Seven of eight stable maxima lie at \(0.426\le r_{\rm tr}/R\le0.457\), with the \(\Gamma=1.70\), \(C_{\rm final}=0.12\) case at \(r/R=0.533\) | results/fixed_final_compactness_refinement_20260918.json | scripts/fixed_final_compactness_refinement.py |
+| Enclosed mass fractions of the same maxima span \(0.340\)--0.852; no stable \(\Gamma=1.70\), \(C_{\rm final}=0.14\) point exists on the scanned grid | results/fixed_final_compactness_refinement_20260918.json | scripts/fixed_final_compactness_refinement.py |
+| Selected maxima have I--Love alignment \(0.911\)--0.983, I--Love/C--Love RMS ratio \(0.227\)--0.477, and soft/hard RMS ratio \(0.063\)--0.201 | results/fixed_final_compactness_refinement_20260918.json | scripts/fixed_final_compactness_refinement.py |
+
+The controlled scan does not support a reference-EOS-independent vulnerable
+shell.  Fractional radius is more compressed than enthalpy or enclosed mass in
+most tested cases, but this is retained only as a diagnostic observation.

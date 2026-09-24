@@ -11,6 +11,7 @@ production stellar solver and return geometrized quantities in km^{-2}.
 from __future__ import annotations
 
 from dataclasses import dataclass
+import math
 
 import jax.numpy as jnp
 
@@ -129,7 +130,7 @@ class NamedPiecewisePolytrope:
                 * kbars[i]
                 * rho_b ** (gammas[i] - 1.0)
             )
-            upper_h.append(float(jnp.log(H)))
+            upper_h.append(math.log(H))
 
         return (
             jnp.asarray(gammas),

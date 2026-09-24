@@ -1,0 +1,44 @@
+\begin{figure*}[t]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[
+  group style={group size=3 by 1,horizontal sep=1.25cm},
+  width=0.30\textwidth,
+  height=0.25\textwidth,
+  xmin=0.095,xmax=0.145,
+  xtick={0.10,0.12,0.14},
+  xlabel={$C_{\rm final}$},
+  grid=both,
+  legend style={draw=none,font=\small},
+]
+\nextgroupplot[ylabel={$h_{\rm tr}/h_c$},ymin=0.30,ymax=0.70,legend pos=north west]
+\addplot[thick,mark=*] table[x=C,y=x]{data/fixed_final_gamma_1p7.dat};
+\addlegendentry{$\Gamma=1.70$}
+\addplot[thick,dashed,mark=square*] table[x=C,y=x]{data/fixed_final_gamma_1p85.dat};
+\addlegendentry{$\Gamma=1.85$}
+\addplot[thick,dotted,mark=triangle*] table[x=C,y=x]{data/fixed_final_gamma_2.dat};
+\addlegendentry{$\Gamma=2.00$}
+
+\nextgroupplot[ylabel={$r_{\rm tr}/R$},ymin=0.40,ymax=0.56]
+\addplot[thick,mark=*] table[x=C,y=r_over_R]{data/fixed_final_gamma_1p7.dat};
+\addplot[thick,dashed,mark=square*] table[x=C,y=r_over_R]{data/fixed_final_gamma_1p85.dat};
+\addplot[thick,dotted,mark=triangle*] table[x=C,y=r_over_R]{data/fixed_final_gamma_2.dat};
+
+\nextgroupplot[ylabel={$m_{\rm tr}/M$},ymin=0.28,ymax=0.90]
+\addplot[thick,mark=*] table[x=C,y=m_over_M]{data/fixed_final_gamma_1p7.dat};
+\addplot[thick,dashed,mark=square*] table[x=C,y=m_over_M]{data/fixed_final_gamma_1p85.dat};
+\addplot[thick,dotted,mark=triangle*] table[x=C,y=m_over_M]{data/fixed_final_gamma_2.dat};
+\end{groupplot}
+\end{tikzpicture}
+\caption{Fixed-final-compactness control of the transition-location scan.
+All reference sequences begin at $C=0.16$; at each trial location the
+softening depth is adjusted to reach the indicated final compactness, and the
+location with the largest stable I--Love/C--Love response is shown.  The
+maximizer is not invariant in enthalpy coordinate (left) or enclosed mass
+fraction (right).  The radius coordinate is more compressed for most cases
+(center), but the $\Gamma=1.70$, $C_{\rm final}=0.12$ point remains displaced
+and no stable $\Gamma=1.70$, $C_{\rm final}=0.14$ maximum exists on the
+scanned grid.  We therefore do not identify a reference-EOS-independent
+vulnerable shell.}
+\label{fig:fixed-final-location}
+\end{figure*}

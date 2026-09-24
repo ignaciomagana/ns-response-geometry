@@ -11,13 +11,20 @@ ledger in the same commit.
 
 | Manuscript claim | Versioned source | Generator |
 |---|---|---|
-| Exact incompressible background agreement at roughly \(10^{-6}\) | Stage-1 validation workflow/logs and tests | scripts/stage1_validation.py |
-| Independent enthalpy/radius solver max differences \(4.71\times10^{-7}\), \(8.10\times10^{-7}\) | Stage-1 validation workflow/logs | scripts/stage1_validation.py |
+| Exact incompressible background agreement at roughly \(10^{-6}\), including the three table entries | results/stage1_validation_20260918.json | scripts/stage1_validation.py |
+| Independent enthalpy/radius solver max differences \(4.71\times10^{-7}\), \(8.10\times10^{-7}\) | results/stage1_validation_20260918.json | scripts/stage1_validation.py |
+| Newtonian-limit values for incompressible and \(n=1\) configurations | results/stage1_validation_20260918.json | scripts/stage1_validation.py |
 
 ## Local response hierarchy
 
 | Manuscript claim | Versioned source | Generator |
 |---|---|---|
+| Five-mode pilot response table and RMS-ratio range \(0.0929\)--\(0.1328\) | results/preliminary_response_20260918.json | scripts/preliminary_response.py |
+| Pilot autodiff/finite-difference max and RMS relative discrepancies \(8.2\times10^{-8}\), \(2.2\times10^{-8}\) | results/preliminary_response_20260918.json | scripts/preliminary_response.py |
+| Production nodal autodiff check \(6.5\times10^{-8}\) max, \(1.3\times10^{-8}\) RMS | results/response_robustness_20260918.json | scripts/response_robustness.py |
+| Observable-coordinate invariance at \(8.4\times10^{-14}\) and \(9.4\times10^{-16}\) fractional differences | results/response_robustness_20260918.json | scripts/response_robustness.py |
+| Reference-polytrope response ratios \(0.096\)--\(0.207\) across \(\Gamma=1.70\)--2.00 | results/response_robustness_20260918.json | scripts/response_robustness.py |
+| Numerical-resolution response-ratio change \(3.4\times10^{-3}\) from 1024/512 to 2048/1024 | results/response_robustness_20260918.json | scripts/response_robustness.py |
 | Nodal 17-to-33 response-ratio change \(3.6\times10^{-5}\) fractionally | results/response_robustness_20260918.json | scripts/response_robustness.py |
 | SE/Matérn-3/2/exponential baseline I--Love/C--Love RMS ratio \(0.1024\)--\(0.1034\) | results/response_robustness_20260918.json | scripts/response_robustness.py |
 | Broad stable ensemble median I--Love/C--Love RMS ratio \(0.0697\), \(q_{0.90}=0.205\) | results/background_ensemble_fine_20260918.json | scripts/background_ensemble.py |
@@ -46,6 +53,7 @@ ledger in the same commit.
 | Manuscript claim | Versioned source | Generator |
 |---|---|---|
 | Refined transition A: alignment \(0.90245\), I--Love/C--Love ratio \(0.49559\), soft/hard ratio \(0.09619\) | results/transition_breakdown_20260918.json | scripts/transition_breakdown.py |
+| Broader transition B: alignment \(0.92595\), I--Love/C--Love ratio \(0.43058\), soft/hard ratio \(0.12032\) | results/transition_breakdown_20260918.json | scripts/transition_breakdown.py |
 | I--Love variance enhancement \(85.06\) | results/transition_breakdown_20260918.json | scripts/transition_breakdown.py |
 | \(90.24\%\) of positive excess sensitivity inside \(h=0.14\)--0.18, peak \(h=0.155\) | results/transition_breakdown_20260918.json | scripts/transition_breakdown.py |
 | 33-node transition screen: 69 physical/stable points of 96 | results/transition_scan_screen_20260918.json | scripts/transition_scan.py |

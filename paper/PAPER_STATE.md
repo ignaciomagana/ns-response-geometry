@@ -2,7 +2,7 @@
 
 The manuscript is a live derivation, not a post-processing step.
 
-**Updated:** 2026-09-18
+**Updated:** 2026-09-24
 
 ## Drafted
 
@@ -45,16 +45,23 @@ All manuscript numbers must trace to versioned result JSON files. Core claims:
 
 ## Active manuscript target
 
-Test whether the transition-vulnerability location survives changes in the
-smooth reference EOS at matched baseline compactness. If it moves
-substantially, retain the result only as a demonstration of localizable
-response vulnerability. If a common shell emerges, report it cautiously
-without claiming a universal microphysical transition radius.
+The matched-reference and fixed-final-compactness controls have been run.
+They do not support promoting the original fixed-depth
+\(h_{\rm tr}/h_c\simeq0.45\)--0.50 ridge to a reference-EOS-independent
+vulnerable shell. A finer fixed-final-compactness refinement also completed
+successfully in GitHub Actions, but its full result currently exists only in
+the workflow log/artifact and has not yet been promoted to a committed
+versioned JSON or incorporated into the manuscript.
+
+The immediate manuscript task is therefore to recover that refinement
+artifact, commit its result with provenance, fold the controlled comparison
+into the Results/Discussion, and then perform the final claim/figure audit.
 
 ## Remaining before final paper pass
 
-- matched-compactness reference-EOS transition-location audit;
+- promote the fixed-final-compactness refinement artifact to a committed,
+  versioned result file and manuscript text;
 - final targeted literature/novelty re-check for response-operator geometry;
 - numerical/claim provenance audit;
-- final figure readability and manuscript build check;
+- final figure readability and rendered-page inspection;
 - clean-room paper review.

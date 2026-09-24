@@ -46,6 +46,7 @@ X_VALUES = tuple(np.arange(0.25, 0.651, 0.025))
 MAX_DEPTH = 3.0
 DEPTH_GRID = tuple(np.linspace(0.0, MAX_DEPTH, 121))
 ROOT_TOL = 1.0e-10
+PATH_SLOPE_SAMPLES = 11
 
 nodes = jnp.linspace(0.02, 0.50, N_NODES)
 response_covariance = squared_exponential_covariance(
@@ -170,9 +171,17 @@ def make_functions(reference, h_c):
             dMdh,
         )
 
+    @jax.jit
+    def mass_slope_for(values):
+        dh = 1.0e-3
+        return (
+            mass(values, h_c + dh) - mass(values, h_c - dh)
+        ) / (2.0 * dh)
+
     compactness_for(jnp.zeros(N_NODES)).block_until_ready()
     response_state(jnp.zeros(N_NODES))[0].block_until_ready()
-    return eos_kwargs, compactness_for, response_state
+    mass_slope_for(jnp.zeros(N_NODES)).block_until_ready()
+    return eos_kwargs, compactness_for, response_state, mass_slope_for
 
 
 def depth_curve(compactness_for, center, width):
@@ -243,6 +252,7 @@ def evaluate(
     eos_kwargs,
     compactness_for,
     response_state,
+    mass_slope_for,
 ):
     center = x * h_c
     width = WIDTH_FRACTION * h_c
@@ -290,13 +300,26 @@ def evaluate(
         and np.isfinite(float(dMdh))
     )
     positive_mass_slope = finite and float(dMdh) > 0.0
+    path_depths = np.linspace(0.0, depth, PATH_SLOPE_SAMPLES)
+    path_slopes = []
+    for path_depth in path_depths:
+        path_values = transition_profile(center, width, path_depth)
+        path_slopes.append(float(mass_slope_for(path_values)))
+    path_slopes = np.asarray(path_slopes, dtype=float)
+    path_positive_mass_slope = bool(
+        np.all(np.isfinite(path_slopes)) and np.all(path_slopes > 0.0)
+    )
     compactness_value = float(jnp.exp(y[0]))
     root_residual = abs(compactness_value - target)
 
     return dict(
         base,
         reachable=True,
-        retained=bool(positive_mass_slope),
+        retained=bool(positive_mass_slope and path_positive_mass_slope),
+        positive_mass_slope=bool(positive_mass_slope),
+        path_positive_mass_slope=path_positive_mass_slope,
+        path_min_dM_dh=float(np.min(path_slopes))
+        if np.all(np.isfinite(path_slopes)) else None,
         compactness=compactness_value,
         root_residual=float(root_residual),
         depth=float(depth),
@@ -329,13 +352,12 @@ def main():
         reference = RelativisticPolytrope(K=100.0, gamma=gamma)
         h_c = find_hc(reference, BASELINE_COMPACTNESS)
         baseline = solve_observables(reference, h_c, n_steps=N_STEPS)
-        eos_kwargs, compactness_for, response_state = make_functions(
+        eos_kwargs, compactness_for, response_state, mass_slope_for = make_functions(
             reference, h_c
         )
         reference_context[gamma] = (reference, eos_kwargs)
 
-        baseline_state = response_state(jnp.zeros(N_NODES))
-        baseline_dMdh = float(baseline_state[-1])
+        baseline_dMdh = float(mass_slope_for(jnp.zeros(N_NODES)))
         baseline_retained = (
             np.isfinite(baseline_dMdh) and baseline_dMdh > 0.0
         )
@@ -365,6 +387,7 @@ def main():
                         eos_kwargs,
                         compactness_for,
                         response_state,
+                        mass_slope_for,
                     )
                 )
 
@@ -430,6 +453,7 @@ def main():
         edge=EDGE,
         max_depth=MAX_DEPTH,
         depth_grid_size=len(DEPTH_GRID),
+        path_slope_samples=PATH_SLOPE_SAMPLES,
         x_grid=list(X_VALUES),
         baselines=baselines,
         all_baselines_retained=all(b["retained"] for b in baselines),

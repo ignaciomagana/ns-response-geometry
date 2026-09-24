@@ -183,5 +183,4 @@ A replacement branch-safe audit is running with a common baseline
 \(C=0.14\), targets \(C_{\rm final}=0.10,0.12\), explicit positive
 baseline mass-slope checks, sampled depth curves, and selection of the
 smallest-depth root continuously connected to \(D=0\). Until that result is
-complete, the fixed-final subsection/figure are provisional. The earlier
-fixed-depth and matched-reference null tests are unaffected.
+complete, the fixed-final subsection/figure are provisional. The original \(\Gamma=2\) fixed-depth scans are unaffected. The cross-EOS matched-reference control is also partially superseded because it includes the same invalid \(\Gamma=1.70\), baseline-\(C=0.16\) reference.

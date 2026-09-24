@@ -297,3 +297,16 @@ There is no known lost analysis or unresolved session state required to
 support the current paper. Paper-1 science through Stage 6 is complete under
 the declared scope. New work should either be an explicit strengthening pass
 (realistic EOS/radial stability) or a separately scoped Stage-7 extension.
+
+
+## 2026-09-24 pre-submission strengthening reopened
+
+By author decision, paper 1 is reopened only for two strengthening analyses:
+
+1. a named realistic-EOS validation of the existing response-geometry result;
+2. a true relativistic radial-mode stability calculation for the controlled
+   transition sequences.
+
+Stage 7 remains deferred and is now treated as a separate-paper program.
+Do not add \(\bar Q\), higher Love numbers, f-modes, or dynamical tides to
+paper 1 during this pass.

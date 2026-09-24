@@ -214,3 +214,86 @@ remain in the repository only as superseded provenance.
   claims; `LEGACY.md` is the authority for superseded artifacts.
 - Stage 7 is deferred. Do not add new observables to paper 1 without an
   explicit scope change and fresh literature audit.
+
+
+## 2026-09-24 full continuity audit
+
+A full repository pass was completed after multiple disconnected sessions.
+
+### Recovery order for a new session
+
+Read these in order before doing new work:
+
+1. `STATE.md` — current scientific state and next-scope boundary.
+2. `SCIENCE_CONTRACT.md` — exact claims/scope/falsification contract.
+3. `paper/PAPER_STATE.md` — authoritative manuscript status.
+4. `paper/CLAIM_PROVENANCE.md` — quantitative claim-to-result map.
+5. `MEMORY.md` — chronology, mathematical decisions, and corrections.
+6. `LEGACY.md` — analyses that must not be revived as current evidence.
+7. `results/README.md` — current versus superseded result manifest.
+8. `ENVIRONMENT.md` and `constraints-paper-20260924.txt` —
+   frozen numerical reproduction environment.
+9. Inspect recent commits and GitHub Actions before changing code or paper.
+
+### Audit findings and fixes
+
+- No open PRs or issues.
+- All committed result JSON files parse successfully.
+- Live TeX has no TODO/FIXME placeholders.
+- All 18 manuscript citation keys resolve to the 18 bibliography entries.
+- All checked `\ref`/`\eqref` targets resolve.
+- Stale `PAPER_STATE.md` fixed-final claims were replaced by the
+  branch-safe result.
+- The earlier matched-reference and fixed-final cross-EOS analyses are
+  explicitly marked superseded and their workflows are manual-only.
+- The broad-EOS claim domain was corrected from an overbroad hadronic wording
+  to the tested cold, causal latent-EOS domain.
+- The Python reproduction environment is frozen in
+  `constraints-paper-20260924.txt`.
+- The paper PDF auto-publish workflow was made race-safe for concurrent pushes.
+
+### Frozen-environment verification
+
+Using the frozen 2026-09-24 constraints, the following GitHub Actions
+workflows completed successfully:
+
+- unit tests;
+- Stage-1 validation report;
+- response robustness;
+- core science reproduction (broad ensemble, normal spectrum, Frobenius,
+  potential reconstruction, curvature);
+- transition breakdown;
+- transition-location refinement;
+- transition scan;
+- branch-safe fixed-final-compactness control;
+- manuscript compile/render.
+
+### Not missing, but optional strengthening
+
+The current manuscript does not require the following for its stated claims,
+and explicitly limits its scope accordingly:
+
+- a named/realistic nuclear-EOS ensemble or nuclear-theory posterior;
+- a radial-mode eigenvalue stability calculation beyond the
+  positive-(dM/dh_c) screen;
+- microphysical first-order phase-transition models rather than controlled
+  sound-speed softening profiles;
+- Stage-7 observables such as (ar Q,Lambda_3,f)-modes, or dynamical
+  tides.
+
+These would strengthen or extend the work, but are not evidence already
+claimed in paper 1.
+
+### Author/repository choices still open
+
+- repository license: none chosen; do not add one without an author decision;
+- manuscript affiliation/coauthor metadata: not populated beyond the current
+  author entry; do not invent it;
+- release/tag/DOI/CITATION metadata: not yet created.
+
+### Bottom line
+
+There is no known lost analysis or unresolved session state required to
+support the current paper. Paper-1 science through Stage 6 is complete under
+the declared scope. New work should either be an explicit strengthening pass
+(realistic EOS/radial stability) or a separately scoped Stage-7 extension.

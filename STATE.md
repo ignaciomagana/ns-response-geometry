@@ -29,9 +29,14 @@ complete for the current static/slow-rotation observable set
 - Controlled localized sound-speed softening.
 - Systematic transition center/width/depth screen.
 - 65-node transition-location refinement and mapping into \(r/R\) and \(m/M\).
-- Matched-reference transition-location null test across \(\Gamma=1.70,1.85,2.00\).
-- Fixed-final-compactness control that removes the dominant global-expansion confound.
-- Finer fixed-final-compactness refinement completed in GitHub Actions and promoted to `results/fixed_final_compactness_refinement_20260918.json` with workflow provenance.
+- Preliminary cross-EOS transition controls audited and superseded after a
+  branch/stability failure was found.
+- Branch-safe fixed-final-compactness control across
+  \(\Gamma=1.70,1.85,2.00\), using positive-mass-slope baselines,
+  first depth roots connected to \(D=0\), and pathwise mass-slope checks.
+- Branch-safe result promoted to
+  `results/fixed_final_compactness_branchsafe_20260924.json` with GitHub
+  Actions provenance.
 - Production figures and manuscript introduction/results/discussion updates.
 - Core science reproduction and paper-build workflows passing in GitHub Actions.
 - Manuscript workflow now compiles and renders every PDF page on every push/pull request.
@@ -103,22 +108,28 @@ The deformed layer is centered at \(r/R=0.453\), \(m/M=0.759\).
 
 ## Current scientific target
 
-The transition-location program is complete for the present controlled
-polytropic family.  After fixing the final compactness, the stable maximizing
-locations span \(h_{\rm tr}/h_c=0.35\)--0.65 and
-\(m_{\rm tr}/M=0.340\)--0.852.  Seven of eight maxima fall in the narrower
-range \(r_{\rm tr}/R=0.426\)--0.457\), but one lies at \(0.533\), and the
-\(\Gamma=1.70\) sequence has no stable point at
-\(C_{\rm final}=0.14\).  The result therefore does not support a universal
-vulnerable shell; the fractional-radius clustering is retained only as a
-diagnostic observation.
+The controlled transition-location program is complete for the present
+polytropic family.  The original \(\Gamma=2\) fixed-depth experiment
+demonstrates that response vulnerability can be localized for a specified
+configuration.  The branch-safe cross-EOS control shows that this location
+does not define a universal shell: for all six
+\((\Gamma,C_{\rm final})\) cases, the largest retained response occurs at
+the deepest transition location that still passes the positive-mass-slope
+path screen.  Those boundary-adjacent locations span
+\[
+h_{\rm tr}/h_c=0.475\text{--}0.725,\qquad
+r_{\rm tr}/R=0.368\text{--}0.476,\qquad
+m_{\rm tr}/M=0.235\text{--}0.675 .
+\]
+The cross-EOS result is therefore a negative localization result: vulnerability
+grows toward the screened branch boundary rather than selecting a
+reference-EOS-independent interior shell.
 
-The current target is the final paper-quality pass:
-1. targeted literature/novelty re-check through the current date;
-2. numerical/claim provenance audit against all committed result files;
-3. figure and rendered-page readability audit;
-4. clean-room consistency review of the manuscript against the code/results;
-5. only then decide whether additional physics is required before submission.
+The literature/novelty sweep, quantitative provenance audit, and clean-room
+code/manuscript consistency pass are complete.  The remaining gate for this
+round is the final manuscript build and rendered-page inspection at current
+HEAD, followed by a decision on whether any additional physics is required
+before submission.
 
 ## Validation / execution status
 
@@ -129,6 +140,8 @@ push and pull request, compiles `paper/main.tex`, renders all pages to PNG,
 and uploads the PDF plus page renders as the `manuscript-render` artifact.
 
 Versioned science results include:
+- results/stage1_validation_20260918.json
+- results/preliminary_response_20260918.json
 - results/response_robustness_20260918.json
 - results/background_ensemble_fine_20260918.json
 - results/normal_spectrum_20260918.json
@@ -140,7 +153,8 @@ Versioned science results include:
 - results/transition_location_refinement_20260918.json
 - results/matched_compactness_transition_20260918.json
 - results/fixed_final_compactness_transition_20260918.json
-- results/fixed_final_compactness_refinement_20260918.json
+- results/fixed_final_compactness_refinement_20260918.json  [superseded]
+- results/fixed_final_compactness_branchsafe_20260924.json
 
 ## Manuscript status
 
@@ -150,14 +164,15 @@ Versioned science results include:
 - Local hierarchy/full normal spectrum: written.
 - Integrability/global reconstruction: written.
 - Curvature: written.
-- Controlled breakdown, matched-reference null test, and fixed-final-
-  compactness refinement: written.
-- Production figures: inserted, including the fixed-final-compactness
-  location summary.
-- Discussion/conclusions: updated through the final H5 interpretation.
-- Remaining work before submission-level review: final novelty/literature
-  check, claim-provenance audit, rendered figure/readability audit, and
-  clean-room numerical consistency pass.
+- Controlled breakdown and fixed-depth localization: written.
+- Superseded cross-EOS controls removed from live scientific claims.
+- Branch-safe cross-EOS control and negative universal-shell result: written.
+- Production figures: inserted, including branch-safe response curves.
+- Discussion/conclusions: synchronized with the final H5 interpretation.
+- Literature/novelty, claim-provenance, and clean-room consistency audits:
+  complete.
+- Remaining work in this round: final rendered-page inspection at current
+  HEAD.
 
 ## Session protocol
 
@@ -179,8 +194,11 @@ used for paper claims. An explicit audit found that its
 tested transition locations. The original depth solver assumed global
 monotonicity, so several roots were not branch-safe.
 
-A replacement branch-safe audit is running with a common baseline
-\(C=0.14\), targets \(C_{\rm final}=0.10,0.12\), explicit positive
-baseline mass-slope checks, sampled depth curves, and selection of the
-smallest-depth root continuously connected to \(D=0\). Until that result is
-complete, the fixed-final subsection/figure are provisional. The original \(\Gamma=2\) fixed-depth scans are unaffected. The cross-EOS matched-reference control is also partially superseded because it includes the same invalid \(\Gamma=1.70\), baseline-\(C=0.16\) reference.
+The correction is complete.  The branch-safe replacement uses a common
+baseline \(C=0.14\), targets \(C_{\rm final}=0.10,0.12\), explicit
+positive baseline mass-slope checks, sampled depth curves, first roots
+connected to \(D=0\), and positive-mass-slope checks along the deformation
+path.  Its result is versioned in
+`results/fixed_final_compactness_branchsafe_20260924.json`.  The original
+\(\Gamma=2\) fixed-depth scans remain valid; the older cross-EOS controls
+remain in the repository only as superseded provenance.

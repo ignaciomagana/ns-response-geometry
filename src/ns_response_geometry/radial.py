@@ -43,6 +43,9 @@ class _RadialBackground:
     h: np.ndarray
     r: np.ndarray
     m: np.ndarray
+    p: np.ndarray
+    eps: np.ndarray
+    cs2: np.ndarray
     radius: float
     mass: float
     compactness: float
@@ -59,12 +62,19 @@ def _background(eos, h_c, n_steps):
     r = r_desc[::-1]
     m = m_desc[::-1]
 
+    p = np.asarray(eos.pressure(h), dtype=float)
+    eps = np.asarray(eos.energy_density(h), dtype=float)
+    cs2 = np.asarray(eos.sound_speed_squared(h), dtype=float)
+
     radius = float(r_desc[-1])
     mass = float(m_desc[-1])
     return _RadialBackground(
         h=h,
         r=r,
         m=m,
+        p=p,
+        eps=eps,
+        cs2=cs2,
         radius=radius,
         mass=mass,
         compactness=mass / radius,
@@ -75,20 +85,15 @@ def _background(eos, h_c, n_steps):
 def _interp_background(h, background):
     r = float(np.interp(h, background.h, background.r))
     m = float(np.interp(h, background.h, background.m))
-    return r, m
-
-
-def _thermo(eos, h):
-    p = float(eos.pressure(h))
-    eps = float(eos.energy_density(h))
-    cs2 = float(eos.sound_speed_squared(h))
-    return p, eps, cs2
+    p = float(np.interp(h, background.h, background.p))
+    eps = float(np.interp(h, background.h, background.eps))
+    cs2 = float(np.interp(h, background.h, background.cs2))
+    return r, m, p, eps, cs2
 
 
 def _mode_rhs(h, state, *, eos, omega2, background):
     zeta, delta_p = state
-    r, m = _interp_background(h, background)
-    p, eps, cs2 = _thermo(eos, h)
+    r, m, p, eps, cs2 = _interp_background(h, background)
 
     one_minus_2c = 1.0 - 2.0 * m / r
     e2lambda = 1.0 / one_minus_2c
@@ -141,7 +146,7 @@ def _shoot_on_background(
     if h_floor <= background.h[0]:
         h_floor = max(10.0 * background.h[0], 1.0e-8)
 
-    p0, eps0, cs20 = _thermo(eos, h_start)
+    _, _, p0, eps0, cs20 = _interp_background(h_start, background)
     zeta0 = 1.0
     delta0 = -3.0 * (eps0 + p0) * cs20 * zeta0
 
@@ -174,7 +179,7 @@ def _shoot_on_background(
 
     zeta_s = float(sol.y[0, -1])
     delta_s = float(sol.y[1, -1])
-    p_s, _, _ = _thermo(eos, h_floor)
+    _, _, p_s, _, _ = _interp_background(h_floor, background)
 
     eta_numeric = delta_s / p_s
     eta_surface = -(

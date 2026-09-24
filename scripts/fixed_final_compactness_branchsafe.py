@@ -13,6 +13,8 @@ undeformed D=0 configuration, and then apply the same positive-mass-slope
 screen to the deformed star.
 
 Window width: 0.25 h_c.
+The transition-center grid extends to h_tr/h_c=0.875, where the inner edge
+of the full window reaches h_c.
 Transition edge scale: 0.008.
 EOS nodes: 65.
 """
@@ -42,7 +44,7 @@ WIDTH_FRACTION = 0.25
 BASELINE_COMPACTNESS = 0.14
 TARGET_COMPACTNESS = (0.10, 0.12)
 GAMMAS = (1.70, 1.85, 2.00)
-X_VALUES = tuple(np.arange(0.25, 0.651, 0.025))
+X_VALUES = tuple(np.linspace(0.25, 0.875, 26))
 MAX_DEPTH = 3.0
 DEPTH_GRID = tuple(np.linspace(0.0, MAX_DEPTH, 121))
 ROOT_TOL = 1.0e-10

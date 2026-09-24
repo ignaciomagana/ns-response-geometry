@@ -1,6 +1,6 @@
 # Current state
 
-**Last updated:** 2026-09-18
+**Last updated:** 2026-09-24
 
 ## Stage
 
@@ -29,8 +29,12 @@ complete for the current static/slow-rotation observable set
 - Controlled localized sound-speed softening.
 - Systematic transition center/width/depth screen.
 - 65-node transition-location refinement and mapping into \(r/R\) and \(m/M\).
+- Matched-reference transition-location null test across \(\Gamma=1.70,1.85,2.00\).
+- Fixed-final-compactness control that removes the dominant global-expansion confound.
+- Finer fixed-final-compactness refinement completed successfully in GitHub Actions; its workflow artifact still needs promotion to a committed result file.
 - Production figures and manuscript introduction/results/discussion updates.
 - Core science reproduction and paper-build workflows passing in GitHub Actions.
+- Manuscript workflow now compiles and renders every PDF page on every push/pull request.
 
 ## Central results
 
@@ -99,24 +103,31 @@ The deformed layer is centered at \(r/R=0.453\), \(m/M=0.759\).
 
 ## Current scientific target
 
-Determine whether the vulnerable transition location is specific to the
-\(\Gamma=2\) reference or persists across different smooth causal reference
-EOSs when stars are compared at matched baseline compactness.
+The matched-reference test is complete and rules out promoting the original
+fixed-depth \(h_{\rm tr}/h_c\simeq0.45\)--0.50 ridge as a
+reference-EOS-independent vulnerable shell. The fixed-final-compactness
+control is also complete and a finer refinement has run successfully in
+GitHub Actions.
 
-The next calculation will:
-1. choose several reference polytropes;
-2. solve for central enthalpy at common baseline compactness values;
-3. scan \(h_{\rm tr}/h_c\) with fixed fractional width and depth;
-4. compare the location of maximal I--Love degradation;
-5. map that location into \(r/R\) and \(m/M\).
+The immediate target is to:
+1. recover the finer refinement artifact from workflow run 35387620727;
+2. commit its full JSON with provenance;
+3. integrate the controlled fixed-final-compactness result into the manuscript;
+4. decide what, if anything, can be said robustly about location in
+   \(h_{\rm tr}/h_c\), \(r/R\), or \(m/M\);
+5. proceed to the final literature, claim-provenance, figure, and clean-room
+   numerical review.
 
-The purpose is diagnostic, not to claim a universal transition radius.
+The purpose remains diagnostic; no universal microphysical transition radius
+should be claimed without stronger evidence.
 
 ## Validation / execution status
 
 GitHub Actions are operational again after the repository was made public.
 Recent tests, paper, science-reproduction, transition-breakdown, and
-transition-location workflows are green.
+transition-location workflows are green. The paper workflow now runs on every
+push and pull request, compiles `paper/main.tex`, renders all pages to PNG,
+and uploads the PDF plus page renders as the `manuscript-render` artifact.
 
 Versioned science results include:
 - results/response_robustness_20260918.json
@@ -140,14 +151,17 @@ Versioned science results include:
 - Controlled breakdown and systematic location refinement: written.
 - Production figures: inserted.
 - Discussion/conclusions: updated through current H5 interpretation.
-- Remaining scientific work before final paper pass: reference-EOS dependence
-  of the transition-vulnerability location, final novelty/literature check,
-  figure/claim audit, and clean-room numerical consistency pass.
+- Remaining work before final paper pass: promote and interpret the finer
+  fixed-final-compactness refinement, integrate it into Results/Discussion,
+  final novelty/literature check, figure/claim audit, and clean-room numerical
+  consistency pass.
 
 ## Session protocol
 
 At the beginning of every session read STATE.md, MEMORY.md,
 SCIENCE_CONTRACT.md, inspect recent commits/results, and inspect CI.
 At the end update STATE.md, record durable decisions in MEMORY.md,
-update the paper, and leave every reported numerical result reproducible from
-a committed script plus a versioned result file.
+update the paper, leave every reported numerical result reproducible from a
+committed script plus a versioned result file, and verify the per-round paper
+workflow produced `main.pdf` plus rendered page images. Inspect the rendered
+pages rather than treating a successful LaTeX compile as sufficient.

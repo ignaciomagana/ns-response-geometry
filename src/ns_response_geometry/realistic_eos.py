@@ -23,7 +23,7 @@ M_SUN_KM = 1.4766250385
 
 # Read et al. low-density SLy crust.  The tabulated constants are K_i / c^2,
 # so p/c^2 = Kbar_i rho^Gamma in g cm^-3.
-_CRUST_KBAR = (
+_CRUST_KBAR_PUBLISHED = (
     6.80110e-9,
     1.06186e-6,
     5.32697e1,
@@ -31,6 +31,23 @@ _CRUST_KBAR = (
 )
 _CRUST_GAMMA = (1.58425, 1.28733, 0.62223, 1.35692)
 _CRUST_UPPER_RHO = (2.44034e7, 3.78358e11, 2.62780e12)
+
+
+def _continuous_crust_kbars():
+    """Return crust Kbar values with exact pressure continuity.
+
+    Read et al. tabulate each K_i at finite precision.  Using those rounded
+    values independently leaves O(1e-4) pressure jumps at the joins.  We keep
+    the published first normalization and all published Gamma/rho boundaries,
+    then propagate K_i recursively so p is exactly continuous.
+    """
+    values = [_CRUST_KBAR_PUBLISHED[0]]
+    for i, rho_b in enumerate(_CRUST_UPPER_RHO):
+        values.append(
+            values[-1]
+            * rho_b ** (_CRUST_GAMMA[i] - _CRUST_GAMMA[i + 1])
+        )
+    return tuple(values)
 
 _CORE_RHO1 = 10.0**14.7
 _CORE_RHO2 = 10.0**15.0
@@ -88,7 +105,8 @@ class NamedPiecewisePolytrope:
 
         # Match the last crust polytrope to core piece 1.
         gamma_crust = _CRUST_GAMMA[-1]
-        k_crust = _CRUST_KBAR[-1]
+        crust_kbars = _continuous_crust_kbars()
+        k_crust = crust_kbars[-1]
         rho_match = (k_crust / k_core1) ** (1.0 / (self.gamma1 - gamma_crust))
 
         gammas = (
@@ -98,7 +116,7 @@ class NamedPiecewisePolytrope:
             self.gamma3,
         )
         kbars = (
-            *_CRUST_KBAR,
+            *crust_kbars,
             k_core1,
             k_core2,
             k_core3,

@@ -58,6 +58,14 @@ manuscript explicitly rejects a universal-shell interpretation of the
 fixed-depth ridge and reports the tighter fractional-radius behavior only as
 a diagnostic observation.
 
+## Final render status
+
+- Current manuscript compiles successfully.
+- All 19 rendered pages inspected.
+- No clipped text, overlapping elements, or broken glyphs found.
+- The rendered PDF is tracked in the repository at `paper/main.pdf`.
+- The paper workflow re-renders and updates the tracked PDF after successful pushes to `main`.
+
 ## Remaining before final paper pass
 
 - final targeted literature/novelty re-check for response-operator geometry;

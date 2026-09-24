@@ -56,7 +56,7 @@ H1. I--Love appears as a suppressed transverse response mode without using an em
 
 H2. The suppression is stronger than for a control relation such as C--Love over the same EOS/configuration domain.
 
-H3. The suppressed local covectors are approximately integrable over the ordinary cold-hadronic domain.
+H3. The suppressed local covectors are approximately integrable over the tested cold, causal latent-EOS domain.
 
 H4. Leading finite EOS scatter is predicted by second-order response/curvature after first-order transverse sensitivity is suppressed.
 
@@ -70,7 +70,7 @@ Negative results must be reported rather than tuned away.
 
 ## Scope for paper 1
 
-Included: cold barotropic GR; stable nonrotating \(M,R,\Lambda_2\) sequences; first-order slow rotation for \(I\); broad/nonparametric EOS perturbations; I--Love and C--Love; tangent quotient, integrability, curvature, phase-transition stress tests.
+Included: cold barotropic GR; positive-mass-slope nonrotating \(M,R,\Lambda_2\) sequences; first-order slow rotation for \(I\); broad causal latent/nonparametric EOS perturbations; I--Love and C--Love; tangent quotient, integrability, curvature, and controlled softening stress tests. The broad EOS ensemble is a function-space stress test, not a nuclear-theory posterior or named realistic-EOS catalog.
 
 Excluded initially: rapid rotation, magnetic fields, finite temperature/composition, modified gravity, full \(\bar Q\), dynamical tides and mode spectra.
 

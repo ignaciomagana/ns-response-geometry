@@ -1,0 +1,36 @@
+name: realistic-eos-validation
+
+on:
+  push:
+    paths:
+      - "scripts/realistic_eos_validation.py"
+      - "src/ns_response_geometry/realistic_eos.py"
+      - "src/ns_response_geometry/response.py"
+      - "src/ns_response_geometry/response_eos.py"
+      - "src/ns_response_geometry/geometry.py"
+      - "src/ns_response_geometry/observables.py"
+      - ".github/workflows/realistic-eos-validation.yml"
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install frozen paper environment
+        run: python -m pip install -c constraints-paper-20260924.txt -e ".[test]"
+      - name: Run named realistic-EOS validation
+        env:
+          JAX_ENABLE_X64: "true"
+          XLA_PYTHON_CLIENT_PREALLOCATE: "false"
+        run: |
+          set -o pipefail
+          python scripts/realistic_eos_validation.py | tee realistic_eos_validation.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: realistic-eos-validation-log
+          path: realistic_eos_validation.log

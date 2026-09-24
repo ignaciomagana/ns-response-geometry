@@ -53,3 +53,19 @@ G_\perp=P_\perp G P_\perp^T.
 A small-eigenvalue covector defines a local approximately EOS-insensitive direction. A global universal relation exists only if that local distribution is approximately integrable.
 
 See \`SCIENCE_CONTRACT.md\` and \`paper/main.tex\` for the precise formulation.
+
+
+## Current paper status
+
+Paper-1 analysis through Stage 6 is complete for
+\((C,\bar I,\Lambda_2)\). The current manuscript uses the branch-safe
+cross-EOS transition control and is rendered at
+[`paper/main.pdf`](paper/main.pdf).
+
+For continuity:
+- quantitative live claims: `paper/CLAIM_PROVENANCE.md`;
+- current project state: `STATE.md`;
+- superseded analyses: `LEGACY.md`;
+- durable decisions and corrections: `MEMORY.md`.
+
+Stage 7 extensions are intentionally deferred.

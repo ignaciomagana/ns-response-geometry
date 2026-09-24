@@ -24,9 +24,10 @@ The manuscript is a live derivation, not a post-processing step.
 - Systematic transition center/width/depth screen.
 - High-resolution transition-location refinement in enthalpy and physical
   stellar coordinates.
+- Matched-reference null test and fixed-final-compactness control/refinement.
 - Discussion and conclusions through H5.
-- Production figures for normal spectrum, integrability, curvature, and
-  transition location.
+- Production figures for normal spectrum, integrability, curvature,
+  fixed-depth transition location, and fixed-final-compactness location.
 
 ## Numerical statements currently allowed
 
@@ -41,27 +42,27 @@ All manuscript numbers must trace to versioned result JSON files. Core claims:
 - refined transition variance enhancement \(85.06\) with \(90.24\%\)
   positive excess sensitivity localized on the imposed layer;
 - scaled transition-location maximum at \(h_{\rm tr}/h_c=0.45\) for the
-  current \(\Gamma=2\), \(C\ge0.1\) controlled experiment.
+  original \(\Gamma=2\), \(C\ge0.1\) fixed-depth experiment;
+- fixed-final-compactness stable maxima span
+  \(h_{\rm tr}/h_c=0.35\)--0.65 and
+  \(m_{\rm tr}/M=0.340\)--0.852;
+- seven of eight fixed-final maxima lie at
+  \(0.426\le r_{\rm tr}/R\le0.457\), with one at \(0.533\);
+- the fixed-final scan does not support a reference-EOS-independent
+  vulnerable shell.
 
 ## Active manuscript target
 
-The matched-reference and fixed-final-compactness controls have been run.
-They do not support promoting the original fixed-depth
-\(h_{\rm tr}/h_c\simeq0.45\)--0.50 ridge to a reference-EOS-independent
-vulnerable shell. A finer fixed-final-compactness refinement also completed
-successfully in GitHub Actions, but its full result currently exists only in
-the workflow log/artifact and has not yet been promoted to a committed
-versioned JSON or incorporated into the manuscript.
-
-The immediate manuscript task is therefore to recover that refinement
-artifact, commit its result with provenance, fold the controlled comparison
-into the Results/Discussion, and then perform the final claim/figure audit.
+The transition-location controls are now complete and incorporated.  The
+manuscript explicitly rejects a universal-shell interpretation of the
+fixed-depth ridge and reports the tighter fractional-radius behavior only as
+a diagnostic observation.
 
 ## Remaining before final paper pass
 
-- promote the fixed-final-compactness refinement artifact to a committed,
-  versioned result file and manuscript text;
 - final targeted literature/novelty re-check for response-operator geometry;
-- numerical/claim provenance audit;
+- numerical/claim provenance audit against every quantitative manuscript
+  statement;
 - final figure readability and rendered-page inspection;
-- clean-room paper review.
+- clean-room code/results/manuscript consistency review;
+- decide whether any additional physics is needed before submission.

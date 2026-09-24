@@ -289,3 +289,23 @@ the validated second-order statement is displacement away from the local
 soft tangent plane with a frozen soft covector. It is not a numerical
 validation of the complete Hessian of the globally reconstructed scalar
 relation F.
+
+
+## 2026-09-24 correction to fixed-final control
+
+Do not use the original fixed-final refinement at
+results/fixed_final_compactness_refinement_20260918.json for scientific
+claims. A clean-room audit added baseline mass-slope and depth-curve checks
+and found two failures:
+
+1. the \(\Gamma=1.70\), \(C=0.16\) baseline has
+   \(dM/dh_c=-1.90299\), so it is already beyond the positive-mass-slope
+   branch used elsewhere in the paper;
+2. \(C(D)\) is not globally monotone at 18/51 transition locations
+   (maximum sampled positive increment \(7.55\times10^{-3}\)), while the
+   original solver used a monotone bisection.
+
+This supersedes the earlier 2026-09-24 fixed-final interpretation entry.
+The replacement calculation must use a common positive-mass-slope baseline
+and a root finder that searches the sampled \(C(D)\) curve and follows the
+first root connected to \(D=0\).

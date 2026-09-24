@@ -154,9 +154,14 @@ class NamedPiecewisePolytrope:
         x = (
             (gamma - 1.0)
             / (gamma * kbar)
-            * jnp.maximum(jnp.exp(jnp.maximum(h, 0.0)) - 1.0 - offset, 0.0)
+            * (jnp.exp(jnp.maximum(h, 0.0)) - 1.0 - offset)
         )
-        return x ** (1.0 / (gamma - 1.0))
+        # The neutron-drip crust piece has Gamma < 1, so the sign of the
+        # prefactor matters: clip only after forming the full positive
+        # inversion variable.
+        x = jnp.maximum(x, 1.0e-300)
+        rho = x ** (1.0 / (gamma - 1.0))
+        return jnp.where(h > 0.0, rho, 0.0)
 
     def pressure(self, h):
         h = jnp.asarray(h)

@@ -2,12 +2,7 @@ name: paper
 
 on:
   push:
-    paths:
-      - "paper/**"
-      - ".github/workflows/paper.yml"
   pull_request:
-    paths:
-      - "paper/**"
   workflow_dispatch:
 
 jobs:
@@ -15,11 +10,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: xu-cheng/latex-action@v3
         with:
           root_file: main.tex
           working_directory: paper
+
+      - name: Render PDF pages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+          mkdir -p paper/rendered
+          pdftoppm -png -r 144 paper/main.pdf paper/rendered/page
+
       - uses: actions/upload-artifact@v4
         with:
-          name: manuscript-pdf
-          path: paper/main.pdf
+          name: manuscript-render
+          path: |
+            paper/main.pdf
+            paper/rendered/*.png

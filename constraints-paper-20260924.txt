@@ -1,0 +1,9 @@
+# Frozen environment for the paper-1 numerical reproduction audit.
+# Recorded from successful GitHub Actions runs on 2026-09-24.
+jax==0.10.2
+jaxlib==0.10.2
+numpy==2.4.6
+scipy==1.17.1
+pytest==9.1.1
+ml_dtypes==0.6.0
+opt_einsum==3.4.0

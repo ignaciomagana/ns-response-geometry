@@ -1,0 +1,32 @@
+name: fixed-final-compactness-branchsafe
+
+on:
+  push:
+    paths:
+      - "scripts/fixed_final_compactness_branchsafe.py"
+      - ".github/workflows/fixed-final-compactness-branchsafe.yml"
+      - "src/ns_response_geometry/**"
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install
+        run: python -m pip install -e ".[test]"
+      - name: Run branch-safe fixed-final-compactness audit
+        env:
+          JAX_ENABLE_X64: "true"
+          XLA_PYTHON_CLIENT_PREALLOCATE: "false"
+        run: |
+          set -o pipefail
+          python scripts/fixed_final_compactness_branchsafe.py | tee fixed_final_compactness_branchsafe.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fixed-final-compactness-branchsafe-log
+          path: fixed_final_compactness_branchsafe.log

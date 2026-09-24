@@ -168,3 +168,20 @@ update the paper, leave every reported numerical result reproducible from a
 committed script plus a versioned result file, and verify the per-round paper
 workflow produced `main.pdf` plus rendered page images. Inspect the rendered
 pages rather than treating a successful LaTeX compile as sufficient.
+
+
+## 2026-09-24 fixed-final control audit failure
+
+The first fixed-final-compactness refinement is superseded and must not be
+used for paper claims. An explicit audit found that its
+\(\Gamma=1.70\), baseline-\(C=0.16\) reference has
+\(dM/dh_c=-1.903<0\), and that \(C(D)\) is non-monotonic at 18 of the 51
+tested transition locations. The original depth solver assumed global
+monotonicity, so several roots were not branch-safe.
+
+A replacement branch-safe audit is running with a common baseline
+\(C=0.14\), targets \(C_{\rm final}=0.10,0.12\), explicit positive
+baseline mass-slope checks, sampled depth curves, and selection of the
+smallest-depth root continuously connected to \(D=0\). Until that result is
+complete, the fixed-final subsection/figure are provisional. The earlier
+fixed-depth and matched-reference null tests are unaffected.

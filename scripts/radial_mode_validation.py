@@ -37,9 +37,9 @@ def mode(eos, h):
         h,
         background_steps=4096,
         h_floor=2.0e-6,
-        scan_min=-8.0,
-        scan_max=25.0,
-        scan_points=133,
+        scan_min=-4.0,
+        scan_max=8.0,
+        scan_points=61,
     )
     return dict(
         h_c=float(h),

@@ -82,9 +82,11 @@ ledger in the same commit.
 | With post-softening \(C\ge0.10\), only three baseline-\(C=0.16\) cases survive and their maxima shift to \(h_{\rm tr}/h_c=0.25,0.30,0.35\) with alignments \(0.9998,0.9989,0.9999\) | results/matched_compactness_transition_20260918.json | scripts/matched_compactness_transition.py |
 | Fixed-depth \(h_{\rm tr}/h_c\simeq0.45\)--0.50 is therefore not promoted as a universal vulnerable shell | results/matched_compactness_transition_20260918.json | scripts/matched_compactness_transition.py |
 
-## Fixed-final-compactness control
+## Superseded fixed-final-compactness control
 
-| Manuscript claim | Versioned source | Generator |
+**Do not use these values for scientific claims.** The 2026-09-24 audit found a negative-mass-slope \(\Gamma=1.70\), baseline-\(C=0.16\) reference and non-monotonic \(C(D)\) curves at 18/51 locations, invalidating the original global-bisection control. The table is retained only to trace the superseded manuscript state. A branch-safe replacement is required.
+
+| Superseded claim | Versioned source | Generator |
 |---|---|---|
 | Baseline \(C=0.16\), target \(C_{\rm final}=0.10,0.12,0.14\), 65 EOS nodes, and \(h_{\rm tr}/h_c\) spacing 0.025 | results/fixed_final_compactness_refinement_20260918.json | scripts/fixed_final_compactness_refinement.py |
 | Stable maximizing \(h_{\rm tr}/h_c\) spans \(0.35\)--0.65 across the eight reference-EOS/target-compactness cases with a stable maximum | results/fixed_final_compactness_refinement_20260918.json | scripts/fixed_final_compactness_refinement.py |
@@ -92,6 +94,4 @@ ledger in the same commit.
 | Enclosed mass fractions of the same maxima span \(0.340\)--0.852; no stable \(\Gamma=1.70\), \(C_{\rm final}=0.14\) point exists on the scanned grid | results/fixed_final_compactness_refinement_20260918.json | scripts/fixed_final_compactness_refinement.py |
 | Selected maxima have I--Love alignment \(0.911\)--0.983, I--Love/C--Love RMS ratio \(0.227\)--0.477, and soft/hard RMS ratio \(0.063\)--0.201 | results/fixed_final_compactness_refinement_20260918.json | scripts/fixed_final_compactness_refinement.py |
 
-The controlled scan does not support a reference-EOS-independent vulnerable
-shell.  Fractional radius is more compressed than enthalpy or enclosed mass in
-most tested cases, but this is retained only as a diagnostic observation.
+These statements are superseded pending the branch-safe replacement and must not be used in the manuscript.

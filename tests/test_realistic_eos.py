@@ -34,7 +34,7 @@ def test_named_eos_pressure_and_energy_are_continuous(name):
     _, _, _, upper_h, _ = eos._segment_data()
 
     for hb in np.asarray(upper_h):
-        dh = 1.0e-8
+        dh = 1.0e-10
         pm = float(eos.pressure(hb - dh))
         pp = float(eos.pressure(hb + dh))
         em = float(eos.energy_density(hb - dh))

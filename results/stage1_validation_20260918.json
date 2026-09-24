@@ -1,0 +1,77 @@
+{
+  "exact_incompressible": [
+    {
+      "compactness_relative_error": -0.0000014376429789562748,
+      "h_c": 0.05,
+      "mass_relative_error": -0.0000021608145917157947,
+      "radius_relative_error": -7.231726523445487e-7
+    },
+    {
+      "compactness_relative_error": -7.93175326353626e-7,
+      "h_c": 0.15,
+      "mass_relative_error": -0.0000011934163007983867,
+      "radius_relative_error": -4.00241291818432e-7
+    },
+    {
+      "compactness_relative_error": -3.697728615897658e-7,
+      "h_c": 0.3,
+      "mass_relative_error": -5.574345772933864e-7,
+      "radius_relative_error": -1.8766178504113765e-7
+    }
+  ],
+  "independent_radius_crosscheck": [
+    {
+      "case": "incompressible",
+      "h_c": 0.15,
+      "max_absolute_relative_error": 4.7111792240593194e-7,
+      "relative_errors": {
+        "compactness": -7.047409924978929e-8,
+        "i_mr2": -1.7113091606990174e-8,
+        "ibar": 1.238351194267419e-7,
+        "k2": 1.1874730995042051e-7,
+        "lambda2": 4.7111792240593194e-7,
+        "mass": -1.0595316942863699e-7,
+        "moment_of_inertia": -1.940243943770652e-7,
+        "radius": -3.547907263279478e-8
+      }
+    },
+    {
+      "case": "gamma2_polytrope",
+      "h_c": 0.1,
+      "max_absolute_relative_error": 8.102304048000794e-7,
+      "relative_errors": {
+        "compactness": -1.4281353706107874e-7,
+        "i_mr2": -1.4811111399721823e-8,
+        "ibar": 2.708160195843994e-7,
+        "k2": 9.616234496019983e-8,
+        "lambda2": 8.102304048000794e-7,
+        "mass": -1.2276776772348118e-7,
+        "moment_of_inertia": -9.74873380081269e-8,
+        "radius": 2.0045772209036607e-8
+      }
+    }
+  ],
+  "newtonian_limits": {
+    "incompressible": {
+      "compactness": 0.004956586561146661,
+      "i_mr2": 0.40170938515733134,
+      "i_mr2_newtonian": 0.4,
+      "k2": 0.728972114531947,
+      "k2_newtonian": 0.75
+    },
+    "n1_polytrope": {
+      "compactness": 0.002485653432188475,
+      "i_mr2": 0.2620567682544757,
+      "i_mr2_newtonian": 0.26138193209731553,
+      "k2": 0.25543123405654994,
+      "k2_newtonian": 0.2599088773175333
+    }
+  },
+  "provenance": {
+    "date": "2026-09-18",
+    "execution": "GitHub Actions",
+    "workflow_run_id": 35326114324,
+    "workflow_job_id": 105539428922,
+    "script": "scripts/stage1_validation.py"
+  }
+}

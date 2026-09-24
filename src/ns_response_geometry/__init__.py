@@ -9,6 +9,7 @@ from .geometry import (
     transverse_response,
 )
 from .observables import StellarObservables, solve_observables
+from .realistic_eos import NAMED_EOS_FITS, NamedPiecewisePolytrope, named_eos
 from .response import (
     local_response_geometry,
     log_observable_vector,
@@ -31,6 +32,9 @@ __all__ = [
     "Star",
     "StarProfile",
     "StellarObservables",
+    "NamedPiecewisePolytrope",
+    "NAMED_EOS_FITS",
+    "named_eos",
     "solve_star",
     "solve_star_profile",
     "solve_observables",

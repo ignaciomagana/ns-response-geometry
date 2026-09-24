@@ -66,3 +66,11 @@ a diagnostic observation.
 - final figure readability and rendered-page inspection;
 - clean-room code/results/manuscript consistency review;
 - decide whether any additional physics is needed before submission.
+
+
+## 2026-09-24 correction in progress
+
+The first fixed-final-compactness refinement has been superseded after a
+branch/stability audit. Its manuscript subsection and figure are provisional
+until the branch-safe replacement completes. Do not treat the current
+fixed-final numerical values as submission-ready.

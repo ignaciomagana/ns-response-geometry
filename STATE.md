@@ -126,10 +126,7 @@ grows toward the screened branch boundary rather than selecting a
 reference-EOS-independent interior shell.
 
 The literature/novelty sweep, quantitative provenance audit, and clean-room
-code/manuscript consistency pass are complete.  The remaining gate for this
-round is the final manuscript build and rendered-page inspection at current
-HEAD, followed by a decision on whether any additional physics is required
-before submission.
+code/manuscript consistency pass are complete.  The final manuscript build and rendered-page inspection at current HEAD are complete. All 19 rendered pages were inspected with no clipping, overlap, or broken glyphs. The paper workflow now commits the rendered PDF to `paper/main.pdf` on successful pushes in addition to uploading the manuscript artifact. The current round is complete pending only any optional additional physics or author-level editorial changes.
 
 ## Validation / execution status
 
@@ -171,8 +168,8 @@ Versioned science results include:
 - Discussion/conclusions: synchronized with the final H5 interpretation.
 - Literature/novelty, claim-provenance, and clean-room consistency audits:
   complete.
-- Remaining work in this round: final rendered-page inspection at current
-  HEAD.
+- Final rendered-page inspection: complete (19/19 pages inspected).
+- Rendered manuscript PDF: committed at `paper/main.pdf`.
 
 ## Session protocol
 

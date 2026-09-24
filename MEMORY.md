@@ -309,3 +309,9 @@ This supersedes the earlier 2026-09-24 fixed-final interpretation entry.
 The replacement calculation must use a common positive-mass-slope baseline
 and a root finder that searches the sampled \(C(D)\) curve and follows the
 first root connected to \(D=0\).
+
+The same issue also affects the cross-EOS matched-reference control in
+results/matched_compactness_transition_20260918.json because that scan also
+uses the Gamma=1.70, baseline-C=0.16 reference. Its cross-EOS summary should
+not be used as final evidence. The original Gamma=2 fixed-depth transition
+screen/refinement remains valid.

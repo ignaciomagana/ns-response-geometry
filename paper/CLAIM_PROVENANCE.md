@@ -74,9 +74,11 @@ ledger in the same commit.
   quantitative claims should be reproduced in GitHub Actions when feasible.
 
 
-## Matched-reference transition-location null test
+## Superseded matched-reference transition-location control
 
-| Manuscript claim | Versioned source | Generator |
+**Do not use the cross-EOS summary as final evidence.** The scan includes the \(\Gamma=1.70\), baseline-\(C=0.16\) configuration later found to have \(dM/dh_c<0\). The values below are retained for historical provenance only; the branch-safe fixed-final replacement supersedes this cross-EOS control.
+
+| Superseded claim | Versioned source | Generator |
 |---|---|---|
 | Unconstrained fixed-depth maxima across \(\Gamma=1.7,1.85,2.0\), baseline \(C=0.12,0.16\), occur at \(h_{\rm tr}/h_c=0.40\)--0.55 but have deformed \(C=0.045\)--0.090 | results/matched_compactness_transition_20260918.json | scripts/matched_compactness_transition.py |
 | With post-softening \(C\ge0.10\), only three baseline-\(C=0.16\) cases survive and their maxima shift to \(h_{\rm tr}/h_c=0.25,0.30,0.35\) with alignments \(0.9998,0.9989,0.9999\) | results/matched_compactness_transition_20260918.json | scripts/matched_compactness_transition.py |

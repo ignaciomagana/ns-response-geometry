@@ -40,6 +40,7 @@ TARGET_COMPACTNESS = (0.10, 0.12, 0.14)
 GAMMAS = (1.70, 1.85, 2.00)
 X_VALUES = tuple(np.arange(0.25, 0.651, 0.025))
 MAX_DEPTH = 3.0
+MONOTONICITY_DEPTHS = tuple(np.linspace(0.0, MAX_DEPTH, 13))
 
 nodes = jnp.linspace(0.02, 0.50, N_NODES)
 response_covariance = squared_exponential_covariance(
@@ -169,6 +170,29 @@ def make_functions(reference, h_c):
     return eos_kwargs, compactness_for, response_state
 
 
+def compactness_depth_audit(compactness_for, center, width):
+    values = []
+    for depth in MONOTONICITY_DEPTHS:
+        c = float(
+            compactness_for(transition_profile(center, width, depth))
+        )
+        values.append(c)
+
+    arr = np.asarray(values, dtype=float)
+    finite = np.all(np.isfinite(arr))
+    diffs = np.diff(arr) if finite else np.asarray([np.nan])
+    max_increase = float(np.max(diffs)) if finite else None
+    return dict(
+        depths=list(MONOTONICITY_DEPTHS),
+        compactness=values,
+        finite=bool(finite),
+        max_increase=max_increase,
+        monotone_nonincreasing=bool(
+            finite and max_increase <= 1.0e-8
+        ),
+    )
+
+
 def solve_depth(compactness_for, center, width, target):
     def C(depth):
         return float(
@@ -261,6 +285,7 @@ def attach_shell(reference, eos_kwargs, row):
 def main():
     rows = []
     baselines = []
+    monotonicity_checks = []
     reference_context = {}
 
     for gamma in GAMMAS:
@@ -272,13 +297,36 @@ def main():
         )
         reference_context[gamma] = (reference, eos_kwargs)
 
+        baseline_response = response_state(jnp.zeros(N_NODES))
+        baseline_dMdh = float(baseline_response[-1])
         baselines.append(
             dict(
                 gamma=float(gamma),
                 h_c=float(h_c),
                 compactness=float(baseline.compactness),
+                dM_dh=baseline_dMdh,
+                positive_mass_slope=bool(
+                    np.isfinite(baseline_dMdh) and baseline_dMdh > 0.0
+                ),
             )
         )
+
+        for x in X_VALUES:
+            center = x * h_c
+            width = WIDTH_FRACTION * h_c
+            audit = compactness_depth_audit(
+                compactness_for, center, width
+            )
+            monotonicity_checks.append(
+                dict(
+                    gamma=float(gamma),
+                    h_c=float(h_c),
+                    x=float(x),
+                    center=float(center),
+                    width=float(width),
+                    **audit,
+                )
+            )
 
         for target in TARGET_COMPACTNESS:
             for x in X_VALUES:
@@ -351,6 +399,19 @@ def main():
         max_depth=MAX_DEPTH,
         x_grid=list(X_VALUES),
         baselines=baselines,
+        monotonicity_checks=monotonicity_checks,
+        all_baselines_positive_mass_slope=all(
+            b["positive_mass_slope"] for b in baselines
+        ),
+        all_depth_curves_monotone=all(
+            a["monotone_nonincreasing"]
+            for a in monotonicity_checks
+        ),
+        max_depth_curve_increase=max(
+            a["max_increase"]
+            for a in monotonicity_checks
+            if a["max_increase"] is not None
+        ),
         n_reachable=sum(r.get("reachable", False) for r in rows),
         n_stable=sum(r.get("stable", False) for r in rows),
         best_by_gamma_and_target=best,
